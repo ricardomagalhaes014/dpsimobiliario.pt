@@ -5,16 +5,9 @@
     <title>DPS Imobiliário</title>
     <script type="text/javascript">
       // SPA redirect for GitHub Pages
-      // Stores the path and redirects to index.html
-      var pathSegmentsToKeep = 0;
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      // Saves the current path to sessionStorage and redirects to index.html
+      sessionStorage.redirect = location.href;
+      window.location.replace('/');
     </script>
   </head>
   <body>
