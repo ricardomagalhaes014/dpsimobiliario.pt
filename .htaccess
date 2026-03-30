@@ -1,0 +1,24 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# Servir ficheiros estáticos directamente
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rota para landing pages de agentes: /{slug} -> agente.php?slug={slug}
+# Excluir rotas do sistema (assets, imoveis, simulador, etc.)
+RewriteCond %{REQUEST_URI} !^/assets/
+RewriteCond %{REQUEST_URI} !^/imoveis/
+RewriteCond %{REQUEST_URI} !^/simulador/
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteCond %{REQUEST_URI} !^/api
+RewriteCond %{REQUEST_URI} !\.php$
+RewriteCond %{REQUEST_URI} !^/sitemap
+RewriteCond %{REQUEST_URI} !^/robots
+RewriteCond %{REQUEST_URI} !^/google
+RewriteRule ^([a-z0-9][a-z0-9\-]*)/?$ agente.php?slug=$1 [L,QSA]
+
+# Redirecionar tudo o resto para index.html (SPA routing)
+RewriteRule ^ index.html [L]
