@@ -2,23 +2,41 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
-# Servir ficheiros estáticos directamente
+# ─── Redireccionamento: dpsimobiliario.grupo-dps.com → dpsimobiliario.pt ──────
+RewriteCond %{HTTP_HOST} ^(www\.)?dpsimobiliario\.grupo-dps\.com$ [NC]
+RewriteRule ^(.*)$ https://dpsimobiliario.pt/$1 [R=301,L]
+
+# ─── HTTPS Redirect ───────────────────────────────────────────────────────────
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ─── WWW → non-WWW ────────────────────────────────────────────────────────────
+RewriteCond %{HTTP_HOST} ^www\.dpsimobiliario\.pt [NC]
+RewriteRule ^ https://dpsimobiliario.pt%{REQUEST_URI} [L,R=301]
+
+# ─── Servir ficheiros estáticos directamente ──────────────────────────────────
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Rota para landing pages de agentes: /{slug} -> agente.php?slug={slug}
-# Excluir rotas do sistema (assets, imoveis, simulador, etc.)
+# ─── Rota para landing pages de agentes: /{slug} → agente.php?slug={slug} ────
 RewriteCond %{REQUEST_URI} !^/assets/
 RewriteCond %{REQUEST_URI} !^/imoveis/
 RewriteCond %{REQUEST_URI} !^/simulador/
 RewriteCond %{REQUEST_URI} !^/admin
 RewriteCond %{REQUEST_URI} !^/api
+RewriteCond %{REQUEST_URI} !^/sobre
+RewriteCond %{REQUEST_URI} !^/contacto
+RewriteCond %{REQUEST_URI} !^/investimento
+RewriteCond %{REQUEST_URI} !^/venda-em-planta
 RewriteCond %{REQUEST_URI} !\.php$
 RewriteCond %{REQUEST_URI} !^/sitemap
 RewriteCond %{REQUEST_URI} !^/robots
+RewriteCond %{REQUEST_URI} !^/equipa
+RewriteCond %{REQUEST_URI} !^/estudoporto
 RewriteCond %{REQUEST_URI} !^/google
+RewriteCond %{REQUEST_URI} !^/site\.webmanifest
 RewriteRule ^([a-z0-9][a-z0-9\-]*)/?$ agente.php?slug=$1 [L,QSA]
 
-# Redirecionar tudo o resto para index.html (SPA routing)
+# ─── Redirecionar tudo o resto para index.html (SPA routing) ──────────────────
 RewriteRule ^ index.html [L]
