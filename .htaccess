@@ -34,6 +34,7 @@ RewriteCond %{REQUEST_URI} !^/sitemap
 RewriteCond %{REQUEST_URI} !^/robots
 RewriteCond %{REQUEST_URI} !^/equipa
 RewriteCond %{REQUEST_URI} !^/estudoporto
+RewriteCond %{REQUEST_URI} !^/belohorizonte
 RewriteCond %{REQUEST_URI} !^/google
 RewriteCond %{REQUEST_URI} !^/site\.webmanifest
 RewriteRule ^([a-z0-9][a-z0-9\-]*)/?$ agente.php?slug=$1 [L,QSA]
