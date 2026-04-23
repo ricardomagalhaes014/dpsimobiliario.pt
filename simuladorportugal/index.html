@@ -246,30 +246,7 @@
   .lake-placeholder h3 { font-size: 1.1rem; margin-bottom: 8px; }
   .lake-placeholder p { color: var(--gray); font-size: 0.85rem; }
 
-  /* PASSWORD MODAL */
-  .pwd-modal {
-    display: none; position: fixed; inset: 0; z-index: 2000;
-    background: rgba(0,0,0,0.9); align-items: center; justify-content: center;
-  }
-  .pwd-modal.open { display: flex; }
-  .pwd-box {
-    background: var(--dark); border: 1px solid var(--border);
-    padding: 40px; width: 360px; text-align: center;
-  }
-  .pwd-box h2 { font-size: 1.1rem; margin-bottom: 8px; }
-  .pwd-box p { color: var(--gray); font-size: 0.82rem; margin-bottom: 24px; }
-  .pwd-input {
-    width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-    color: var(--white); padding: 11px 14px; font-size: 0.9rem; margin-bottom: 14px;
-    text-align: center; letter-spacing: 0.1em;
-  }
-  .pwd-input:focus { outline: none; border-color: var(--gold); }
-  .pwd-btn {
-    width: 100%; background: var(--gold); color: var(--dark);
-    border: none; padding: 12px; font-size: 0.82rem; font-weight: 800;
-    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
-  }
-  .pwd-error { color: #ef4444; font-size: 0.78rem; margin-top: 8px; display: none; }
+  /* PASSWORD MODAL — removido (acesso via simulador principal) */
 
   /* EMPTY STATE */
   .empty-state {
@@ -285,20 +262,85 @@
     .sim-grid { grid-template-columns: 1fr; }
     .result-grid { grid-template-columns: 1fr; }
   }
+
+  /* MODO EDIÇÃO */
+  .edit-mode-btn {
+    background: none; border: 1px solid var(--border);
+    color: var(--gray); padding: 6px 14px; cursor: pointer;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .edit-mode-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .edit-mode-btn.active { border-color: #f59e0b; color: #f59e0b; background: rgba(245,158,11,0.08); }
+
+  .status-select {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    color: var(--white); padding: 4px 8px; font-size: 0.78rem; cursor: pointer;
+    min-width: 120px;
+  }
+  .status-select:focus { outline: none; border-color: var(--gold); }
+  .status-select option { background: #0D1F3C; }
+  .status-select.disponivel { border-color: #22c55e; color: #22c55e; }
+  .status-select.reservado { border-color: #f59e0b; color: #f59e0b; }
+  .status-select.vendido { border-color: #ef4444; color: #ef4444; }
+  .status-select.dps { border-color: var(--gold); color: var(--gold); }
+
+  /* MODAL EDIÇÃO PASSWORD */
+  .edit-pwd-modal {
+    display: none; position: fixed; inset: 0; z-index: 3000;
+    background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
+  }
+  .edit-pwd-modal.open { display: flex; }
+  .edit-pwd-box {
+    background: var(--dark); border: 1px solid var(--gold);
+    padding: 36px; width: 340px; text-align: center;
+  }
+  .edit-pwd-box h2 { font-size: 1rem; margin-bottom: 6px; color: var(--gold); }
+  .edit-pwd-box p { color: var(--gray); font-size: 0.8rem; margin-bottom: 20px; }
+  .edit-pwd-input {
+    width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    color: var(--white); padding: 10px 14px; font-size: 0.9rem; margin-bottom: 12px;
+    text-align: center; letter-spacing: 0.1em;
+  }
+  .edit-pwd-input:focus { outline: none; border-color: var(--gold); }
+  .edit-pwd-btn {
+    width: 100%; background: var(--gold); color: var(--dark);
+    border: none; padding: 11px; font-size: 0.8rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+  }
+  .edit-pwd-error { color: #ef4444; font-size: 0.75rem; margin-top: 8px; display: none; }
+
+  /* BADGE DPS */
+  .badge-dps { background: rgba(197,165,90,0.2); color: var(--gold); }
+
+  /* SAVE INDICATOR */
+  .save-indicator {
+    display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: #22c55e; color: white; padding: 10px 24px; font-size: 0.82rem;
+    font-weight: 700; letter-spacing: 0.08em; z-index: 9999; border-radius: 2px;
+  }
+  .save-indicator.show { display: block; }
+
 </style>
 </head>
 <body>
 
-<!-- PASSWORD MODAL -->
-<div class="pwd-modal open" id="pwdModal">
-  <div class="pwd-box">
-    <h2>🔒 Acesso Restrito</h2>
-    <p>Introduza a senha para aceder ao Simulador Portugal</p>
-    <input type="password" class="pwd-input" id="pwdInput" placeholder="••••••••••••" onkeydown="if(event.key==='Enter')checkPwd()">
-    <button class="pwd-btn" onclick="checkPwd()">ENTRAR</button>
-    <div class="pwd-error" id="pwdError">Senha incorrecta. Tente novamente.</div>
+<!-- PASSWORD MODAL removido — acesso controlado pelo simulador principal -->
+
+
+<!-- MODAL PASSWORD EDIÇÃO -->
+<div class="edit-pwd-modal" id="editPwdModal">
+  <div class="edit-pwd-box">
+    <h2>✏️ Modo de Edição</h2>
+    <p>Introduza a senha de administrador para activar a edição de estados</p>
+    <input type="password" class="edit-pwd-input" id="editPwdInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkEditPwd()">
+    <button class="edit-pwd-btn" onclick="checkEditPwd()">ACTIVAR EDIÇÃO</button>
+    <div class="edit-pwd-error" id="editPwdError">Senha incorrecta.</div>
   </div>
 </div>
+
+<!-- INDICADOR DE GRAVAÇÃO -->
+<div class="save-indicator" id="saveIndicator">✓ Estado actualizado</div>
 
 <!-- SIMULADOR MODAL -->
 <div class="modal-overlay" id="simModal">
@@ -339,8 +381,8 @@
         <div class="sim-field">
           <label>Regime Fiscal</label>
           <select id="simFiscal" onchange="calcular()">
-            <option value="0.28">Residente (28%)</option>
-            <option value="0.25" selected>Não Residente (25%)</option>
+            <option value="0.28" selected>Residente (28%)</option>
+            <option value="0.25">Não Residente (25%)</option>
             <option value="0">Isento / NHR</option>
           </select>
         </div>
@@ -431,6 +473,16 @@
       <h2>2. Filtros</h2>
 
       <div class="filter-group">
+        <span class="filter-label">Bloco / Torre</span>
+        <div class="filter-btns">
+          <button class="filter-btn all active" onclick="setFilter('torre','all',this)">Todos</button>
+          <button class="filter-btn" onclick="setFilter('torre','A1',this)">Torre A1</button>
+          <button class="filter-btn" onclick="setFilter('torre','A2',this)">Torre A2</button>
+          <button class="filter-btn" onclick="setFilter('torre','A4',this)">Torre A4</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
         <span class="filter-label">Tipologia</span>
         <div class="filter-btns">
           <button class="filter-btn all active" onclick="setFilter('tipo','all',this)">Todas</button>
@@ -447,6 +499,7 @@
           <button class="filter-btn" onclick="setFilter('status','Disponível',this)">Disponível</button>
           <button class="filter-btn" onclick="setFilter('status','Reservado',this)">Reservado</button>
           <button class="filter-btn" onclick="setFilter('status','Vendido',this)">Vendido</button>
+          <button class="filter-btn" onclick="setFilter('status','DPS',this)">DPS</button>
         </div>
       </div>
 
@@ -469,12 +522,30 @@
   <div class="content" id="mainContent">
     <!-- BH TABLE (default) -->
     <div id="bh-section">
+
+      <!-- DOCUMENTOS DOWNLOAD -->
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <a href="https://dpsimobiliario.pt/belohorizonte/docs/doc-reserva.pdf" target="_blank" download
+           style="display:inline-flex;align-items:center;gap:8px;background:rgba(197,165,90,0.12);border:1px solid var(--gold);color:var(--gold);padding:10px 18px;font-size:0.78rem;font-weight:700;letter-spacing:0.05em;text-decoration:none;text-transform:uppercase;transition:background 0.2s;"
+           onmouseover="this.style.background='rgba(197,165,90,0.25)'" onmouseout="this.style.background='rgba(197,165,90,0.12)'">
+          📄 Documento de Reserva
+        </a>
+        <a href="https://dpsimobiliario.pt/belohorizonte/docs/catalogo.pdf" target="_blank" download
+           style="display:inline-flex;align-items:center;gap:8px;background:rgba(197,165,90,0.12);border:1px solid var(--gold);color:var(--gold);padding:10px 18px;font-size:0.78rem;font-weight:700;letter-spacing:0.05em;text-decoration:none;text-transform:uppercase;transition:background 0.2s;"
+           onmouseover="this.style.background='rgba(197,165,90,0.25)'" onmouseout="this.style.background='rgba(197,165,90,0.12)'">
+          📖 Apresentação do Empreendimento
+        </a>
+      </div>
+
       <!-- STATS -->
       <div class="stats-bar" id="statsBar"></div>
 
       <!-- TABLE HEADER -->
       <div class="table-header">
-        <div class="table-title">A mostrar <strong id="countLabel">0</strong> unidades</div>
+        <div class="table-title" style="display:flex;align-items:center;gap:16px;">
+          <span>A mostrar <strong id="countLabel">0</strong> unidades</span>
+          <button class="edit-mode-btn" id="bhEditBtn" onclick="toggleEditMode('bh')">✏️ Modo Edição</button>
+        </div>
         <input type="text" class="search-box" placeholder="🔍 Pesquisar fracção..." id="searchBox" oninput="applyFilters()">
       </div>
 
@@ -490,7 +561,8 @@
               <th onclick="sortTable('varanda')">Varanda (m²) <span class="sort-arrow">↕</span></th>
               <th onclick="sortTable('total')">Total (m²) <span class="sort-arrow">↕</span></th>
               <th onclick="sortTable('preco')">Preço (€) <span class="sort-arrow">↕</span></th>
-              <th onclick="sortTable('status')">Estado <span class="sort-arrow">↕</span></th>
+              <th onclick="sortTable('status')">Estado <span class="sort-arrow">⇕</span></th>
+              <th onclick="sortTable('orientacao')">Orientação <span class="sort-arrow">⇕</span></th>
               <th>Simulador</th>
             </tr>
           </thead>
@@ -499,25 +571,303 @@
       </div>
     </div>
 
-    <!-- LAKE SECTION -->
-    <div id="lake-section" style="display:none;">
-      <div class="lake-placeholder">
-        <h3>🏗️ Lake Towers — Porto</h3>
-        <p style="margin-top:8px;">O simulador do Lake Towers está disponível no simulador principal.</p>
-        <a href="https://dpsimobiliario.pt/simulador/" style="display:inline-block;margin-top:20px;background:var(--gold);color:var(--dark);padding:10px 24px;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-decoration:none;">ABRIR SIMULADOR LAKE TOWERS →</a>
+    <!-- PAINEL DE DETALHE BH (aparece ao clicar Simular) -->
+    <div id="bhDetailPanel" style="display:none;margin:24px;background:var(--dark);border:1px solid var(--border);padding:28px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+        <div>
+          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">BELO HORIZONTE RESIDENCES — PLANO DE PAGAMENTO</div>
+          <div style="font-size:1.3rem;font-weight:700;" id="bhDetailTitle">Fracção —</div>
+          <div style="color:var(--gray);font-size:0.85rem;margin-top:4px;" id="bhDetailSubtitle">Setúbal · Distrito de Lisboa</div>
+        </div>
+        <button onclick="closeBhDetail()" style="background:none;border:1px solid var(--border);color:var(--gray);padding:6px 14px;cursor:pointer;font-size:0.8rem;">✕ Fechar</button>
+      </div>
+
+      <!-- INFO GRID -->
+      <div class="unit-info-grid" id="bhUnitInfoGrid" style="margin-bottom:24px;"></div>
+
+      <!-- PLANO DE PAGAMENTO -->
+      <div class="sim-section" style="margin-bottom:24px;">
+        <h3 style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);">Plano de Pagamento</h3>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;" id="bhPagamentoGrid"></div>
+      </div>
+
+      <!-- SIMULADOR -->
+      <div class="sim-section">
+        <h3 style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);">Simulação de Cedência de Posição</h3>
+        <div class="sim-grid">
+          <div class="sim-field">
+            <label>Preço de Compra (€)</label>
+            <input type="number" id="bhSimPreco" readonly style="opacity:0.7;">
+          </div>
+          <div class="sim-field">
+            <label>Valorização Anual Estimada (%)</label>
+            <input type="number" id="bhSimValorizacao" value="10" min="0" max="50" step="0.5" oninput="calcularBh()">
+          </div>
+          <div class="sim-field">
+            <label>Número de Meses para Venda</label>
+            <input type="number" id="bhSimMeses" value="24" min="1" max="120" oninput="calcularBh()">
+          </div>
+          <div class="sim-field">
+            <label>Regime Fiscal</label>
+            <select id="bhSimFiscal" onchange="calcularBh()">
+              <option value="0.28" selected>Residente (28%)</option>
+              <option value="0.25">Não Residente (25%)</option>
+              <option value="0">Isento / NHR</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- RESULTADO -->
+        <!-- Linha informativa do valor investido -->
+        <div id="bh-investido-info" style="background:rgba(197,165,90,0.08);border:1px solid rgba(197,165,90,0.25);padding:12px 16px;margin-top:20px;margin-bottom:4px;font-size:0.82rem;color:var(--gray);line-height:1.7;"></div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;" id="bhResultGrid">
+          <div class="result-box">
+            <div class="result-label">Preço de Compra</div>
+            <div class="result-val" id="bh-res-preco">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Valor de Cedência Estimado</div>
+            <div class="result-val" id="bh-res-cessao">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Mais-Valia Bruta</div>
+            <div class="result-val" id="bh-res-mais-valia">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Imposto Estimado</div>
+            <div class="result-val" id="bh-res-imposto">—</div>
+          </div>
+          <div class="result-box highlight">
+            <div class="result-label">Lucro Líquido Estimado</div>
+            <div class="result-val big" id="bh-res-lucro">—</div>
+          </div>
+          <div class="result-box" style="border-color:rgba(197,165,90,0.4);">
+            <div class="result-label">💰 Capital Investido até à Venda</div>
+            <div class="result-val" id="bh-res-investido" style="color:var(--gold)">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">ROI sobre Capital Investido</div>
+            <div class="result-val" id="bh-res-roi">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Meses até Venda</div>
+            <div class="result-val" id="bh-res-meses">—</div>
+          </div>
+        </div>
+
+        <div style="font-size:0.72rem;color:var(--gray);margin-top:16px;line-height:1.6;">
+          * Simulação meramente indicativa. Valores sujeitos a alteração. Não constitui proposta contratual.<br>
+          * A simulação de cedência é calculada com base na % de valorização anual colocada pelo cliente e no número de meses introduzido.<br>
+          * CPCV previsto para Dezembro 2026. Prestações contadas a partir dessa data.
+        </div>
+
+        <!-- BOTÃO PROPOSTA DENTRO DO SIMULADOR -->
+        <div style="text-align:center;margin-top:24px;">
+          <button id="btnGerarProposta" onclick="gerarPropostaBhFromPanel(this)" style="background:linear-gradient(135deg,#C5A55A,#a8893d);color:#0a0a0a;font-weight:700;font-size:0.95rem;letter-spacing:0.12em;text-transform:uppercase;padding:14px 40px;border:none;cursor:pointer;">📄 Gerar Proposta PDF</button>
+          <div style="font-size:0.72rem;color:var(--gray);margin-top:8px;">O PDF incluirá os valores da simulação acima, a planta da unidade e galeria de fotos.</div>
+        </div>
+      </div>
+
+      <!-- PLANTA DA UNIDADE -->
+      <div class="sim-section" style="margin-top:24px;">
+        <h3 style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);">Planta da Unidade</h3>
+        <div id="bhPlantaContainer" style="text-align:center;">
+          <img id="bhPlantaImg" src="" alt="Planta" style="max-width:100%;max-height:500px;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')" title="Clique para ampliar">
+          <div style="font-size:0.72rem;color:var(--gray);margin-top:8px;">Clique na planta para ampliar</div>
+        </div>
+      </div>
+
+      <!-- GALERIA DE FOTOS -->
+      <div class="sim-section" style="margin-top:24px;">
+        <h3 style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);">Galeria do Empreendimento</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_01.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_02.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_03.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_04.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_05.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_06.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_07.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_08.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_09.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_10.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_11.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_12.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_13.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+          <img src="https://dpsimobiliario.pt/belohorizonte/fotos/foto_14.webp" style="width:100%;height:160px;object-fit:cover;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src,'_blank')">
+        </div>
+      </div>
+
+      <!-- BOTÃO MAIS INFORMAÇÕES -->
+      <div style="text-align:center;margin-top:28px;margin-bottom:8px;">
+        <a href="https://dpsimobiliario.pt/belohorizonte" target="_blank" style="display:inline-block;background:var(--gold);color:#000;font-weight:700;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;padding:14px 36px;text-decoration:none;border:none;cursor:pointer;">Mais Informações sobre o Empreendimento →</a>
       </div>
     </div>
+<div id="lake-section" style="display:none;">
+    <!-- STATS LAKE -->
+    <div class="stats-bar" id="lakeStatsBar"></div>
+
+    <!-- TABLE HEADER LAKE -->
+    <div class="table-header">
+      <div class="table-title" style="display:flex;align-items:center;gap:16px;">
+        <span>Lake Towers — <strong id="lakeCountLabel">0</strong> unidades</span>
+        <button class="edit-mode-btn" id="lakeEditBtn" onclick="toggleEditMode('lake')">✏️ Modo Edição</button>
+      </div>
+      <input type="text" class="search-box" placeholder="🔍 Pesquisar fracção..." id="lakeSearchBox" oninput="applyLakeFilters()">
+    </div>
+
+    <!-- FILTROS LAKE inline -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;padding:0 24px 16px;align-items:center;">
+      <span style="font-size:0.75rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;">Torre:</span>
+      <div class="filter-btns" id="lakeTorreBtns">
+        <button class="filter-btn all active" onclick="setLakeFilter('torre','all',this)">Todas</button>
+        <button class="filter-btn" onclick="setLakeFilter('torre','A1',this)">A1</button>
+        <button class="filter-btn" onclick="setLakeFilter('torre','A2',this)">A2</button>
+        <button class="filter-btn" onclick="setLakeFilter('torre','A4',this)">A4</button>
+      </div>
+      <span style="font-size:0.75rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-left:12px;">Estado:</span>
+      <div class="filter-btns" id="lakeStatusBtns">
+        <button class="filter-btn all active" onclick="setLakeFilter('status','all',this)">Todos</button>
+        <button class="filter-btn" onclick="setLakeFilter('status','Disponível',this)">Disponível</button>
+        <button class="filter-btn" onclick="setLakeFilter('status','Reservado',this)">Reservado</button>
+        <button class="filter-btn" onclick="setLakeFilter('status','DPS',this)">DPS</button>
+      </div>
+    </div>
+
+    <!-- TABLE LAKE -->
+    <div style="overflow-x:auto;">
+      <table id="lakeTable">
+        <thead>
+          <tr>
+            <th>Torre</th>
+            <th>Fracção</th>
+            <th>Piso</th>
+            <th>Tipologia</th>
+            <th>Orientação</th>
+            <th>Área Total (m²)</th>
+            <th>Área Privada (m²)</th>
+            <th>Varandas (m²)</th>
+            <th>Est.</th>
+            <th>PVP (€)</th>
+            <th>Preço Lançamento (€)</th>
+            <th>Estado</th>
+            <th>Simulador</th>
+          </tr>
+        </thead>
+        <tbody id="lakeTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- PAINEL DE DETALHE LAKE (aparece ao clicar Simular) -->
+    <div id="lakeDetailPanel" style="display:none;margin:24px;background:var(--dark);border:1px solid var(--border);padding:28px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+        <div>
+          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">LAKE TOWERS — SIMULADOR DE CEDÊNCIA DE POSIÇÃO</div>
+          <div style="font-size:1.3rem;font-weight:700;" id="lakeDetailTitle">Fracção —</div>
+          <div style="color:var(--gray);font-size:0.85rem;margin-top:4px;" id="lakeDetailSubtitle">Porto · Arca d'Água</div>
+        </div>
+        <button onclick="closeLakeDetail()" style="background:none;border:1px solid var(--border);color:var(--gray);padding:6px 14px;cursor:pointer;font-size:0.8rem;">✕ Fechar</button>
+      </div>
+
+      <!-- INFO GRID -->
+      <div class="unit-info-grid" id="lakeUnitInfoGrid" style="margin-bottom:24px;"></div>
+
+      <!-- PLANO DE PAGAMENTO -->
+      <div class="sim-section" style="margin-bottom:24px;">
+        <h3 style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);">Plano de Pagamento</h3>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="lakePagamentoGrid"></div>
+      </div>
+
+      <!-- SIMULADOR -->
+      <div class="sim-section">
+        <h3 style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);">Simulação de Cedência de Posição</h3>
+        <div class="sim-grid">
+          <div class="sim-field">
+            <label>Preço de Compra — Lançamento (€)</label>
+            <input type="number" id="lakeSimPreco" readonly style="opacity:0.7;">
+          </div>
+          <div class="sim-field">
+            <label>Valorização Anual Estimada (%)</label>
+            <input type="number" id="lakeSimValorizacao" value="8" min="0" max="50" step="0.5" oninput="calcularLake()">
+          </div>
+          <div class="sim-field">
+            <label>Número de Meses para Venda</label>
+            <input type="number" id="lakeSimMeses" value="24" min="1" max="120" oninput="calcularLake()">
+          </div>
+          <div class="sim-field">
+            <label>Regime Fiscal</label>
+            <select id="lakeSimFiscal" onchange="calcularLake()">
+              <option value="0.28">Residente (28%)</option>
+              <option value="0.25" selected>Não Residente (25%)</option>
+              <option value="0">Isento / NHR</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- AVISO DESCONTO 24 MESES -->
+        <div id="lakeDesconto24Aviso" style="display:none;margin:16px 0;padding:12px 16px;background:rgba(197,165,90,0.1);border-left:3px solid var(--gold);font-size:0.85rem;color:var(--gold);">
+          ✓ Venda após 24 meses — inclui desconto de 20% sobre o PVP que teve na compra
+        </div>
+
+        <!-- RESULTADO -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;" id="lakeResultGrid">
+          <div class="result-box">
+            <div class="result-label">Preço de Compra (Lançamento)</div>
+            <div class="result-val" id="lake-res-preco">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Valor de Cedência Estimado</div>
+            <div class="result-val" id="lake-res-cessao">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Desconto 20% (após 24 meses)</div>
+            <div class="result-val" id="lake-res-desconto">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Mais-Valia Bruta</div>
+            <div class="result-val" id="lake-res-mais-valia">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Imposto Estimado</div>
+            <div class="result-val" id="lake-res-imposto">—</div>
+          </div>
+          <div class="result-box highlight">
+            <div class="result-label">Lucro Líquido Estimado</div>
+            <div class="result-val big" id="lake-res-lucro">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Entrada Paga (CPCV 20%)</div>
+            <div class="result-val" id="lake-res-entrada">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">ROI sobre Entrada</div>
+            <div class="result-val" id="lake-res-roi">—</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Meses até Venda</div>
+            <div class="result-val" id="lake-res-meses">—</div>
+          </div>
+        </div>
+
+        <div style="font-size:0.72rem;color:var(--gray);margin-top:16px;line-height:1.6;">
+          * Simulação meramente indicativa. Valores sujeitos a alteração. Não constitui proposta contratual.<br>
+          * A simulação de cedência é calculada com base na % de valorização anual colocada pelo cliente e no número de meses introduzido.
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
 
 <script>
-const BH_UNITS = [{"fraccao": "A", "piso": 1, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 340000, "status": "Disponível"}, {"fraccao": "B", "piso": 1, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 340000, "status": "Vendido"}, {"fraccao": "C", "piso": 1, "tipologia": "T1", "abc": 52.0, "varanda": 6.4, "terraco": 0.0, "estacionamento": 13.0, "total": 71.4, "preco": 260000, "status": "Disponível"}, {"fraccao": "D", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 179900, "status": "Vendido"}, {"fraccao": "E", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 179900, "status": "Vendido"}, {"fraccao": "F", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 179900, "status": "Vendido"}, {"fraccao": "G", "piso": 2, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 345000, "status": "Disponível"}, {"fraccao": "H", "piso": 2, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 345000, "status": "Vendido"}, {"fraccao": "I", "piso": 2, "tipologia": "T1", "abc": 52.0, "varanda": 6.4, "terraco": 0.0, "estacionamento": 13.0, "total": 71.4, "preco": 265000, "status": "Vendido"}, {"fraccao": "J", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "K", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "L", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "M", "piso": 3, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 350000, "status": "Disponível"}, {"fraccao": "N", "piso": 3, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 350000, "status": "Disponível"}, {"fraccao": "O", "piso": 3, "tipologia": "T1", "abc": 52.0, "varanda": 6.4, "terraco": 0.0, "estacionamento": 13.0, "total": 71.4, "preco": 270000, "status": "Disponível"}, {"fraccao": "P", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "Q", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "R", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Vendido"}, {"fraccao": "S", "piso": 4, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 27.3, "total": 109.8, "preco": 362900, "status": "Vendido"}, {"fraccao": "T", "piso": 4, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 20.0, "total": 102.5, "preco": 362900, "status": "Disponível"}, {"fraccao": "U", "piso": 4, "tipologia": "T1", "abc": 52.0, "varanda": 6.4, "terraco": 0.0, "estacionamento": 13.0, "total": 71.4, "preco": 275000, "status": "Disponível"}, {"fraccao": "V", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Disponível"}, {"fraccao": "W", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Disponível"}, {"fraccao": "X", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Disponível"}, {"fraccao": "Y", "piso": 1, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 345000, "status": "Disponível"}, {"fraccao": "Z", "piso": 1, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 345000, "status": "Disponível"}, {"fraccao": "AA", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "AB", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "AC", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "AD", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "AE", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Disponível"}, {"fraccao": "AF", "piso": 1, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 345000, "status": "Disponível"}, {"fraccao": "AG", "piso": 1, "tipologia": "T1", "abc": 54.5, "varanda": 11.6, "terraco": 0.0, "estacionamento": 13.0, "total": 79.1, "preco": 265000, "status": "Vendido"}, {"fraccao": "AH", "piso": 1, "tipologia": "T2", "abc": 84.0, "varanda": 18.1, "terraco": 0.0, "estacionamento": 13.0, "total": 115.1, "preco": 379000, "status": "Disponível"}, {"fraccao": "AI", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AJ", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AK", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AL", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AM", "piso": 2, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 350000, "status": "Disponível"}, {"fraccao": "AN", "piso": 2, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 350000, "status": "Disponível"}, {"fraccao": "AO", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AP", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AQ", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AR", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AS", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "AT", "piso": 2, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 350000, "status": "Disponível"}, {"fraccao": "AU", "piso": 2, "tipologia": "T1", "abc": 54.5, "varanda": 11.6, "terraco": 0.0, "estacionamento": 13.0, "total": 79.1, "preco": 270000, "status": "Vendido"}, {"fraccao": "AV", "piso": 2, "tipologia": "T2", "abc": 84.0, "varanda": 18.1, "terraco": 0.0, "estacionamento": 13.0, "total": 115.1, "preco": 384900, "status": "Disponível"}, {"fraccao": "AW", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Vendido"}, {"fraccao": "AX", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Vendido"}, {"fraccao": "AY", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Reservado"}, {"fraccao": "AZ", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Reservado"}, {"fraccao": "BA", "piso": 3, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 369000, "status": "Reservado"}, {"fraccao": "BB", "piso": 3, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 369000, "status": "Disponível"}, {"fraccao": "BC", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Disponível"}, {"fraccao": "BD", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Vendido"}, {"fraccao": "BE", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Vendido"}, {"fraccao": "BF", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Disponível"}, {"fraccao": "BG", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 194900, "status": "Disponível"}, {"fraccao": "BH", "piso": 3, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 369000, "status": "Disponível"}, {"fraccao": "BI", "piso": 3, "tipologia": "T1", "abc": 54.5, "varanda": 11.6, "terraco": 0.0, "estacionamento": 13.0, "total": 79.1, "preco": 275000, "status": "Reservado"}, {"fraccao": "BJ", "piso": 3, "tipologia": "T2", "abc": 84.0, "varanda": 16.1, "terraco": 0.0, "estacionamento": 13.0, "total": 113.1, "preco": 394900, "status": "Reservado"}, {"fraccao": "BK", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Vendido"}, {"fraccao": "BL", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Vendido"}, {"fraccao": "BM", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Vendido"}, {"fraccao": "BN", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Vendido"}, {"fraccao": "BO", "piso": 4, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 374900, "status": "Disponível"}, {"fraccao": "BP", "piso": 4, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 374900, "status": "Disponível"}, {"fraccao": "BQ", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Vendido"}, {"fraccao": "BR", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Disponível"}, {"fraccao": "BS", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Disponível"}, {"fraccao": "BT", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Disponível"}, {"fraccao": "BU", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 199000, "status": "Disponível"}, {"fraccao": "BV", "piso": 4, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 374900, "status": "Disponível"}, {"fraccao": "BW", "piso": 4, "tipologia": "T1", "abc": 54.5, "varanda": 11.6, "terraco": 0.0, "estacionamento": 13.0, "total": 79.1, "preco": 280000, "status": "Vendido"}, {"fraccao": "BX", "piso": 4, "tipologia": "T2", "abc": 84.0, "varanda": 16.1, "terraco": 0.0, "estacionamento": 13.0, "total": 113.1, "preco": 399900, "status": "Reservado"}, {"fraccao": "BY", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 204900, "status": "Vendido"}, {"fraccao": "BZ", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 204900, "status": "Disponível"}, {"fraccao": "CA", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 204900, "status": "Disponível"}, {"fraccao": "CB", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 204900, "status": "Disponível"}, {"fraccao": "CC", "piso": 5, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 379900, "status": "Reservado"}, {"fraccao": "CD", "piso": 5, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 379900, "status": "Disponível"}, {"fraccao": "CE", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Disponível"}, {"fraccao": "CF", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Disponível"}, {"fraccao": "CG", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Disponível"}, {"fraccao": "CH", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Disponível"}, {"fraccao": "CI", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Disponível"}, {"fraccao": "CJ", "piso": 5, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 19.0, "total": 101.5, "preco": 379900, "status": "Disponível"}, {"fraccao": "CK", "piso": 5, "tipologia": "T1", "abc": 54.5, "varanda": 11.6, "terraco": 0.0, "estacionamento": 13.0, "total": 79.1, "preco": 285000, "status": "Vendido"}, {"fraccao": "CL", "piso": 5, "tipologia": "T2", "abc": 84.0, "varanda": 16.1, "terraco": 0.0, "estacionamento": 13.0, "total": 113.1, "preco": 404900, "status": "Vendido"}, {"fraccao": "CM", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Vendido"}, {"fraccao": "CN", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Vendido"}, {"fraccao": "CO", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Disponível"}, {"fraccao": "CP", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 209000, "status": "Disponível"}, {"fraccao": "CQ", "piso": 6, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 384900, "status": "Reservado"}, {"fraccao": "CR", "piso": 6, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 384900, "status": "Reservado"}, {"fraccao": "CS", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "CT", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "CU", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "CV", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "CW", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "CX", "piso": 6, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 19.0, "total": 101.5, "preco": 384900, "status": "Reservado"}, {"fraccao": "CY", "piso": 6, "tipologia": "T1", "abc": 54.5, "varanda": 11.6, "terraco": 0.0, "estacionamento": 13.0, "total": 79.1, "preco": 290000, "status": "Vendido"}, {"fraccao": "CZ", "piso": 6, "tipologia": "T2", "abc": 84.0, "varanda": 16.1, "terraco": 0.0, "estacionamento": 13.0, "total": 113.1, "preco": 409900, "status": "Vendido"}, {"fraccao": "DA", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Vendido"}, {"fraccao": "DB", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "DC", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "DD", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 214900, "status": "Disponível"}, {"fraccao": "DE", "piso": 1, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 365000, "status": "Disponível"}, {"fraccao": "DF", "piso": 1, "tipologia": "T1", "abc": 58.6, "varanda": 23.7, "terraco": 0.0, "estacionamento": 13.0, "total": 95.3, "preco": 304900, "status": "Disponível"}, {"fraccao": "DG", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 184900, "status": "Vendido"}, {"fraccao": "DH", "piso": 1, "tipologia": "T0", "abc": 35.7, "varanda": 10.9, "terraco": 0.0, "estacionamento": 13.0, "total": 59.6, "preco": 189900, "status": "Vendido"}, {"fraccao": "DI", "piso": 1, "tipologia": "T2", "abc": 72.0, "varanda": 4.4, "terraco": 0.0, "estacionamento": 13.0, "total": 89.4, "preco": 365000, "status": "Disponível"}, {"fraccao": "DJ", "piso": 1, "tipologia": "T1", "abc": 56.9, "varanda": 5.0, "terraco": 0.0, "estacionamento": 13.0, "total": 74.9, "preco": 290000, "status": "Vendido"}, {"fraccao": "DK", "piso": 1, "tipologia": "T2", "abc": 72.9, "varanda": 9.5, "terraco": 0.0, "estacionamento": 13.0, "total": 95.4, "preco": 369900, "status": "Vendido"}, {"fraccao": "DL", "piso": 1, "tipologia": "T0", "abc": 47.7, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 65.74, "preco": 219900, "status": "Disponível"}, {"fraccao": "DM", "piso": 1, "tipologia": "T1", "abc": 59.3, "varanda": 6.4, "terraco": 0.0, "estacionamento": 13.0, "total": 78.7, "preco": 290000, "status": "Vendido"}, {"fraccao": "DN", "piso": 1, "tipologia": "T1", "abc": 52.5, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 70.54, "preco": 285000, "status": "Vendido"}, {"fraccao": "DO", "piso": 1, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 189900, "status": "Disponível"}, {"fraccao": "DP", "piso": 2, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 372000, "status": "Disponível"}, {"fraccao": "DQ", "piso": 2, "tipologia": "T1", "abc": 58.6, "varanda": 23.7, "terraco": 0.0, "estacionamento": 13.0, "total": 95.3, "preco": 312900, "status": "Vendido"}, {"fraccao": "DR", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 191900, "status": "Disponível"}, {"fraccao": "DS", "piso": 2, "tipologia": "T0", "abc": 35.7, "varanda": 10.9, "terraco": 0.0, "estacionamento": 13.0, "total": 59.6, "preco": 196900, "status": "Vendido"}, {"fraccao": "DT", "piso": 2, "tipologia": "T2", "abc": 72.0, "varanda": 4.4, "terraco": 0.0, "estacionamento": 13.0, "total": 89.4, "preco": 372000, "status": "Disponível"}, {"fraccao": "DU", "piso": 2, "tipologia": "T1", "abc": 56.9, "varanda": 5.0, "terraco": 0.0, "estacionamento": 13.0, "total": 74.9, "preco": 297000, "status": "Vendido"}, {"fraccao": "DV", "piso": 2, "tipologia": "T2", "abc": 72.9, "varanda": 9.5, "terraco": 0.0, "estacionamento": 13.0, "total": 95.4, "preco": 372900, "status": "Reservado"}, {"fraccao": "DW", "piso": 2, "tipologia": "T0", "abc": 47.7, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 65.74, "preco": 226900, "status": "Disponível"}, {"fraccao": "DX", "piso": 2, "tipologia": "T1", "abc": 59.3, "varanda": 6.4, "terraco": 0.0, "estacionamento": 13.0, "total": 78.7, "preco": 297000, "status": "Vendido"}, {"fraccao": "DY", "piso": 2, "tipologia": "T1", "abc": 52.5, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 70.54, "preco": 292000, "status": "Vendido"}, {"fraccao": "DZ", "piso": 2, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 196900, "status": "Vendido"}, {"fraccao": "EA", "piso": 3, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 379000, "status": "Reservado"}, {"fraccao": "EB", "piso": 3, "tipologia": "T1", "abc": 58.6, "varanda": 23.7, "terraco": 0.0, "estacionamento": 13.0, "total": 95.3, "preco": 319900, "status": "Disponível"}, {"fraccao": "EC", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 198900, "status": "Disponível"}, {"fraccao": "ED", "piso": 3, "tipologia": "T0", "abc": 35.7, "varanda": 10.9, "terraco": 0.0, "estacionamento": 13.0, "total": 59.6, "preco": 203900, "status": "Vendido"}, {"fraccao": "EE", "piso": 3, "tipologia": "T2", "abc": 72.0, "varanda": 4.4, "terraco": 0.0, "estacionamento": 13.0, "total": 89.4, "preco": 379000, "status": "Disponível"}, {"fraccao": "EF", "piso": 3, "tipologia": "T1", "abc": 56.9, "varanda": 5.0, "terraco": 0.0, "estacionamento": 13.0, "total": 74.9, "preco": 304000, "status": "Vendido"}, {"fraccao": "EG", "piso": 3, "tipologia": "T2", "abc": 72.9, "varanda": 9.5, "terraco": 0.0, "estacionamento": 13.0, "total": 95.4, "preco": 386900, "status": "Vendido"}, {"fraccao": "EH", "piso": 3, "tipologia": "T0", "abc": 47.7, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 65.74, "preco": 233900, "status": "Vendido"}, {"fraccao": "EI", "piso": 3, "tipologia": "T1", "abc": 59.3, "varanda": 6.4, "terraco": 0.0, "estacionamento": 13.0, "total": 78.7, "preco": 304000, "status": "Vendido"}, {"fraccao": "EJ", "piso": 3, "tipologia": "T1", "abc": 52.5, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 70.54, "preco": 304000, "status": "Reservado"}, {"fraccao": "EK", "piso": 3, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 203900, "status": "Vendido"}, {"fraccao": "EL", "piso": 4, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 389000, "status": "Vendido"}, {"fraccao": "EM", "piso": 4, "tipologia": "T1", "abc": 58.6, "varanda": 23.7, "terraco": 0.0, "estacionamento": 13.0, "total": 95.3, "preco": 329900, "status": "Reservado"}, {"fraccao": "EN", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 208900, "status": "Vendido"}, {"fraccao": "EP", "piso": 4, "tipologia": "T1", "abc": 52.5, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 70.54, "preco": 314000, "status": "Disponível"}, {"fraccao": "EQ", "piso": 4, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 213900, "status": "Vendido"}, {"fraccao": "ER", "piso": 5, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 405000, "status": "Vendido"}, {"fraccao": "ES", "piso": 5, "tipologia": "T1", "abc": 58.6, "varanda": 23.7, "terraco": 0.0, "estacionamento": 13.0, "total": 95.3, "preco": 339900, "status": "Vendido"}, {"fraccao": "ET", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 221000, "status": "Vendido"}, {"fraccao": "EU", "piso": 5, "tipologia": "T0", "abc": 35.7, "varanda": 8.8, "terraco": 0.0, "estacionamento": 13.0, "total": 57.5, "preco": 225000, "status": "Vendido"}, {"fraccao": "EV", "piso": 5, "tipologia": "T1", "abc": 52.0, "varanda": 4.4, "terraco": 0.0, "estacionamento": 13.0, "total": 69.4, "preco": 324000, "status": "Disponível"}, {"fraccao": "EW", "piso": 5, "tipologia": "T2", "abc": 72.6, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 90.64, "preco": 425000, "status": "Disponível"}, {"fraccao": "EX", "piso": 5, "tipologia": "T0", "abc": 43.4, "varanda": 11.3, "terraco": 0.0, "estacionamento": 13.0, "total": 67.7, "preco": 253900, "status": "Vendido"}, {"fraccao": "EY", "piso": 5, "tipologia": "T1", "abc": 53.5, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 71.54, "preco": 327900, "status": "Vendido"}, {"fraccao": "EZ", "piso": 5, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 221000, "status": "Vendido"}, {"fraccao": "FA", "piso": 6, "tipologia": "T2", "abc": 73.5, "varanda": 9.0, "terraco": 0.0, "estacionamento": 13.0, "total": 95.5, "preco": 415000, "status": "Vendido"}, {"fraccao": "FB", "piso": 6, "tipologia": "T1", "abc": 58.6, "varanda": 23.7, "terraco": 0.0, "estacionamento": 13.0, "total": 95.3, "preco": 349900, "status": "Disponível"}, {"fraccao": "FC", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 231000, "status": "Disponível"}, {"fraccao": "FD", "piso": 6, "tipologia": "T0", "abc": 35.7, "varanda": 8.8, "terraco": 0.0, "estacionamento": 13.0, "total": 57.5, "preco": 235000, "status": "Vendido"}, {"fraccao": "FE", "piso": 6, "tipologia": "T2", "abc": 72.5, "varanda": 39.4, "terraco": 0.0, "estacionamento": 13.0, "total": 124.9, "preco": 479900, "status": "Vendido"}, {"fraccao": "FF", "piso": 6, "tipologia": "T0", "abc": 43.4, "varanda": 11.3, "terraco": 0.0, "estacionamento": 13.0, "total": 67.7, "preco": 263900, "status": "Vendido"}, {"fraccao": "FG", "piso": 6, "tipologia": "T1", "abc": 53.5, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 71.54, "preco": 337900, "status": "Vendido"}, {"fraccao": "FH", "piso": 6, "tipologia": "T0", "abc": 35.0, "varanda": 5.04, "terraco": 0.0, "estacionamento": 13.0, "total": 53.04, "preco": 231000, "status": "Vendido"}];
+const BH_UNITS = [{"fraccao":"A","piso":1,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":340000,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"B","piso":1,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":340000,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"C","piso":1,"tipologia":"T1","abc":52.0,"varanda":6.4,"terraco":0.0,"estacionamento":13.0,"total":71.4,"preco":260000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"D","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":179900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"E","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":179900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"F","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":179900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"G","piso":2,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":345000,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"H","piso":2,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":345000,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"I","piso":2,"tipologia":"T1","abc":52.0,"varanda":6.4,"terraco":0.0,"estacionamento":13.0,"total":71.4,"preco":265000,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"J","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"K","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"L","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"M","piso":3,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":350000,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"N","piso":3,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":350000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"O","piso":3,"tipologia":"T1","abc":52.0,"varanda":6.4,"terraco":0.0,"estacionamento":13.0,"total":71.4,"preco":270000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"P","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"Q","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"R","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"S","piso":4,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":27.3,"total":109.8,"preco":362900,"status":"Vendido","orientacao":"Norte / Poente"},{"fraccao":"T","piso":4,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":20.0,"total":102.5,"preco":362900,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"U","piso":4,"tipologia":"T1","abc":52.0,"varanda":6.4,"terraco":0.0,"estacionamento":13.0,"total":71.4,"preco":275000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"V","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"W","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"X","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"Y","piso":1,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":345000,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"Z","piso":1,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":345000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"AA","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AB","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AC","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AD","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AE","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AF","piso":1,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":345000,"status":"Disponível","orientacao":"Sul / Nascente"},{"fraccao":"AG","piso":1,"tipologia":"T1","abc":54.5,"varanda":11.6,"terraco":0.0,"estacionamento":13.0,"total":79.1,"preco":265000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"AH","piso":1,"tipologia":"T2","abc":84.0,"varanda":18.1,"terraco":0.0,"estacionamento":13.0,"total":115.1,"preco":379000,"status":"Disponível","orientacao":"Poente"},{"fraccao":"AI","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Sul / Poente"},{"fraccao":"AJ","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"AK","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"AL","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"AM","piso":2,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":350000,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"AN","piso":2,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":350000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"AO","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AP","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AQ","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AR","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AS","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"AT","piso":2,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":350000,"status":"Disponível","orientacao":"Sul / Nascente"},{"fraccao":"AU","piso":2,"tipologia":"T1","abc":54.5,"varanda":11.6,"terraco":0.0,"estacionamento":13.0,"total":79.1,"preco":270000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"AV","piso":2,"tipologia":"T2","abc":84.0,"varanda":18.1,"terraco":0.0,"estacionamento":13.0,"total":115.1,"preco":384900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"AW","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Vendido","orientacao":"Sul / Poente"},{"fraccao":"AX","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"AY","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Reservado","orientacao":"Poente"},{"fraccao":"AZ","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Reservado","orientacao":"Poente"},{"fraccao":"BA","piso":3,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":369000,"status":"Reservado","orientacao":"Norte / Poente"},{"fraccao":"BB","piso":3,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":369000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"BC","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"BD","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"BE","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"BF","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"BG","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":194900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"BH","piso":3,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":369000,"status":"Disponível","orientacao":"Sul / Nascente"},{"fraccao":"BI","piso":3,"tipologia":"T1","abc":54.5,"varanda":11.6,"terraco":0.0,"estacionamento":13.0,"total":79.1,"preco":275000,"status":"Reservado","orientacao":"Poente"},{"fraccao":"BJ","piso":3,"tipologia":"T2","abc":84.0,"varanda":16.1,"terraco":0.0,"estacionamento":13.0,"total":113.1,"preco":394900,"status":"Reservado","orientacao":"Poente"},{"fraccao":"BK","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Vendido","orientacao":"Sul / Poente"},{"fraccao":"BL","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"BM","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"BN","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"BO","piso":4,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":374900,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"BP","piso":4,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":374900,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"BQ","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"BR","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"BS","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"BT","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"BU","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":199000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"BV","piso":4,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":374900,"status":"Disponível","orientacao":"Sul / Nascente"},{"fraccao":"BW","piso":4,"tipologia":"T1","abc":54.5,"varanda":11.6,"terraco":0.0,"estacionamento":13.0,"total":79.1,"preco":280000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"BX","piso":4,"tipologia":"T2","abc":84.0,"varanda":16.1,"terraco":0.0,"estacionamento":13.0,"total":113.1,"preco":399900,"status":"Reservado","orientacao":"Poente"},{"fraccao":"BY","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":204900,"status":"Vendido","orientacao":"Sul / Poente"},{"fraccao":"BZ","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":204900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"CA","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":204900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"CB","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":204900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"CC","piso":5,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":379900,"status":"Reservado","orientacao":"Norte / Poente"},{"fraccao":"CD","piso":5,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":379900,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"CE","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CF","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CG","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CH","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CI","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CJ","piso":5,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":19.0,"total":101.5,"preco":379900,"status":"Disponível","orientacao":"Sul / Nascente"},{"fraccao":"CK","piso":5,"tipologia":"T1","abc":54.5,"varanda":11.6,"terraco":0.0,"estacionamento":13.0,"total":79.1,"preco":285000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"CL","piso":5,"tipologia":"T2","abc":84.0,"varanda":16.1,"terraco":0.0,"estacionamento":13.0,"total":113.1,"preco":404900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"CM","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Vendido","orientacao":"Sul / Poente"},{"fraccao":"CN","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"CO","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Disponível","orientacao":"Poente"},{"fraccao":"CP","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":209000,"status":"Disponível","orientacao":"Poente"},{"fraccao":"CQ","piso":6,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":384900,"status":"Reservado","orientacao":"Norte / Poente"},{"fraccao":"CR","piso":6,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":384900,"status":"Reservado","orientacao":"Norte / Nascente"},{"fraccao":"CS","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CT","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CU","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CV","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CW","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"CX","piso":6,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":19.0,"total":101.5,"preco":384900,"status":"Reservado","orientacao":"Sul / Nascente"},{"fraccao":"CY","piso":6,"tipologia":"T1","abc":54.5,"varanda":11.6,"terraco":0.0,"estacionamento":13.0,"total":79.1,"preco":290000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"CZ","piso":6,"tipologia":"T2","abc":84.0,"varanda":16.1,"terraco":0.0,"estacionamento":13.0,"total":113.1,"preco":409900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"DA","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Vendido","orientacao":"Sul / Poente"},{"fraccao":"DB","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"DC","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"DD","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":214900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"DE","piso":1,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":365000,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"DF","piso":1,"tipologia":"T1","abc":58.6,"varanda":23.7,"terraco":0.0,"estacionamento":13.0,"total":95.3,"preco":304900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"DG","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":184900,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"DH","piso":1,"tipologia":"T0","abc":35.7,"varanda":10.9,"terraco":0.0,"estacionamento":13.0,"total":59.6,"preco":189900,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"DI","piso":1,"tipologia":"T2","abc":72.0,"varanda":4.4,"terraco":0.0,"estacionamento":13.0,"total":89.4,"preco":365000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"DJ","piso":1,"tipologia":"T1","abc":56.9,"varanda":5.0,"terraco":0.0,"estacionamento":13.0,"total":74.9,"preco":290000,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"DK","piso":1,"tipologia":"T2","abc":72.9,"varanda":9.5,"terraco":0.0,"estacionamento":13.0,"total":95.4,"preco":369900,"status":"Vendido","orientacao":"Norte / Poente"},{"fraccao":"DL","piso":1,"tipologia":"T0","abc":47.7,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":65.74,"preco":219900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"DM","piso":1,"tipologia":"T1","abc":59.3,"varanda":6.4,"terraco":0.0,"estacionamento":13.0,"total":78.7,"preco":290000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"DN","piso":1,"tipologia":"T1","abc":52.5,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":70.54,"preco":285000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"DO","piso":1,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":189900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"DP","piso":2,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":372000,"status":"Disponível","orientacao":"Norte / Poente"},{"fraccao":"DQ","piso":2,"tipologia":"T1","abc":58.6,"varanda":23.7,"terraco":0.0,"estacionamento":13.0,"total":95.3,"preco":312900,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"DR","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":191900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"DS","piso":2,"tipologia":"T0","abc":35.7,"varanda":10.9,"terraco":0.0,"estacionamento":13.0,"total":59.6,"preco":196900,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"DT","piso":2,"tipologia":"T2","abc":72.0,"varanda":4.4,"terraco":0.0,"estacionamento":13.0,"total":89.4,"preco":372000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"DU","piso":2,"tipologia":"T1","abc":56.9,"varanda":5.0,"terraco":0.0,"estacionamento":13.0,"total":74.9,"preco":297000,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"DV","piso":2,"tipologia":"T2","abc":72.9,"varanda":9.5,"terraco":0.0,"estacionamento":13.0,"total":95.4,"preco":372900,"status":"Reservado","orientacao":"Norte / Poente"},{"fraccao":"DW","piso":2,"tipologia":"T0","abc":47.7,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":65.74,"preco":226900,"status":"Disponível","orientacao":"Poente"},{"fraccao":"DX","piso":2,"tipologia":"T1","abc":59.3,"varanda":6.4,"terraco":0.0,"estacionamento":13.0,"total":78.7,"preco":297000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"DY","piso":2,"tipologia":"T1","abc":52.5,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":70.54,"preco":292000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"DZ","piso":2,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":196900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"EA","piso":3,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":379000,"status":"Reservado","orientacao":"Norte / Poente"},{"fraccao":"EB","piso":3,"tipologia":"T1","abc":58.6,"varanda":23.7,"terraco":0.0,"estacionamento":13.0,"total":95.3,"preco":319900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"EC","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":198900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"ED","piso":3,"tipologia":"T0","abc":35.7,"varanda":10.9,"terraco":0.0,"estacionamento":13.0,"total":59.6,"preco":203900,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"EE","piso":3,"tipologia":"T2","abc":72.0,"varanda":4.4,"terraco":0.0,"estacionamento":13.0,"total":89.4,"preco":379000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"EF","piso":3,"tipologia":"T1","abc":56.9,"varanda":5.0,"terraco":0.0,"estacionamento":13.0,"total":74.9,"preco":304000,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"EG","piso":3,"tipologia":"T2","abc":72.9,"varanda":9.5,"terraco":0.0,"estacionamento":13.0,"total":95.4,"preco":386900,"status":"Vendido","orientacao":"Norte / Poente"},{"fraccao":"EH","piso":3,"tipologia":"T0","abc":47.7,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":65.74,"preco":233900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"EI","piso":3,"tipologia":"T1","abc":59.3,"varanda":6.4,"terraco":0.0,"estacionamento":13.0,"total":78.7,"preco":304000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"EJ","piso":3,"tipologia":"T1","abc":52.5,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":70.54,"preco":304000,"status":"Reservado","orientacao":"Poente"},{"fraccao":"EK","piso":3,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":203900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"EL","piso":4,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":389000,"status":"Vendido","orientacao":"Norte / Poente"},{"fraccao":"EM","piso":4,"tipologia":"T1","abc":58.6,"varanda":23.7,"terraco":0.0,"estacionamento":13.0,"total":95.3,"preco":329900,"status":"Reservado","orientacao":"Nascente"},{"fraccao":"EN","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":208900,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"EP","piso":4,"tipologia":"T1","abc":52.5,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":70.54,"preco":314000,"status":"Disponível","orientacao":"Poente"},{"fraccao":"EQ","piso":4,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":213900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"ER","piso":5,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":405000,"status":"Vendido","orientacao":"Norte / Poente"},{"fraccao":"ES","piso":5,"tipologia":"T1","abc":58.6,"varanda":23.7,"terraco":0.0,"estacionamento":13.0,"total":95.3,"preco":339900,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"ET","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":221000,"status":"Vendido","orientacao":"Nascente"},{"fraccao":"EU","piso":5,"tipologia":"T0","abc":35.7,"varanda":8.8,"terraco":0.0,"estacionamento":13.0,"total":57.5,"preco":225000,"status":"Vendido","orientacao":"Norte / Nascente"},{"fraccao":"EV","piso":5,"tipologia":"T1","abc":52.0,"varanda":4.4,"terraco":0.0,"estacionamento":13.0,"total":69.4,"preco":324000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"EW","piso":5,"tipologia":"T2","abc":72.6,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":90.64,"preco":425000,"status":"Disponível","orientacao":"Norte / Nascente"},{"fraccao":"EX","piso":5,"tipologia":"T0","abc":43.4,"varanda":11.3,"terraco":0.0,"estacionamento":13.0,"total":67.7,"preco":253900,"status":"Vendido","orientacao":"Sul / Poente"},{"fraccao":"EY","piso":5,"tipologia":"T1","abc":53.5,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":71.54,"preco":327900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"EZ","piso":5,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":221000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"FA","piso":6,"tipologia":"T2","abc":73.5,"varanda":9.0,"terraco":0.0,"estacionamento":13.0,"total":95.5,"preco":415000,"status":"Vendido","orientacao":"Norte / Poente"},{"fraccao":"FB","piso":6,"tipologia":"T1","abc":58.6,"varanda":23.7,"terraco":0.0,"estacionamento":13.0,"total":95.3,"preco":349900,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"FC","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":231000,"status":"Disponível","orientacao":"Nascente"},{"fraccao":"FD","piso":6,"tipologia":"T0","abc":35.7,"varanda":8.8,"terraco":0.0,"estacionamento":13.0,"total":57.5,"preco":235000,"status":"Vendido","orientacao":"Poente"},{"fraccao":"FE","piso":6,"tipologia":"T2","abc":72.5,"varanda":39.4,"terraco":0.0,"estacionamento":13.0,"total":124.9,"preco":479900,"status":"Vendido","orientacao":"Sul / Poente"},{"fraccao":"FF","piso":6,"tipologia":"T0","abc":43.4,"varanda":11.3,"terraco":0.0,"estacionamento":13.0,"total":67.7,"preco":263900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"FG","piso":6,"tipologia":"T1","abc":53.5,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":71.54,"preco":337900,"status":"Vendido","orientacao":"Poente"},{"fraccao":"FH","piso":6,"tipologia":"T0","abc":35.0,"varanda":5.04,"terraco":0.0,"estacionamento":13.0,"total":53.04,"preco":231000,"status":"Vendido","orientacao":"Poente"}];
 
 // ============================================================
 // ESTADO
 // ============================================================
 let currentEmp = 'bh';
-let filters = { tipo: 'all', status: 'all', piso: 'all' };
+let filters = { tipo: 'all', status: 'all', piso: 'all', torre: 'all' };
 let sortKey = 'piso';
 let sortAsc = true;
 let selectedUnit = null;
@@ -526,23 +876,12 @@ let selectedUnit = null;
 // INICIALIZAÇÃO
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
+  loadSavedStates();
   renderStats();
   applyFilters();
 });
 
-// ============================================================
-// PASSWORD
-// ============================================================
-function checkPwd() {
-  const val = document.getElementById('pwdInput').value;
-  if (val === 'dpsimobiliario') {
-    document.getElementById('pwdModal').classList.remove('open');
-  } else {
-    document.getElementById('pwdError').style.display = 'block';
-    document.getElementById('pwdInput').value = '';
-    document.getElementById('pwdInput').focus();
-  }
-}
+// PASSWORD — removida (acesso controlado pelo simulador principal)
 
 // ============================================================
 // SELECÇÃO DE EMPREENDIMENTO
@@ -575,6 +914,7 @@ function applyFilters() {
   let data = BH_UNITS.filter(u => {
     if (filters.tipo !== 'all' && u.tipologia !== filters.tipo) return false;
     if (filters.status !== 'all' && u.status !== filters.status) return false;
+    if (filters.torre !== 'all' && u.torre !== filters.torre) return false;
     if (piso !== 'all' && u.piso !== parseInt(piso)) return false;
     if (search && !u.fraccao.toLowerCase().includes(search)) return false;
     return true;
@@ -681,64 +1021,185 @@ function renderTable(data) {
       <td class="muted">${u.varanda.toFixed(2)}</td>
       <td><strong>${u.total.toFixed(2)}</strong></td>
       <td><strong>${precoFmt}</strong></td>
-      <td><span class="badge badge-${statusClass}">${u.status}</span></td>
-      <td>
-        <button class="btn-selecionar" ${!canSim ? 'disabled' : ''} onclick='openSimModal(${JSON.stringify(u)})'>${btnLabel}</button>
+      <td id="bh-status-${u.fraccao}">
+        ${editMode.bh ? getStatusSelectHTML('bh', u.fraccao, u.status) : '<span class="badge badge-' + statusClass + '">' + u.status + '</span>'}
+      </td>
+      <td class="muted" style="font-size:0.8rem;">${u.orientacao || '—'}</td>
+      <td style="display:flex;gap:6px;align-items:center;">
+        <button class="btn-selecionar" ${!canSim ? 'disabled' : ''} onclick='openBhDetail(${JSON.stringify(u)})'>${btnLabel}</button>
       </td>
     </tr>`;
   }).join('');
 }
 
 // ============================================================
-// SIMULADOR MODAL
+// BELO HORIZONTE — PAINEL DE DETALHE INLINE
 // ============================================================
-function openSimModal(unit) {
-  selectedUnit = unit;
-  document.getElementById('simTitle').textContent = 'Simulador — Fracção ' + unit.fraccao;
-  document.getElementById('simSubtitle').textContent = 'Belo Horizonte Residences · Setúbal · Piso ' + unit.piso + ' · ' + unit.tipologia;
+let selectedBhUnit = null;
 
-  document.getElementById('unitInfoGrid').innerHTML = `
-    <div class="unit-info-box">
-      <div class="unit-info-label">Fracção</div>
-      <div class="unit-info-val">${unit.fraccao}</div>
+function openBhDetail(unit) {
+  selectedBhUnit = unit;
+  document.getElementById('bhDetailTitle').textContent = 'Fracção ' + unit.fraccao;
+  document.getElementById('bhDetailSubtitle').textContent = 'Belo Horizonte Residences · Setúbal · Piso ' + unit.piso + ' · ' + unit.tipologia;
+
+  // Info grid
+  document.getElementById('bhUnitInfoGrid').innerHTML = `
+    <div class="unit-info-box"><div class="unit-info-label">Fracção</div><div class="unit-info-val">${unit.fraccao}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Tipologia</div><div class="unit-info-val">${unit.tipologia}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Piso</div><div class="unit-info-val">${unit.piso}º</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Área ABC</div><div class="unit-info-val">${unit.abc.toFixed(2)} m²</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Varanda</div><div class="unit-info-val">${unit.varanda.toFixed(2)} m²</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Área Total</div><div class="unit-info-val">${unit.total.toFixed(2)} m²</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Estacionamento</div><div class="unit-info-val">${unit.estacionamento} m²</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Orientação Solar</div><div class="unit-info-val">${unit.orientacao || '—'}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Preço</div><div class="unit-info-val" style="color:var(--gold)">€ ${unit.preco.toLocaleString('pt-PT')}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Estado</div><div class="unit-info-val">${unit.status}</div></div>
+  `;
+
+  // Plano de pagamento (do Contrato de Reserva BH Living)
+  const reserva   = Math.round(unit.preco * 0.02);
+  const cpcv      = Math.round(unit.preco * 0.10);
+  const cpcv6m    = Math.round(unit.preco * 0.10);
+  const cpcv12m   = Math.round(unit.preco * 0.08);
+  const escritura = Math.round(unit.preco * 0.70);
+  document.getElementById('bhPagamentoGrid').innerHTML = `
+    <div class="result-box">
+      <div class="result-label">Reserva — Agora</div>
+      <div class="result-val" style="color:var(--gold)">€ ${reserva.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">2% do preço de compra</div>
     </div>
-    <div class="unit-info-box">
-      <div class="unit-info-label">Tipologia</div>
-      <div class="unit-info-val">${unit.tipologia}</div>
+    <div class="result-box">
+      <div class="result-label">CPCV — Até final de 2026</div>
+      <div class="result-val" style="color:var(--gold)">€ ${cpcv.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">10% do preço de compra</div>
     </div>
-    <div class="unit-info-box">
-      <div class="unit-info-label">Piso</div>
-      <div class="unit-info-val">${unit.piso}º</div>
+    <div class="result-box">
+      <div class="result-label">6 meses após CPCV</div>
+      <div class="result-val" style="color:var(--gold)">€ ${cpcv6m.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">10% do preço de compra</div>
     </div>
-    <div class="unit-info-box">
-      <div class="unit-info-label">Área ABC</div>
-      <div class="unit-info-val">${unit.abc.toFixed(2)} m²</div>
+    <div class="result-box">
+      <div class="result-label">12 meses após CPCV + Licença</div>
+      <div class="result-val" style="color:var(--gold)">€ ${cpcv12m.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">8% do preço de compra</div>
     </div>
-    <div class="unit-info-box">
-      <div class="unit-info-label">Área Total</div>
-      <div class="unit-info-val">${unit.total.toFixed(2)} m²</div>
-    </div>
-    <div class="unit-info-box">
-      <div class="unit-info-label">Estado</div>
-      <div class="unit-info-val">${unit.status}</div>
+    <div class="result-box">
+      <div class="result-label">Escritura Pública</div>
+      <div class="result-val" style="color:var(--gold)">€ ${escritura.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">70% do preço de compra</div>
     </div>
   `;
 
-  document.getElementById('simPreco').value = unit.preco;
-  document.getElementById('simCessao').value = Math.round(unit.preco * 1.15);
+  // Preencher simulador
+  document.getElementById('bhSimPreco').value = unit.preco;
+  document.getElementById('bhSimValorizacao').value = 10;
+  document.getElementById('bhSimMeses').value = 24;
 
-  document.getElementById('simModal').classList.add('open');
-  calcular();
+  // Actualizar planta da unidade no painel
+  const plantaUrl = 'https://dpsimobiliario.pt/belohorizonte/plantas/' + unit.fraccao + '.webp';
+  const bhPlantaImg = document.getElementById('bhPlantaImg');
+  if (bhPlantaImg) {
+    bhPlantaImg.src = plantaUrl;
+    bhPlantaImg.onclick = function() { window.open(plantaUrl, '_blank'); };
+  }
+
+  // Mostrar painel
+  document.getElementById('bhDetailPanel').style.display = 'block';
+  document.getElementById('bhDetailPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  calcularBh();
 }
 
-function closeSimModal() {
-  document.getElementById('simModal').classList.remove('open');
+function closeBhDetail() {
+  document.getElementById('bhDetailPanel').style.display = 'none';
+  selectedBhUnit = null;
 }
 
-// Fechar modal ao clicar fora
-document.getElementById('simModal').addEventListener('click', function(e) {
-  if (e.target === this) closeSimModal();
-});
+// ============================================================
+// BELO HORIZONTE — CÁLCULO
+// ============================================================
+function calcularBh() {
+  if (!selectedBhUnit) return;
+
+  const preco = parseFloat(document.getElementById('bhSimPreco').value) || 0;
+  const valorizacaoPct = parseFloat(document.getElementById('bhSimValorizacao').value) || 10;
+  const meses = parseInt(document.getElementById('bhSimMeses').value) || 24;
+  const taxaFiscal = parseFloat(document.getElementById('bhSimFiscal').value);
+
+  const anos = meses / 12;
+
+  // Valor de cedência estimado (preço + valorização)
+  const valorCessao = preco * Math.pow(1 + valorizacaoPct / 100, anos);
+
+  // Mais-valia bruta
+  const maisValiaBruta = valorCessao - preco;
+
+  // Imposto
+  const imposto = maisValiaBruta > 0 ? maisValiaBruta * taxaFiscal : 0;
+
+  // Lucro líquido
+  const lucroLiquido = maisValiaBruta - imposto;
+
+  // -------------------------------------------------------
+  // Cálculo do CAPITAL INVESTIDO até à data de venda
+  // Plano de pagamento BH (a contar do momento actual):
+  //   - Reserva (2%)  → AGORA (já pago ao assinar)
+  //   - CPCV (10%)    → Dezembro 2026
+  //   - 6m após CPCV (10%) → Junho 2027
+  //   - 12m após CPCV + Licença (8%) → Dezembro 2027
+  //   - Escritura (70%) → à escritura (não relevante para cedência)
+  // -------------------------------------------------------
+  const hoje = new Date();
+  // Data de referência: CPCV = Dezembro 2026
+  const dataCPCV   = new Date(2026, 11, 1); // Dez 2026
+  const data6m     = new Date(2027,  5, 1); // Jun 2027
+  const data12m    = new Date(2027, 11, 1); // Dez 2027
+
+  // Data de venda estimada = hoje + meses
+  const dataVenda = new Date(hoje.getFullYear(), hoje.getMonth() + meses, hoje.getDate());
+
+  // Parcelas pagas até à data de venda
+  const pReserva = preco * 0.02;  // sempre pago
+  const pCPCV    = dataVenda >= dataCPCV ? preco * 0.10 : 0;
+  const p6m      = dataVenda >= data6m   ? preco * 0.10 : 0;
+  const p12m     = dataVenda >= data12m  ? preco * 0.08 : 0;
+
+  const capitalInvestido = pReserva + pCPCV + p6m + p12m;
+  const pctInvestido = Math.round((capitalInvestido / preco) * 100);
+
+  // ROI sobre capital investido
+  const roi = capitalInvestido > 0 ? (lucroLiquido / capitalInvestido * 100) : 0;
+
+  // Texto explicativo das parcelas pagas
+  let parcelasTexto = `<strong style="color:var(--gold);">Capital investido até à venda (${meses} meses):</strong> `;
+  const partes = [];
+  partes.push(`Reserva 2% = € ${Math.round(pReserva).toLocaleString('pt-PT')}`);
+  if (pCPCV > 0) partes.push(`CPCV 10% (Dez 2026) = € ${Math.round(pCPCV).toLocaleString('pt-PT')}`);
+  if (p6m  > 0) partes.push(`6m após CPCV 10% (Jun 2027) = € ${Math.round(p6m).toLocaleString('pt-PT')}`);
+  if (p12m > 0) partes.push(`12m após CPCV 8% (Dez 2027) = € ${Math.round(p12m).toLocaleString('pt-PT')}`);
+  parcelasTexto += partes.join(' &nbsp;+&nbsp; ');
+  parcelasTexto += ` &nbsp;→&nbsp; <strong style="color:var(--gold);">Total: € ${Math.round(capitalInvestido).toLocaleString('pt-PT')} (${pctInvestido}% do preço)</strong>`;
+
+  const fmt = (v) => '€ ' + Math.round(v).toLocaleString('pt-PT');
+  const fmtPct = (v) => v.toFixed(1) + '%';
+
+  document.getElementById('bh-investido-info').innerHTML = parcelasTexto;
+  document.getElementById('bh-res-preco').textContent = fmt(preco);
+  document.getElementById('bh-res-cessao').textContent = fmt(valorCessao);
+  document.getElementById('bh-res-mais-valia').textContent = fmt(maisValiaBruta);
+  document.getElementById('bh-res-imposto').textContent = fmt(imposto);
+  document.getElementById('bh-res-lucro').textContent = fmt(lucroLiquido);
+  document.getElementById('bh-res-lucro').style.color = lucroLiquido >= 0 ? 'var(--gold)' : '#ef4444';
+  document.getElementById('bh-res-investido').textContent = fmt(capitalInvestido);
+  document.getElementById('bh-res-roi').textContent = fmtPct(roi);
+  document.getElementById('bh-res-meses').textContent = meses + ' meses';
+}
+
+// ============================================================
+// SIMULADOR MODAL (redirecciona para painel inline)
+// ============================================================
+function openSimModal(unit) { openBhDetail(unit); }
+function closeSimModal() { closeBhDetail(); }
 
 // ============================================================
 // CÁLCULO
@@ -791,6 +1252,829 @@ function calcular() {
   const lucroEl = document.getElementById('res-lucro');
   lucroEl.style.color = lucroLiquido >= 0 ? 'var(--gold)' : '#ef4444';
 }
+
+// ============================================================
+// LAKE TOWERS — DADOS
+// ============================================================
+const LAKE_UNITS = [{"fraccao": "C", "torre": "A1", "piso": 1, "tipologia": "T3 Smart", "orientacao": "Sul / Poente", "area_total": 200, "area_privada": 95, "varandas": 105, "estacionamento": 2, "pvp": 617000, "preco_lancamento": 499900, "status": "Disponível"}, {"fraccao": "DY", "torre": "A1", "piso": 13, "tipologia": "T3 Smart", "orientacao": "Sul / Nascente", "area_total": 125, "area_privada": 95, "varandas": 30, "estacionamento": 2, "pvp": 700000, "preco_lancamento": 519900, "status": "Disponível"}, {"fraccao": "EB", "torre": "A1", "piso": 13, "tipologia": "T3", "orientacao": "Poente / Norte", "area_total": 126, "area_privada": 100, "varandas": 26, "estacionamento": 2, "pvp": 725000, "preco_lancamento": 539900, "status": "Reservado"}, {"fraccao": "ED", "torre": "A1", "piso": 13, "tipologia": "T2+1", "orientacao": "Nascente", "area_total": 100, "area_privada": 81, "varandas": 19, "estacionamento": 1, "pvp": 565000, "preco_lancamento": 419900, "status": "Disponível"}, {"fraccao": "EE", "torre": "A1", "piso": 14, "tipologia": "T3 Smart", "orientacao": "Sul / Nascente", "area_total": 128, "area_privada": 95, "varandas": 33, "estacionamento": 2, "pvp": 710000, "preco_lancamento": 529900, "status": "Disponível"}, {"fraccao": "CV", "torre": "A2", "piso": 11, "tipologia": "T3 Smart", "orientacao": "Sul / Poente", "area_total": 125, "area_privada": 95, "varandas": 30, "estacionamento": 2, "pvp": 700000, "preco_lancamento": 519900, "status": "Disponível"}, {"fraccao": "CW", "torre": "A2", "piso": 11, "tipologia": "T3", "orientacao": "Poente / Norte", "area_total": 136, "area_privada": 100, "varandas": 36, "estacionamento": 2, "pvp": 725000, "preco_lancamento": 539900, "status": "Disponível"}, {"fraccao": "CX", "torre": "A2", "piso": 11, "tipologia": "T2+1", "orientacao": "Norte", "area_total": 96, "area_privada": 81, "varandas": 15, "estacionamento": 1, "pvp": 565000, "preco_lancamento": 419900, "status": "Disponível"}, {"fraccao": "CZ", "torre": "A2", "piso": 11, "tipologia": "T3 Smart", "orientacao": "Sul / Nascente", "area_total": 128, "area_privada": 95, "varandas": 33, "estacionamento": 2, "pvp": 700000, "preco_lancamento": 519900, "status": "Disponível"}, {"fraccao": "DB", "torre": "A2", "piso": 12, "tipologia": "T3 Smart", "orientacao": "Sul / Poente", "area_total": 128, "area_privada": 95, "varandas": 33, "estacionamento": 2, "pvp": 710000, "preco_lancamento": 529900, "status": "Disponível"}, {"fraccao": "DC", "torre": "A2", "piso": 12, "tipologia": "T3", "orientacao": "Poente / Norte", "area_total": 126, "area_privada": 100, "varandas": 26, "estacionamento": 2, "pvp": 735000, "preco_lancamento": 549900, "status": "Disponível"}, {"fraccao": "DD", "torre": "A2", "piso": 12, "tipologia": "T2+1", "orientacao": "Norte", "area_total": 96, "area_privada": 81, "varandas": 15, "estacionamento": 1, "pvp": 575000, "preco_lancamento": 429900, "status": "Disponível"}, {"fraccao": "DE", "torre": "A2", "piso": 12, "tipologia": "T3", "orientacao": "Nascente / Norte", "area_total": 136, "area_privada": 100, "varandas": 36, "estacionamento": 2, "pvp": 710000, "preco_lancamento": 529900, "status": "Disponível"}, {"fraccao": "DF", "torre": "A2", "piso": 12, "tipologia": "T3 Smart", "orientacao": "Sul / Nascente", "area_total": 125, "area_privada": 95, "varandas": 30, "estacionamento": 2, "pvp": 710000, "preco_lancamento": 529900, "status": "Disponível"}, {"fraccao": "C", "torre": "A4", "piso": 1, "tipologia": "T3 Smart", "orientacao": "Nascente / Norte", "area_total": 168, "area_privada": 89, "varandas": 79, "estacionamento": 2, "pvp": 533000, "preco_lancamento": 399900, "status": "Reservado"}, {"fraccao": "DC", "torre": "A4", "piso": 11, "tipologia": "T3 Smart", "orientacao": "Nascente / Norte", "area_total": 125, "area_privada": 95, "varandas": 30, "estacionamento": 2, "pvp": 660000, "preco_lancamento": 489900, "status": "Disponível"}, {"fraccao": "DG", "torre": "A4", "piso": 11, "tipologia": "T3 Smart", "orientacao": "Sul / Nascente", "area_total": 128, "area_privada": 95, "varandas": 33, "estacionamento": 2, "pvp": 700000, "preco_lancamento": 519900, "status": "Disponível"}, {"fraccao": "DI", "torre": "A4", "piso": 12, "tipologia": "T3 Smart", "orientacao": "Nascente / Norte", "area_total": 128, "area_privada": 95, "varandas": 33, "estacionamento": 2, "pvp": 670000, "preco_lancamento": 499900, "status": "Disponível"}, {"fraccao": "DJ", "torre": "A4", "piso": 12, "tipologia": "T3", "orientacao": "Poente / Norte", "area_total": 126, "area_privada": 100, "varandas": 26, "estacionamento": 2, "pvp": 735000, "preco_lancamento": 549900, "status": "Reservado"}, {"fraccao": "DN", "torre": "A4", "piso": 12, "tipologia": "T2+1", "orientacao": "Nascente", "area_total": 100, "area_privada": 81, "varandas": 19, "estacionamento": 1, "pvp": 575000, "preco_lancamento": 429900, "status": "Disponível"}];
+
+let lakeFilters = { torre: 'all', status: 'all' };
+let selectedLakeUnit = null;
+
+// ============================================================
+// LAKE TOWERS — FILTROS
+// ============================================================
+function setLakeFilter(key, val, btn) {
+  lakeFilters[key] = val;
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyLakeFilters();
+}
+
+function applyLakeFilters() {
+  const search = document.getElementById('lakeSearchBox').value.toLowerCase();
+  let data = LAKE_UNITS.filter(u => {
+    if (lakeFilters.torre !== 'all' && u.torre !== lakeFilters.torre) return false;
+    if (lakeFilters.status !== 'all' && u.status !== lakeFilters.status) return false;
+    if (search && !u.fraccao.toLowerCase().includes(search) && !u.torre.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  renderLakeTable(data);
+  document.getElementById('lakeCountLabel').textContent = data.length;
+}
+
+// ============================================================
+// LAKE TOWERS — STATS
+// ============================================================
+function renderLakeStats() {
+  const total = LAKE_UNITS.length;
+  const disp = LAKE_UNITS.filter(u => u.status === 'Disponível').length;
+  const res = LAKE_UNITS.filter(u => u.status === 'Reservado').length;
+  document.getElementById('lakeStatsBar').innerHTML = `
+    <div class="stat-box">
+      <div class="stat-box-val">${total}</div>
+      <div class="stat-box-label">Unidades Disponíveis</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val" style="color:#22c55e">${disp}</div>
+      <div class="stat-box-label">Disponíveis</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val" style="color:#f59e0b">${res}</div>
+      <div class="stat-box-label">Reservadas</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val" style="color:var(--gold)">T2+1 – T3</div>
+      <div class="stat-box-label">Tipologias</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val" style="color:var(--gold)">Set 2029</div>
+      <div class="stat-box-label">Entrega Prevista</div>
+    </div>
+  `;
+}
+
+// ============================================================
+// LAKE TOWERS — RENDER TABLE
+// ============================================================
+function renderLakeTable(data) {
+  const tbody = document.getElementById('lakeTableBody');
+  if (!tbody) return;
+  if (data.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="13" style="text-align:center;padding:40px;color:var(--gray);">Nenhuma unidade encontrada.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(u => {
+    const statusClass = u.status === 'Disponível' ? 'disponivel' : u.status === 'Vendido' ? 'vendido' : u.status === 'DPS' ? 'dps' : 'reservado';
+    const pvpFmt = '€ ' + u.pvp.toLocaleString('pt-PT');
+    const lancFmt = '€ ' + u.preco_lancamento.toLocaleString('pt-PT');
+    const canSim = u.status === 'Disponível' || u.status === 'Reservado';
+    return `<tr>
+      <td><span class="tipo-badge" style="background:rgba(139,92,246,0.2);color:#a78bfa;">${u.torre}</span></td>
+      <td><strong>${u.fraccao}</strong></td>
+      <td class="muted">${u.piso}º</td>
+      <td><span class="tipo-badge">${u.tipologia}</span></td>
+      <td class="muted" style="font-size:0.8rem;">${u.orientacao}</td>
+      <td><strong>${u.area_total}</strong></td>
+      <td>${u.area_privada}</td>
+      <td class="muted">${u.varandas}</td>
+      <td class="muted">${u.estacionamento}</td>
+      <td style="color:var(--gray);text-decoration:line-through;font-size:0.85rem;">${pvpFmt}</td>
+      <td><strong style="color:var(--gold)">${lancFmt}</strong></td>
+      <td id="lake-status-${u.torre}_${u.fraccao}">
+        ${editMode.lake ? getStatusSelectHTML('lake', u.torre+'_'+u.fraccao, u.status) : '<span class="badge badge-' + statusClass + '">' + u.status + '</span>'}
+      </td>
+      <td>
+        <button class="btn-selecionar" ${!canSim ? 'disabled' : ''} onclick='openLakeDetail(${JSON.stringify(u)})'>Simular</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ============================================================
+// LAKE TOWERS — ABRIR DETALHE
+// ============================================================
+function openLakeDetail(unit) {
+  selectedLakeUnit = unit;
+  document.getElementById('lakeDetailTitle').textContent = 'Fracção ' + unit.fraccao + ' — Torre ' + unit.torre;
+  document.getElementById('lakeDetailSubtitle').textContent = 'Lake Towers · Porto · Piso ' + unit.piso + ' · ' + unit.tipologia;
+
+  // Info grid
+  document.getElementById('lakeUnitInfoGrid').innerHTML = `
+    <div class="unit-info-box"><div class="unit-info-label">Torre</div><div class="unit-info-val">${unit.torre}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Fracção</div><div class="unit-info-val">${unit.fraccao}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Tipologia</div><div class="unit-info-val">${unit.tipologia}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Piso</div><div class="unit-info-val">${unit.piso}º</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Área Total</div><div class="unit-info-val">${unit.area_total} m²</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Área Privada</div><div class="unit-info-val">${unit.area_privada} m²</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Varandas</div><div class="unit-info-val">${unit.varandas} m²</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Estacionamento</div><div class="unit-info-val">${unit.estacionamento} lugar(es)</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Orientação</div><div class="unit-info-val">${unit.orientacao}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">PVP</div><div class="unit-info-val" style="text-decoration:line-through;color:var(--gray)">€ ${unit.pvp.toLocaleString('pt-PT')}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Preço Lançamento</div><div class="unit-info-val" style="color:var(--gold)">€ ${unit.preco_lancamento.toLocaleString('pt-PT')}</div></div>
+    <div class="unit-info-box"><div class="unit-info-label">Estado</div><div class="unit-info-val">${unit.status}</div></div>
+  `;
+
+  // Plano de pagamento
+  const cpcv = Math.round(unit.preco_lancamento * 0.20);
+  const betao = Math.round(unit.preco_lancamento * 0.15);
+  const escritura = Math.round(unit.preco_lancamento * 0.65);
+  document.getElementById('lakePagamentoGrid').innerHTML = `
+    <div class="result-box">
+      <div class="result-label">CPCV — Agora</div>
+      <div class="result-val" style="color:var(--gold)">€ ${cpcv.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">20% do preço de lançamento</div>
+    </div>
+    <div class="result-box">
+      <div class="result-label">Conclusão do Betão — Jan 2028</div>
+      <div class="result-val" style="color:var(--gold)">€ ${betao.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">15% do preço de lançamento</div>
+    </div>
+    <div class="result-box">
+      <div class="result-label">Escritura — Set 2029</div>
+      <div class="result-val" style="color:var(--gold)">€ ${escritura.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">65% do preço de lançamento</div>
+    </div>
+  `;
+
+  // Preencher simulador
+  document.getElementById('lakeSimPreco').value = unit.preco_lancamento;
+  document.getElementById('lakeSimValorizacao').value = 8;
+  document.getElementById('lakeSimMeses').value = 24;
+
+  // Mostrar painel
+  document.getElementById('lakeDetailPanel').style.display = 'block';
+  document.getElementById('lakeDetailPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  calcularLake();
+}
+
+function closeLakeDetail() {
+  document.getElementById('lakeDetailPanel').style.display = 'none';
+  selectedLakeUnit = null;
+}
+
+// ============================================================
+// LAKE TOWERS — CÁLCULO
+// ============================================================
+function calcularLake() {
+  if (!selectedLakeUnit) return;
+
+  const preco = parseFloat(document.getElementById('lakeSimPreco').value) || 0;
+  const valorizacaoPct = parseFloat(document.getElementById('lakeSimValorizacao').value) || 8;
+  const meses = parseInt(document.getElementById('lakeSimMeses').value) || 24;
+  const taxaFiscal = parseFloat(document.getElementById('lakeSimFiscal').value);
+
+  const anos = meses / 12;
+
+  // Valor de cedência estimado (preço de lançamento + valorização)
+  const valorCessao = preco * Math.pow(1 + valorizacaoPct / 100, anos);
+
+  // Desconto de 20% se venda após 24 meses
+  // O desconto é sobre o PVP que teve na compra (diferença entre PVP e preço lançamento)
+  const descontoOriginal = selectedLakeUnit.pvp - selectedLakeUnit.preco_lancamento;
+  const desconto24 = meses >= 24 ? descontoOriginal : 0;
+
+  // Mostrar/esconder aviso
+  document.getElementById('lakeDesconto24Aviso').style.display = meses >= 24 ? 'block' : 'none';
+
+  // Mais-valia bruta = valor cedência - preço compra + desconto 24 meses
+  const maisValiaBruta = (valorCessao - preco) + desconto24;
+
+  // Imposto
+  const imposto = maisValiaBruta > 0 ? maisValiaBruta * taxaFiscal : 0;
+
+  // Lucro líquido
+  const lucroLiquido = maisValiaBruta - imposto;
+
+  // Entrada paga (CPCV 20%)
+  const entrada = preco * 0.20;
+
+  // ROI sobre entrada
+  const roi = entrada > 0 ? (lucroLiquido / entrada * 100) : 0;
+
+  const fmt = (v) => '€ ' + Math.round(v).toLocaleString('pt-PT');
+  const fmtPct = (v) => v.toFixed(1) + '%';
+
+  document.getElementById('lake-res-preco').textContent = fmt(preco);
+  document.getElementById('lake-res-cessao').textContent = fmt(valorCessao);
+  document.getElementById('lake-res-desconto').textContent = meses >= 24 ? fmt(desconto24) + ' ✓' : '—  (< 24 meses)';
+  document.getElementById('lake-res-desconto').style.color = meses >= 24 ? 'var(--gold)' : 'var(--gray)';
+  document.getElementById('lake-res-mais-valia').textContent = fmt(maisValiaBruta);
+  document.getElementById('lake-res-imposto').textContent = fmt(imposto);
+  document.getElementById('lake-res-lucro').textContent = fmt(lucroLiquido);
+  document.getElementById('lake-res-lucro').style.color = lucroLiquido >= 0 ? 'var(--gold)' : '#ef4444';
+  document.getElementById('lake-res-entrada').textContent = fmt(entrada);
+  document.getElementById('lake-res-roi').textContent = fmtPct(roi);
+  document.getElementById('lake-res-meses').textContent = meses + ' meses';
+}
+
+
+// ============================================================
+// MODO EDIÇÃO DE ESTADOS
+// ============================================================
+let editMode = { bh: false, lake: false };
+let pendingEditTable = null;
+const EDIT_PASSWORD = 'Dps2026';
+const ESTADOS = ['Disponível', 'Reservado', 'Vendido', 'DPS'];
+
+// Carregar estados guardados do localStorage
+function loadSavedStates() {
+  try {
+    const bhStates = JSON.parse(localStorage.getItem('bh_states') || '{}');
+    const lakeStates = JSON.parse(localStorage.getItem('lake_states') || '{}');
+    
+    // Aplicar estados guardados ao BH_UNITS
+    BH_UNITS.forEach(u => {
+      const key = u.fraccao;
+      if (bhStates[key]) u.status = bhStates[key];
+    });
+    
+    // Aplicar estados guardados ao LAKE_UNITS
+    LAKE_UNITS.forEach(u => {
+      const key = u.torre + '_' + u.fraccao;
+      if (lakeStates[key]) u.status = lakeStates[key];
+    });
+  } catch(e) {}
+}
+
+function toggleEditMode(table) {
+  if (editMode[table]) {
+    // Desactivar modo edição
+    editMode[table] = false;
+    const btn = document.getElementById(table === 'bh' ? 'bhEditBtn' : 'lakeEditBtn');
+    btn.classList.remove('active');
+    btn.textContent = '✏️ Modo Edição';
+    if (table === 'bh') applyFilters();
+    else applyLakeFilters();
+  } else {
+    // Pedir password
+    pendingEditTable = table;
+    document.getElementById('editPwdInput').value = '';
+    document.getElementById('editPwdError').style.display = 'none';
+    document.getElementById('editPwdModal').classList.add('open');
+    setTimeout(() => document.getElementById('editPwdInput').focus(), 100);
+  }
+}
+
+function checkEditPwd() {
+  const pwd = document.getElementById('editPwdInput').value;
+  if (pwd === EDIT_PASSWORD) {
+    document.getElementById('editPwdModal').classList.remove('open');
+    editMode[pendingEditTable] = true;
+    const btn = document.getElementById(pendingEditTable === 'bh' ? 'bhEditBtn' : 'lakeEditBtn');
+    btn.classList.add('active');
+    btn.textContent = '✏️ Edição Activa';
+    if (pendingEditTable === 'bh') applyFilters();
+    else applyLakeFilters();
+  } else {
+    document.getElementById('editPwdError').style.display = 'block';
+    document.getElementById('editPwdInput').value = '';
+    document.getElementById('editPwdInput').focus();
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('editPwdModal').classList.remove('open');
+  }
+});
+
+function changeStatus(table, key, newStatus) {
+  if (table === 'bh') {
+    const unit = BH_UNITS.find(u => u.fraccao === key);
+    if (unit) {
+      unit.status = newStatus;
+      // Guardar no localStorage
+      const states = JSON.parse(localStorage.getItem('bh_states') || '{}');
+      states[key] = newStatus;
+      localStorage.setItem('bh_states', JSON.stringify(states));
+      applyFilters();
+      renderStats();
+    }
+  } else {
+    const [torre, fraccao] = key.split('_');
+    const unit = LAKE_UNITS.find(u => u.torre === torre && u.fraccao === fraccao);
+    if (unit) {
+      unit.status = newStatus;
+      // Guardar no localStorage
+      const states = JSON.parse(localStorage.getItem('lake_states') || '{}');
+      states[key] = newStatus;
+      localStorage.setItem('lake_states', JSON.stringify(states));
+      applyLakeFilters();
+      renderLakeStats();
+    }
+  }
+  // Mostrar indicador de gravação
+  const ind = document.getElementById('saveIndicator');
+  ind.classList.add('show');
+  setTimeout(() => ind.classList.remove('show'), 2000);
+}
+
+function getStatusSelectHTML(table, key, currentStatus) {
+  const statusClass = currentStatus === 'Disponível' ? 'disponivel' :
+                      currentStatus === 'Reservado' ? 'reservado' :
+                      currentStatus === 'Vendido' ? 'vendido' : 'dps';
+  const options = ESTADOS.map(s => 
+    `<option value="${s}" ${s === currentStatus ? 'selected' : ''}>${s}</option>`
+  ).join('');
+  return `<select class="status-select ${statusClass}" onchange="changeStatus('${table}','${key}',this.value);this.className='status-select '+getStatusClass(this.value)">${options}</select>`;
+}
+
+function getStatusClass(status) {
+  return status === 'Disponível' ? 'disponivel' :
+         status === 'Reservado' ? 'reservado' :
+         status === 'Vendido' ? 'vendido' : 'dps';
+}
+
+// ============================================================
+// PLANTA BH
+// ============================================================
+function openPlantaBh(fraccao) {
+  const url = 'https://dpsimobiliario.pt/belohorizonte/plantas/' + fraccao + '.webp';
+  // Criar ou reutilizar lightbox de planta
+  let lb = document.getElementById('plantaLightbox');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'plantaLightbox';
+    lb.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;flex-direction:column;';
+    lb.innerHTML = `
+      <div style="position:absolute;top:16px;right:24px;">
+        <button onclick="document.getElementById('plantaLightbox').style.display='none'" style="background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">&times;</button>
+      </div>
+      <div style="text-align:center;margin-bottom:12px;">
+        <span id="plantaLbTitle" style="color:#C5A55A;font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;"></span>
+      </div>
+      <img id="plantaLbImg" src="" alt="Planta" style="max-width:90vw;max-height:85vh;object-fit:contain;border:1px solid rgba(197,165,90,0.3);">
+      <div style="margin-top:12px;">
+        <a id="plantaLbDownload" href="" download style="color:#C5A55A;font-size:0.8rem;text-decoration:none;border:1px solid #C5A55A;padding:8px 20px;">Descarregar Planta</a>
+      </div>
+    `;
+    lb.addEventListener('click', function(e) { if(e.target === lb) lb.style.display='none'; });
+    document.body.appendChild(lb);
+  }
+  document.getElementById('plantaLbTitle').textContent = 'Planta — Fracção ' + fraccao;
+  document.getElementById('plantaLbImg').src = url;
+  document.getElementById('plantaLbDownload').href = url;
+  lb.style.display = 'flex';
+}
+
+// ============================================================
+// BELO HORIZONTE — GERAR PROPOSTA PDF
+// ============================================================
+// Função auxiliar para carregar imagem como dataURL via fetch (contorna CORS)
+async function loadImageAsDataURL(url) {
+  // Tentar via fetch primeiro
+  try {
+    const resp = await fetch(url, { mode: 'cors', cache: 'no-store' });
+    if (!resp.ok) throw new Error('fetch failed');
+    const blob = await resp.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch(e) {
+    // Fallback: canvas com crossOrigin
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth || img.width;
+        canvas.height = img.naturalHeight || img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        try { resolve(canvas.toDataURL('image/jpeg', 0.85)); }
+        catch(e2) { reject(e2); }
+      };
+      img.onerror = reject;
+      img.src = url;
+    });
+  }
+}
+
+// Função chamada pelo botão dentro do painel de simulação
+async function gerarPropostaBhFromPanel(btn) {
+  if (!selectedBhUnit) { alert('Nenhuma unidade seleccionada.'); return; }
+  // Ler valores do painel
+  const valorizacao = parseFloat(document.getElementById('bhSimValorizacao').value) || 10;
+  const meses = parseInt(document.getElementById('bhSimMeses').value) || 24;
+  const fiscalRate = parseFloat(document.getElementById('bhSimFiscal').value);
+  const fiscalLabel = document.getElementById('bhSimFiscal').options[document.getElementById('bhSimFiscal').selectedIndex].text;
+  // Ler resultados calculados
+  const resPreco = document.getElementById('bh-res-preco').textContent;
+  const resCessao = document.getElementById('bh-res-cessao').textContent;
+  const resMaisValia = document.getElementById('bh-res-mais-valia').textContent;
+  const resImposto = document.getElementById('bh-res-imposto').textContent;
+  const resLucro = document.getElementById('bh-res-lucro').textContent;
+  const resInvestido = document.getElementById('bh-res-investido').textContent;
+  const resRoi = document.getElementById('bh-res-roi').textContent;
+  const resMeses = document.getElementById('bh-res-meses').textContent;
+  const simData = { valorizacao, meses, fiscalLabel, resPreco, resCessao, resMaisValia, resImposto, resLucro, resInvestido, resRoi, resMeses };
+  await gerarPropostaBh(selectedBhUnit, btn, simData);
+}
+
+async function gerarPropostaBh(unit, loadBtn, simData) {
+  // Mostrar loading
+  if (!loadBtn) loadBtn = event ? event.target : null;
+  const origText = loadBtn.textContent;
+  loadBtn.textContent = '⏳ A gerar...';
+  loadBtn.disabled = true;
+
+  try {
+    // Carregar jsPDF dinamicamente
+    if (!window.jspdf) {
+      await new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const W = 210, H = 297;
+    const GOLD = [197, 165, 90];
+    const DARK = [10, 10, 10];
+    const WHITE = [255, 255, 255];
+    const GREY = [180, 180, 180];
+
+    // ---- PÁGINA 1: CAPA ----
+    doc.setFillColor(...DARK);
+    doc.rect(0, 0, W, H, 'F');
+
+    // Barra dourada topo
+    doc.setFillColor(...GOLD);
+    doc.rect(0, 0, W, 3, 'F');
+
+    // Logo texto
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.text('DPS IMOBILIÁRIO', W/2, 25, { align: 'center' });
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...GREY);
+    doc.text('dpsimobiliario.pt  |  Investimentos Imobiliários Premium', W/2, 32, { align: 'center' });
+
+    // Linha separadora
+    doc.setDrawColor(...GOLD);
+    doc.setLineWidth(0.5);
+    doc.line(20, 37, W-20, 37);
+
+    // Título empreendimento
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(28);
+    doc.setFont('helvetica', 'bold');
+    doc.text('BELO HORIZONTE', W/2, 60, { align: 'center' });
+    doc.text('RESIDENCES', W/2, 72, { align: 'center' });
+
+    doc.setTextColor(...WHITE);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Avenida Belo Horizonte, Setúbal, Portugal', W/2, 82, { align: 'center' });
+
+    // Fracção info box
+    doc.setFillColor(20, 20, 20);
+    doc.setDrawColor(...GOLD);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(25, 92, W-50, 40, 3, 3, 'FD');
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text('UNIDADE SELECCIONADA', W/2, 101, { align: 'center' });
+    doc.setTextColor(...WHITE);
+    doc.setFontSize(12);
+    doc.text(`Fracção ${unit.fraccao}  —  ${unit.tipologia}  —  Piso ${unit.piso}`, W/2, 111, { align: 'center' });
+    doc.setFontSize(10);
+    doc.text(`Área ABC: ${unit.abc || unit.area_abc || '—'} m²  |  Varanda: ${unit.varanda || 0} m²  |  Total: ${unit.total || unit.total_area || '—'} m²`, W/2, 120, { align: 'center' });
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${Number(unit.preco).toLocaleString('pt-PT')} €`, W/2, 130, { align: 'center' });
+
+    // ---- 10 PONTOS FORTES ----
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('10 PONTOS FORTES DO EMPREENDIMENTO', W/2, 148, { align: 'center' });
+    doc.setDrawColor(...GOLD);
+    doc.line(20, 151, W-20, 151);
+
+    const pontos = [
+      '1. Localização privilegiada em Setúbal — cidade em crescimento acelerado',
+      '2. Vistas para o Mar e para a Serra da Arrábida',
+      '3. 163 unidades T0, T1 e T2 com acabamentos premium',
+      '4. Ginásio interior totalmente equipado (Technogym)',
+      '5. Piscina exterior com espreguiçadeiras e vistas para o mar',
+      '6. Lavandaria própria do condomínio',
+      '7. Minibus de serviço para residentes',
+      '8. A 5 minutos da Marina de Setúbal e do ferry para Tróia',
+      '9. Promotor com histórico comprovado (Lake Towers, White Towers, Art Tower)',
+      '10. Plano de pagamento faseado — entrada total de apenas 30% até escritura'
+    ];
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(...WHITE);
+    pontos.forEach((p, i) => {
+      doc.text(p, 22, 158 + i * 9);
+    });
+
+    // Plano de pagamento
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('PLANO DE PAGAMENTO', W/2, 252, { align: 'center' });
+    doc.setDrawColor(...GOLD);
+    doc.line(20, 255, W-20, 255);
+
+    const preco = Number(unit.preco);
+    const pagamentos = [
+      { fase: 'Reserva — Agora', pct: '2%', valor: preco * 0.02 },
+      { fase: 'CPCV — Até final de 2026', pct: '10%', valor: preco * 0.10 },
+      { fase: '6 meses após CPCV', pct: '10%', valor: preco * 0.10 },
+      { fase: '12 meses após CPCV + Licença', pct: '8%', valor: preco * 0.08 },
+      { fase: 'Escritura Pública', pct: '70%', valor: preco * 0.70 },
+    ];
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    let y = 262;
+    pagamentos.forEach(p => {
+      doc.setTextColor(...GREY);
+      doc.text(p.fase, 22, y);
+      doc.setTextColor(...GOLD);
+      doc.text(p.pct, 130, y, { align: 'right' });
+      doc.setTextColor(...WHITE);
+      doc.text(`${p.valor.toLocaleString('pt-PT', {minimumFractionDigits:0, maximumFractionDigits:0})} €`, W-22, y, { align: 'right' });
+      y += 7;
+    });
+
+    // Barra dourada rodapé
+    doc.setFillColor(...GOLD);
+    doc.rect(0, H-3, W, 3, 'F');
+
+    // ---- PÁGINA 2: SIMULAÇÃO DE CEDÊNCIA ----
+    doc.addPage();
+    doc.setFillColor(...DARK);
+    doc.rect(0, 0, W, H, 'F');
+    doc.setFillColor(...GOLD);
+    doc.rect(0, 0, W, 3, 'F');
+
+    // Header página 2
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('DPS IMOBILIÁRIO', 20, 15);
+    doc.setTextColor(...GREY);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('dpsimobiliario.pt', 20, 21);
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(9);
+    doc.text(`Fracção ${unit.fraccao} — ${unit.tipologia} — ${Number(unit.preco).toLocaleString('pt-PT')} €`, W-20, 15, { align: 'right' });
+
+    doc.setDrawColor(...GOLD);
+    doc.line(20, 25, W-20, 25);
+
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('SIMULAÇÃO DE CEDÊNCIA DE POSIÇÃO CONTRATUAL', W/2, 35, { align: 'center' });
+
+    // Parâmetros da simulação — usar valores do painel se disponíveis
+    const simMeses = simData ? simData.meses : 24;
+    const simValorizacao = simData ? simData.valorizacao / 100 : 0.08;
+    const simFiscalLabel = simData ? simData.fiscalLabel : 'Não Residente (25%)';
+    const simAnos = simMeses / 12;
+    const valorCedencia = preco * Math.pow(1 + simValorizacao, simAnos);
+    const maisValia = valorCedencia - preco;
+    const fiscalRate = simData ? parseFloat(document.getElementById('bhSimFiscal').value) : 0.28;
+    const imposto = maisValia * fiscalRate;
+    const lucroLiquido = maisValia - imposto;
+
+    // Capital investido até à data de venda
+    const capitalInvestidoStr = simData ? simData.resInvestido : '';
+    const capitalInvestidoNum = capitalInvestidoStr ? parseFloat(capitalInvestidoStr.replace(/[^0-9,]/g,'').replace(',','.')) * 1000 : preco * 0.30;
+    const capitalInvestido = isNaN(capitalInvestidoNum) ? preco * 0.30 : capitalInvestidoNum;
+    const roi = capitalInvestido > 0 ? (lucroLiquido / capitalInvestido) * 100 : 0;
+
+    doc.setFillColor(20, 20, 20);
+    doc.setDrawColor(...GOLD);
+    doc.roundedRect(20, 42, W-40, 60, 3, 3, 'FD');
+
+    doc.setTextColor(...GREY);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    const params = [
+      ['Preço de compra:', `${preco.toLocaleString('pt-PT')} €`],
+      ['Valorização anual estimada:', `${simData ? simData.valorizacao : 8}% (introduzido pelo cliente)`],
+      ['Período de simulação:', `${simMeses} meses`],
+      ['Regime fiscal aplicado:', simFiscalLabel],
+    ];
+    params.forEach((p, i) => {
+      doc.setTextColor(...GREY);
+      doc.text(p[0], 28, 52 + i * 8);
+      doc.setTextColor(...WHITE);
+      doc.text(p[1], W-28, 52 + i * 8, { align: 'right' });
+    });
+
+    // Resultados
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('RESULTADOS ESTIMADOS', W/2, 115, { align: 'center' });
+
+    const resultados = [
+      { label: 'Valor estimado de cedência', valor: simData ? simData.resCessao : `${Math.round(valorCedencia).toLocaleString('pt-PT')} €`, gold: true },
+      { label: 'Mais-valia bruta', valor: simData ? simData.resMaisValia : `${Math.round(maisValia).toLocaleString('pt-PT')} €`, gold: false },
+      { label: 'Imposto estimado', valor: simData ? simData.resImposto : `${Math.round(imposto).toLocaleString('pt-PT')} €`, gold: false },
+      { label: 'Capital investido até à venda', valor: simData ? simData.resInvestido : `${Math.round(capitalInvestido).toLocaleString('pt-PT')} €`, gold: false },
+      { label: 'LUCRO LÍQUIDO ESTIMADO', valor: simData ? simData.resLucro : `${Math.round(lucroLiquido).toLocaleString('pt-PT')} €`, gold: true },
+      { label: 'ROI sobre capital investido', valor: simData ? simData.resRoi : `${roi.toFixed(1)}%`, gold: true },
+    ];
+
+    let yr = 124;
+    resultados.forEach(r => {
+      doc.setFillColor(r.gold ? 30 : 18, r.gold ? 28 : 18, r.gold ? 10 : 18);
+      doc.rect(20, yr - 5, W-40, 9, 'F');
+      doc.setTextColor(r.gold ? GOLD[0] : GREY[0], r.gold ? GOLD[1] : GREY[1], r.gold ? GOLD[2] : GREY[2]);
+      doc.setFontSize(r.gold ? 10 : 9);
+      doc.setFont('helvetica', r.gold ? 'bold' : 'normal');
+      doc.text(r.label, 25, yr);
+      doc.setTextColor(r.gold ? GOLD[0] : WHITE[0], r.gold ? GOLD[1] : WHITE[1], r.gold ? GOLD[2] : WHITE[2]);
+      doc.text(r.valor, W-25, yr, { align: 'right' });
+      yr += 11;
+    });
+
+    // Disclaimer
+    doc.setTextColor(...GREY);
+    doc.setFontSize(7.5);
+    doc.setFont('helvetica', 'italic');
+    const disclaimer = [
+      'Simulação meramente indicativa. Valores sujeitos a alteração. Não constitui proposta contratual.',
+      'A simulação de cedência é calculada com base na % de valorização anual colocada pelo cliente e no número de meses introduzido.'
+    ];
+    let yd = yr + 10;
+    disclaimer.forEach(d => {
+      doc.text(d, W/2, yd, { align: 'center' });
+      yd += 5;
+    });
+
+    // Descrição da unidade
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text('DESCRIÇÃO DA UNIDADE', W/2, yd + 8, { align: 'center' });
+    doc.setDrawColor(...GOLD);
+    doc.line(20, yd + 11, W-20, yd + 11);
+
+    doc.setTextColor(...WHITE);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    const descLines = [
+      `Fracção: ${unit.fraccao}  |  Tipologia: ${unit.tipologia}  |  Piso: ${unit.piso}`,
+      `Área ABC: ${unit.abc || unit.area_abc || '—'} m²  |  Varanda: ${unit.varanda || 0} m²  |  Área Total: ${unit.total || unit.total_area || '—'} m²`,
+      `Orientação Solar: ${unit.orientacao || 'N/D'}  |  Estado: ${unit.status}`,
+      `Preço: ${Number(unit.preco).toLocaleString('pt-PT')} €`,
+    ];
+    let ydesc = yd + 18;
+    descLines.forEach(l => {
+      doc.text(l, 22, ydesc);
+      ydesc += 7;
+    });
+
+    // Contacto
+    doc.setFillColor(20, 20, 20);
+    doc.setDrawColor(...GOLD);
+    doc.roundedRect(20, H-45, W-40, 32, 3, 3, 'FD');
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text('PARA MAIS INFORMAÇÕES', W/2, H-36, { align: 'center' });
+    doc.setTextColor(...WHITE);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text('WhatsApp: +351 925 610 864  |  Email: dpsimobiliario@grupo-dps.com', W/2, H-27, { align: 'center' });
+    doc.text('dpsimobiliario.pt  |  LIC AMI: 26301', W/2, H-20, { align: 'center' });
+
+    doc.setFillColor(...GOLD);
+    doc.rect(0, H-3, W, 3, 'F');
+
+    // ---- PÁGINA 3: PLANTA DA UNIDADE ----
+    const plantaUrl = 'https://dpsimobiliario.pt/belohorizonte/plantas/' + unit.fraccao + '.webp';
+    try {
+      const plantaImg = await loadImageAsDataURL(plantaUrl);
+      doc.addPage();
+      doc.setFillColor(...DARK);
+      doc.rect(0, 0, W, H, 'F');
+      doc.setFillColor(...GOLD);
+      doc.rect(0, 0, W, 3, 'F');
+      // Header
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('DPS IMOBILIÁRIO', 20, 15);
+      doc.setTextColor(...GREY);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('dpsimobiliario.pt', 20, 21);
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(9);
+      doc.text(`Fracção ${unit.fraccao} — ${unit.tipologia}`, W-20, 15, { align: 'right' });
+      doc.setDrawColor(...GOLD);
+      doc.line(20, 25, W-20, 25);
+      // Título
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('PLANTA DA UNIDADE', W/2, 35, { align: 'center' });
+      // Imagem da planta centrada
+      doc.addImage(plantaImg, 'WEBP', 15, 42, W-30, H-80);
+      doc.setFillColor(...GOLD);
+      doc.rect(0, H-3, W, 3, 'F');
+    } catch(e) {
+      console.warn('Planta não carregada:', e);
+    }
+
+    // ---- PÁGINA 4: GALERIA DE FOTOS ----
+    const fotoUrls = [
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_01.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_02.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_03.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_04.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_05.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_06.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_07.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_08.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_09.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_10.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_11.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_12.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_13.webp',
+      'https://dpsimobiliario.pt/belohorizonte/fotos/foto_14.webp'
+    ];
+    // Carregar todas as fotos em paralelo
+    const fotoDataUrls = await Promise.all(fotoUrls.map(url => loadImageAsDataURL(url).catch(() => null)));
+    const fotosValidas = fotoDataUrls.filter(Boolean);
+    if (fotosValidas.length > 0) {
+      doc.addPage();
+      doc.setFillColor(...DARK);
+      doc.rect(0, 0, W, H, 'F');
+      doc.setFillColor(...GOLD);
+      doc.rect(0, 0, W, 3, 'F');
+      // Header
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('DPS IMOBILIÁRIO', 20, 15);
+      doc.setDrawColor(...GOLD);
+      doc.line(20, 25, W-20, 25);
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(14);
+      doc.text('GALERIA DO EMPREENDIMENTO', W/2, 35, { align: 'center' });
+      // Grelha 3x5 de fotos
+      const cols = 3, rows = 5;
+      const imgW = (W - 30) / cols;
+      const imgH = (H - 60) / rows;
+      fotosValidas.slice(0, 14).forEach((imgData, idx) => {
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+        const x = 10 + col * (imgW + 5);
+        const y = 42 + row * (imgH + 4);
+        doc.addImage(imgData, 'WEBP', x, y, imgW, imgH);
+      });
+      doc.setFillColor(...GOLD);
+      doc.rect(0, H-3, W, 3, 'F');
+    }
+
+    // Download
+    doc.save(`Proposta_BH_Fraccao_${unit.fraccao}_${unit.tipologia}.pdf`);
+
+  } catch(err) {
+    alert('Erro ao gerar proposta: ' + err.message);
+    console.error(err);
+  } finally {
+    loadBtn.textContent = origText;
+    loadBtn.disabled = false;
+  }
+}
+
+// ============================================================
+// LAKE TOWERS — INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  loadSavedStates();
+  renderStats();
+  applyFilters();
+  renderLakeStats();
+  applyLakeFilters();
+});
 </script>
 </body>
 </html>
