@@ -1,4 +1,19 @@
+# robots.txt - dpsimobiliario.pt
+# Optimizado para SEO - Edifício Belo Horizonte Setúbal
+
 User-agent: *
 Allow: /
+Allow: /belohorizonte/
+Allow: /simuladorportugal/
+Allow: /imoveis/
 
-Sitemap: https://dpsimobiliario.grupo-dps.com/sitemap.xml
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+
+# Sitemap
+Sitemap: https://dpsimobiliario.pt/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
