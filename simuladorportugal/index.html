@@ -982,8 +982,9 @@ function renderStats() {
   const vend = BH_UNITS.filter(u => u.status === 'Vendido').length;
   const res = BH_UNITS.filter(u => u.status === 'Reservado').length;
   const dps = BH_UNITS.filter(u => u.status === 'DPS').length;
-  // DPS conta como indisponível na absorção (igual a Vendido + Reservado)
-  const pct = Math.round((vend + res + dps) / total * 100);
+  // Reservadas e DPS contam como Vendidas/Indisponíveis
+  const totalVendidas = vend + res + dps;
+  const pct = Math.round(totalVendidas / total * 100);
 
   document.getElementById('bh-disp-count').textContent = disp;
 
@@ -997,17 +998,9 @@ function renderStats() {
       <div class="stat-box-label">Disponíveis</div>
     </div>
     <div class="stat-box">
-      <div class="stat-box-val" style="color:#f59e0b">${res}</div>
-      <div class="stat-box-label">Reservadas</div>
+      <div class="stat-box-val" style="color:#ef4444">${totalVendidas}</div>
+      <div class="stat-box-label">Vendidas / Indisponíveis</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-box-val" style="color:#ef4444">${vend}</div>
-      <div class="stat-box-label">Vendidas</div>
-    </div>
-    ${dps > 0 ? `<div class="stat-box">
-      <div class="stat-box-val" style="color:var(--gold)">${dps}</div>
-      <div class="stat-box-label">DPS</div>
-    </div>` : ''}
     <div class="stat-box">
       <div class="stat-box-val">${pct}%</div>
       <div class="stat-box-label">Absorção</div>
