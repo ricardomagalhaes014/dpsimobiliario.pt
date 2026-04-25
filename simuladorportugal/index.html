@@ -976,7 +976,9 @@ function renderStats() {
   const disp = BH_UNITS.filter(u => u.status === 'Disponível').length;
   const vend = BH_UNITS.filter(u => u.status === 'Vendido').length;
   const res = BH_UNITS.filter(u => u.status === 'Reservado').length;
-  const pct = Math.round((vend + res) / total * 100);
+  const dps = BH_UNITS.filter(u => u.status === 'DPS').length;
+  // DPS conta como indisponível na absorção (igual a Vendido + Reservado)
+  const pct = Math.round((vend + res + dps) / total * 100);
 
   document.getElementById('bh-disp-count').textContent = disp;
 
@@ -997,6 +999,10 @@ function renderStats() {
       <div class="stat-box-val" style="color:#ef4444">${vend}</div>
       <div class="stat-box-label">Vendidas</div>
     </div>
+    ${dps > 0 ? `<div class="stat-box">
+      <div class="stat-box-val" style="color:var(--gold)">${dps}</div>
+      <div class="stat-box-label">DPS</div>
+    </div>` : ''}
     <div class="stat-box">
       <div class="stat-box-val">${pct}%</div>
       <div class="stat-box-label">Absorção</div>
@@ -1015,8 +1021,9 @@ function renderTable(data) {
   }
 
   tbody.innerHTML = data.map(u => {
-    const statusClass = u.status === 'Disponível' ? 'disponivel' : u.status === 'Vendido' ? 'vendido' : 'reservado';
-    const canSim = u.status !== 'Vendido';
+    const statusClass = u.status === 'Disponível' ? 'disponivel' : u.status === 'Vendido' ? 'vendido' : u.status === 'DPS' ? 'dps' : 'reservado';
+    // DPS e Vendido não podem simular (indisponíveis)
+    const canSim = u.status === 'Disponível' || u.status === 'Reservado';
     const precoFmt = '€ ' + u.preco.toLocaleString('pt-PT');
     const btnLabel = u.status === 'Disponível' ? 'Simular' : 'Ver';
 
