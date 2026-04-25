@@ -920,7 +920,12 @@ function applyFilters() {
   let data = BH_UNITS.filter(u => {
     if (filters.tipo !== 'all' && u.tipologia !== filters.tipo) return false;
     if (filters.status !== 'all' && u.status !== filters.status) return false;
-    if (filters.torre !== 'all' && u.torre !== filters.torre) return false;
+    if (filters.torre !== 'all') {
+      const primeiraLetra = u.fraccao.charAt(0).toUpperCase();
+      const blocoMap = { 'A': 'Bloco 1', 'B': 'Bloco 2', 'C': 'Bloco 3' };
+      const blocoUnidade = blocoMap[primeiraLetra] || 'Outro';
+      if (blocoUnidade !== filters.torre) return false;
+    }
     if (piso !== 'all' && u.piso !== parseInt(piso)) return false;
     // Pesquisa exacta: começa com o texto pesquisado (evita falsos positivos)
     if (search && !u.fraccao.toLowerCase().startsWith(search)) return false;
