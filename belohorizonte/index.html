@@ -233,7 +233,7 @@
     .nav-logo img { height: 44px; }
     .nav-logo span { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; transition: color 0.3s; }
+    .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; transition: color 0.3s; }
     .nav-links a:hover { color: var(--gold); }
     .nav-cta { background: var(--gold); color: var(--dark); padding: 10px 24px; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; text-decoration: none; transition: background 0.3s; }
     .nav-cta:hover { background: var(--gold-light); }
@@ -381,6 +381,8 @@
     .tipo-images { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
     .tipo-images img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
     .tipo-images img:first-child { grid-column: 1 / -1; aspect-ratio: 16/9; }
+    .tipo-images-single { display: block; }
+    .tipo-images-single img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: 2px; }
     .tipo-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--gold); margin-bottom: 8px; }
     .tipo-info .tipo-desc { font-size: 0.82rem; font-weight: 300; line-height: 1.8; color: var(--text-light); margin-bottom: 32px; }
     .tipo-specs { display: flex; flex-direction: column; gap: 12px; }
@@ -444,7 +446,24 @@
     .goog-te-gadget-simple { border: none !important; background: transparent !important; }
     .goog-te-gadget-simple span { color: var(--cream) !important; font-size: 0.72rem !important; }
 
-    /* WHATSAPP FLOAT */
+    /* BOTÃO UNIDADES DISPONÍVEIS */
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 4px 24px rgba(197,165,90,0.6); opacity: 1; }
+      50% { box-shadow: 0 4px 40px rgba(197,165,90,1); opacity: 0.85; }
+    }
+    .unidades-float {
+      position: fixed; bottom: 100px; right: 16px; z-index: 999;
+      background: var(--gold); color: var(--dark);
+      padding: 14px 18px; font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; text-align: center; line-height: 1.4;
+      white-space: nowrap;
+      box-shadow: 0 4px 24px rgba(197,165,90,0.6);
+      animation: pulse-gold 1.8s ease-in-out infinite;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .unidades-float:hover { background: var(--gold-light); transform: scale(1.06); animation: none; }
+
     .whatsapp-float {
       position: fixed; bottom: 30px; right: 20px; z-index: 999;
       width: 56px; height: 56px; background: #25D366; border-radius: 50%;
@@ -533,10 +552,10 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-slider">
-    <div class="hero-slide active" style="background-image: url('images/002.webp')"></div>
+    <div class="hero-slide active" style="background-image: url('images/006.webp')"></div>
     <div class="hero-slide" style="background-image: url('images/004.webp')"></div>
-    <div class="hero-slide" style="background-image: url('images/009.webp')"></div>
-    <div class="hero-slide" style="background-image: url('images/021.webp')"></div>
+    <div class="hero-slide" style="background-image: url('images/005.webp')"></div>
+    <div class="hero-slide" style="background-image: url('images/007.webp')"></div>
   </div>
   <div class="hero-content">
     <p class="hero-tag">Setúbal · Distrito de Lisboa · Portugal</p>
@@ -907,10 +926,8 @@
     </div>
     <!-- T0 -->
     <div class="tipo-content active" id="tipo-t0">
-      <div class="tipo-images">
-        <img src="images/page_30.jpg" alt="T0 - Sala" onerror="this.src='images/006.webp'">
-        <img src="images/page_31.jpg" alt="T0 - Cozinha" onerror="this.src='images/007.webp'">
-        <img src="images/page_32.jpg" alt="T0 - Casa de Banho" onerror="this.src='images/008.webp'">
+      <div class="tipo-images tipo-images-single">
+        <img src="images/tipologia-t0.png" alt="Planta Apartamento T0 - Belo Horizonte Setubal">
       </div>
       <div class="tipo-info">
         <h3>Apartamento T0</h3>
@@ -943,10 +960,8 @@
     </div>
     <!-- T1 -->
     <div class="tipo-content" id="tipo-t1">
-      <div class="tipo-images">
-        <img src="images/page_33.jpg" alt="T1 - Sala" onerror="this.src='images/006.webp'">
-        <img src="images/page_34.jpg" alt="T1 - Quarto" onerror="this.src='images/007.webp'">
-        <img src="images/page_35.jpg" alt="T1 - Varanda" onerror="this.src='images/008.webp'">
+      <div class="tipo-images tipo-images-single">
+        <img src="images/tipologia-t1.png" alt="Planta Apartamento T1 - Belo Horizonte Setubal">
       </div>
       <div class="tipo-info">
         <h3>Apartamento T1</h3>
@@ -979,10 +994,8 @@
     </div>
     <!-- T2 -->
     <div class="tipo-content" id="tipo-t2">
-      <div class="tipo-images">
-        <img src="images/page_36.jpg" alt="T2 - Sala" onerror="this.src='images/006.webp'">
-        <img src="images/page_37.jpg" alt="T2 - Suite" onerror="this.src='images/007.webp'">
-        <img src="images/page_38.jpg" alt="T2 - Cozinha" onerror="this.src='images/008.webp'">
+      <div class="tipo-images tipo-images-single">
+        <img src="images/tipologia-t2.png" alt="Planta Apartamento T2 - Belo Horizonte Setubal">
       </div>
       <div class="tipo-info">
         <h3>Apartamento T2</h3>
@@ -1015,10 +1028,8 @@
     </div>
     <!-- T3 -->
     <div class="tipo-content" id="tipo-t3">
-      <div class="tipo-images">
-        <img src="images/004.webp" alt="T3 - Exterior">
-        <img src="images/007.webp" alt="T3 - Varanda">
-        <img src="images/008.webp" alt="T3 - Vista">
+      <div class="tipo-images tipo-images-single">
+        <img src="images/004.webp" alt="Apartamento T3 - Belo Horizonte Setubal - Vista Piscina">
       </div>
       <div class="tipo-info">
         <h3>Apartamento T3</h3>
@@ -1243,6 +1254,9 @@
 <div class="translate-widget">
   <div id="google_translate_element"></div>
 </div>
+
+<!-- BOTÃO UNIDADES DISPONÍVEIS -->
+<a href="https://dpsimobiliario.pt/simuladorportugal/" target="_blank" class="unidades-float">Unidades<br>Disponíveis</a>
 
 <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/351910000000?text=Olá,%20tenho%20interesse%20no%20Belo%20Horizonte%20Residences" target="_blank" class="whatsapp-float" title="Contactar via WhatsApp">
