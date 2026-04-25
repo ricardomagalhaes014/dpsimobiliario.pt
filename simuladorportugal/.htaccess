@@ -1,0 +1,9 @@
+# Forçar UTF-8 em todos os ficheiros HTML
+AddDefaultCharset UTF-8
+
+# Desactivar cache para ficheiros HTML
+<FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
