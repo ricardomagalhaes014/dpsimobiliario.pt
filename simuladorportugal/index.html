@@ -921,9 +921,39 @@ function applyFilters() {
     if (filters.tipo !== 'all' && u.tipologia !== filters.tipo) return false;
     if (filters.status !== 'all' && u.status !== filters.status) return false;
     if (filters.torre !== 'all') {
-      const primeiraLetra = u.fraccao.charAt(0).toUpperCase();
-      const blocoMap = { 'A': 'Bloco 1', 'B': 'Bloco 2', 'C': 'Bloco 3' };
-      const blocoUnidade = blocoMap[primeiraLetra] || 'Outro';
+      // Mapeamento correcto dos blocos baseado na lista oficial:
+      // Bloco 1: A-X (single), Y, Z, AA-AZ
+      // Bloco 2: BA-BZ, CA-DD
+      // Bloco 3: DE-FH
+      const f = u.fraccao.toUpperCase();
+      let blocoUnidade = 'Outro';
+      if (f.length === 1) {
+        // Fracções de letra única: A-Z todas no Bloco 1
+        blocoUnidade = 'Bloco 1';
+      } else if (f.length === 2) {
+        const l1 = f.charAt(0);
+        const l2 = f.charAt(1);
+        if (l1 === 'A') {
+          // AA-AZ → Bloco 1
+          blocoUnidade = 'Bloco 1';
+        } else if (l1 === 'B') {
+          // BA-BZ → Bloco 2
+          blocoUnidade = 'Bloco 2';
+        } else if (l1 === 'C') {
+          // CA-CZ → Bloco 2
+          blocoUnidade = 'Bloco 2';
+        } else if (l1 === 'D') {
+          // DA-DD → Bloco 2; DE-DZ → Bloco 3
+          const d2ord = l2.charCodeAt(0);
+          blocoUnidade = (d2ord <= 'D'.charCodeAt(0)) ? 'Bloco 2' : 'Bloco 3';
+        } else if (l1 === 'E') {
+          // EA-EZ → Bloco 3
+          blocoUnidade = 'Bloco 3';
+        } else if (l1 === 'F') {
+          // FA-FH → Bloco 3
+          blocoUnidade = 'Bloco 3';
+        }
+      }
       if (blocoUnidade !== filters.torre) return false;
     }
     if (piso !== 'all' && u.piso !== parseInt(piso)) return false;
