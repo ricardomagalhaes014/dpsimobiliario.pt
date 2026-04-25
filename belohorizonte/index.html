@@ -1238,6 +1238,77 @@
   </script>
 </section>
 
+<!-- APRESENTAÇÃO -->
+<section style="background: var(--dark-blue, #0a0f1e); padding: 100px 0;" id="apresentacao">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 60px;">
+      <p class="section-label">Apresentação Oficial</p>
+      <div class="gold-line" style="margin: 0 auto 24px;"></div>
+      <h2 class="section-title">Belo Horizonte <em>Residences</em></h2>
+      <p class="section-text" style="margin: 0 auto;">Descubra em detalhe o empreendimento, as tipologias, os acabamentos e o potencial de investimento.</p>
+    </div>
+
+    <!-- Slideshow PDF -->
+    <div style="position: relative; max-width: 900px; margin: 0 auto 60px; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+      <div id="apres-slides" style="position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden;">
+        <img id="apres-img" src="apresentacao/slide-01.webp" alt="Apresentação Belo Horizonte - Slide 1" style="width:100%; height:100%; object-fit:contain; display:block; background:#000;">
+        <!-- Navegação -->
+        <button onclick="bhSlide(-1)" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); border:1px solid var(--gold); color:var(--gold); width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10; display:flex; align-items:center; justify-content:center;">&#8249;</button>
+        <button onclick="bhSlide(1)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); border:1px solid var(--gold); color:var(--gold); width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10; display:flex; align-items:center; justify-content:center;">&#8250;</button>
+        <!-- Contador -->
+        <div style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; padding:4px 14px; border-radius:20px;">
+          <span id="apres-counter">1 / 12</span>
+        </div>
+        <!-- Fullscreen -->
+        <button onclick="document.getElementById('apres-slides').requestFullscreen()" title="Ecrã Inteiro" style="position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.6); border:1px solid var(--gold); color:var(--gold); width:36px; height:36px; border-radius:6px; font-size:0.9rem; cursor:pointer; z-index:10;">&#x26F6;</button>
+      </div>
+      <!-- Thumbnails -->
+      <div style="display:flex; gap:6px; padding:10px; background:#0d0d0d; overflow-x:auto; scrollbar-width:thin;" id="apres-thumbs">
+        <img src="apresentacao/slide-01.webp" onclick="bhGoTo(0)" style="height:48px; cursor:pointer; border:2px solid var(--gold); border-radius:3px; flex-shrink:0;" id="thumb-0">
+        <img src="apresentacao/slide-02.webp" onclick="bhGoTo(1)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-1">
+        <img src="apresentacao/slide-03.webp" onclick="bhGoTo(2)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-2">
+        <img src="apresentacao/slide-04.webp" onclick="bhGoTo(3)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-3">
+        <img src="apresentacao/slide-05.webp" onclick="bhGoTo(4)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-4">
+        <img src="apresentacao/slide-06.webp" onclick="bhGoTo(5)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-5">
+        <img src="apresentacao/slide-07.webp" onclick="bhGoTo(6)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-6">
+        <img src="apresentacao/slide-08.webp" onclick="bhGoTo(7)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-7">
+        <img src="apresentacao/slide-09.webp" onclick="bhGoTo(8)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-8">
+        <img src="apresentacao/slide-10.webp" onclick="bhGoTo(9)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-9">
+        <img src="apresentacao/slide-11.webp" onclick="bhGoTo(10)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-10">
+        <img src="apresentacao/slide-12.webp" onclick="bhGoTo(11)" style="height:48px; cursor:pointer; border:2px solid transparent; border-radius:3px; flex-shrink:0;" id="thumb-11">
+      </div>
+    </div>
+
+    <!-- Vídeo YouTube -->
+    <div style="max-width: 900px; margin: 0 auto;">
+      <p class="section-label" style="text-align:center; margin-bottom:20px;">Vídeo do Empreendimento</p>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+        <iframe src="https://www.youtube.com/embed/ayPAGqwhBRA?rel=0&modestbranding=1" title="Belo Horizonte Residences - Vídeo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var bhCurrent = 0;
+    var bhTotal = 12;
+    function bhGoTo(n) {
+      document.getElementById('thumb-' + bhCurrent).style.borderColor = 'transparent';
+      bhCurrent = (n + bhTotal) % bhTotal;
+      document.getElementById('apres-img').src = 'apresentacao/slide-' + String(bhCurrent + 1).padStart(2,'0') + '.webp';
+      document.getElementById('apres-img').alt = 'Apresentação Belo Horizonte - Slide ' + (bhCurrent + 1);
+      document.getElementById('apres-counter').textContent = (bhCurrent + 1) + ' / ' + bhTotal;
+      document.getElementById('thumb-' + bhCurrent).style.borderColor = 'var(--gold)';
+      document.getElementById('thumb-' + bhCurrent).scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+    }
+    function bhSlide(dir) { bhGoTo(bhCurrent + dir); }
+    // Suporte a teclas de seta
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') bhSlide(1);
+      if (e.key === 'ArrowLeft') bhSlide(-1);
+    });
+  </script>
+</section>
+
 <!-- CONTACTO -->
 <section class="contacto" id="contacto">
   <div class="container">
