@@ -908,15 +908,22 @@ function setFilter(key, val, btn) {
 }
 
 function applyFilters() {
-  const search = document.getElementById('searchBox').value.toLowerCase();
+  const search = document.getElementById('searchBox').value.toLowerCase().trim();
   const piso = document.getElementById('filterPiso').value;
+
+  // Fechar painel de detalhe quando se aplica um novo filtro ou pesquisa
+  const detailPanel = document.getElementById('bhDetailPanel');
+  if (detailPanel && detailPanel.style.display !== 'none') {
+    detailPanel.style.display = 'none';
+  }
 
   let data = BH_UNITS.filter(u => {
     if (filters.tipo !== 'all' && u.tipologia !== filters.tipo) return false;
     if (filters.status !== 'all' && u.status !== filters.status) return false;
     if (filters.torre !== 'all' && u.torre !== filters.torre) return false;
     if (piso !== 'all' && u.piso !== parseInt(piso)) return false;
-    if (search && !u.fraccao.toLowerCase().includes(search)) return false;
+    // Pesquisa exacta: começa com o texto pesquisado (evita falsos positivos)
+    if (search && !u.fraccao.toLowerCase().startsWith(search)) return false;
     return true;
   });
 
@@ -1273,11 +1280,19 @@ function setLakeFilter(key, val, btn) {
 }
 
 function applyLakeFilters() {
-  const search = document.getElementById('lakeSearchBox').value.toLowerCase();
+  const search = document.getElementById('lakeSearchBox').value.toLowerCase().trim();
+
+  // Fechar painel de detalhe quando se aplica um novo filtro ou pesquisa
+  const lakePanel = document.getElementById('lakeDetailPanel');
+  if (lakePanel && lakePanel.style.display !== 'none') {
+    lakePanel.style.display = 'none';
+  }
+
   let data = LAKE_UNITS.filter(u => {
     if (lakeFilters.torre !== 'all' && u.torre !== lakeFilters.torre) return false;
     if (lakeFilters.status !== 'all' && u.status !== lakeFilters.status) return false;
-    if (search && !u.fraccao.toLowerCase().includes(search) && !u.torre.toLowerCase().includes(search)) return false;
+    // Pesquisa exacta: começa com o texto pesquisado (evita falsos positivos)
+    if (search && !u.fraccao.toLowerCase().startsWith(search) && !u.torre.toLowerCase().includes(search)) return false;
     return true;
   });
   renderLakeTable(data);
