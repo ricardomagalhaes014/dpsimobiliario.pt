@@ -838,7 +838,7 @@
             <div class="result-val big" id="lake-res-lucro">—</div>
           </div>
           <div class="result-box">
-            <div class="result-label">Entrada Paga (CPCV 20%)</div>
+            <div class="result-label">Capital Investido até à Venda</div>
             <div class="result-val" id="lake-res-entrada">—</div>
           </div>
           <div class="result-box">
@@ -1433,8 +1433,8 @@ function openLakeDetail(unit) {
 
   // Plano de pagamento
   const cpcv = Math.round(unit.preco_lancamento * 0.20);
-  const betao = Math.round(unit.preco_lancamento * 0.15);
-  const escritura = Math.round(unit.preco_lancamento * 0.65);
+  const prestacao2028 = Math.round(unit.preco_lancamento * 0.10);
+  const escritura = Math.round(unit.preco_lancamento * 0.70);
   document.getElementById('lakePagamentoGrid').innerHTML = `
     <div class="result-box">
       <div class="result-label">CPCV — Agora</div>
@@ -1442,14 +1442,14 @@ function openLakeDetail(unit) {
       <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">20% do preço de lançamento</div>
     </div>
     <div class="result-box">
-      <div class="result-label">Conclusão do Betão — Jan 2028</div>
-      <div class="result-val" style="color:var(--gold)">€ ${betao.toLocaleString('pt-PT')}</div>
-      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">15% do preço de lançamento</div>
+      <div class="result-label">2.ª Prestação — Início 2028</div>
+      <div class="result-val" style="color:var(--gold)">€ ${prestacao2028.toLocaleString('pt-PT')}</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">10% do preço de lançamento</div>
     </div>
     <div class="result-box">
       <div class="result-label">Escritura — Set 2029</div>
       <div class="result-val" style="color:var(--gold)">€ ${escritura.toLocaleString('pt-PT')}</div>
-      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">65% do preço de lançamento</div>
+      <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">70% do preço de lançamento</div>
     </div>
   `;
 
@@ -1503,8 +1503,13 @@ function calcularLake() {
   // Lucro líquido
   const lucroLiquido = maisValiaBruta - imposto;
 
-  // Entrada paga (CPCV 20%)
-  const entrada = preco * 0.20;
+  // Capital investido: CPCV 20% + 2.ª prestação 10% (início 2028) se já passada
+  const dataInicio2028 = new Date(2028, 0, 1); // Jan 2028
+  const hoje2 = new Date();
+  const dataVendaLake = new Date(hoje2.getFullYear(), hoje2.getMonth() + meses, hoje2.getDate());
+  const pCPCVLake = preco * 0.20; // sempre pago
+  const pPrest2028 = dataVendaLake >= dataInicio2028 ? preco * 0.10 : 0;
+  const entrada = pCPCVLake + pPrest2028;
 
   // ROI sobre entrada
   const roi = entrada > 0 ? (lucroLiquido / entrada * 100) : 0;
