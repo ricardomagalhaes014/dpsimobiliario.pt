@@ -660,7 +660,7 @@
         <div style="font-size:0.72rem;color:var(--gray);margin-top:16px;line-height:1.6;">
           * Simulação meramente indicativa. Valores sujeitos a alteração. Não constitui proposta contratual.<br>
           * A simulação de cedência é calculada com base na % de valorização anual colocada pelo cliente e no número de meses introduzido.<br>
-          * CPCV previsto para Dezembro 2026. Prestações contadas a partir dessa data.
+          * Plano de pagamento: 2% Reserva + 10% CPCV (Dez 2026) + 10% 2.ª Prestação (Jun 2027) + 8% 3.ª Prestação (Dez 2027) + 70% Escritura.
         </div>
 
         <!-- BOTÃO PROPOSTA DENTRO DO SIMULADOR -->
@@ -1116,17 +1116,17 @@ function openBhDetail(unit) {
       <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">2% do preço de compra</div>
     </div>
     <div class="result-box">
-      <div class="result-label">CPCV — Até final de 2026</div>
+      <div class="result-label">CPCV — Dezembro 2026</div>
       <div class="result-val" style="color:var(--gold)">€ ${cpcv.toLocaleString('pt-PT')}</div>
       <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">10% do preço de compra</div>
     </div>
     <div class="result-box">
-      <div class="result-label">6 meses após CPCV</div>
+      <div class="result-label">2.ª Prestação — Junho 2027</div>
       <div class="result-val" style="color:var(--gold)">€ ${cpcv6m.toLocaleString('pt-PT')}</div>
       <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">10% do preço de compra</div>
     </div>
     <div class="result-box">
-      <div class="result-label">12 meses após CPCV + Licença</div>
+      <div class="result-label">3.ª Prestação — Dezembro 2027</div>
       <div class="result-val" style="color:var(--gold)">€ ${cpcv12m.toLocaleString('pt-PT')}</div>
       <div style="font-size:0.75rem;color:var(--gray);margin-top:4px;">8% do preço de compra</div>
     </div>
@@ -1221,9 +1221,9 @@ function calcularBh() {
   let parcelasTexto = `<strong style="color:var(--gold);">Capital investido até à venda (${meses} meses):</strong> `;
   const partes = [];
   partes.push(`Reserva 2% = € ${Math.round(pReserva).toLocaleString('pt-PT')}`);
-  if (pCPCV > 0) partes.push(`CPCV 10% (Dez 2026) = € ${Math.round(pCPCV).toLocaleString('pt-PT')}`);
-  if (p6m  > 0) partes.push(`6m após CPCV 10% (Jun 2027) = € ${Math.round(p6m).toLocaleString('pt-PT')}`);
-  if (p12m > 0) partes.push(`12m após CPCV 8% (Dez 2027) = € ${Math.round(p12m).toLocaleString('pt-PT')}`);
+  if (pCPCV > 0) partes.push(`CPCV 10% (Dez 2026) = € ${Math.round(pCPCV).toLocaleString('pt-PT')}`);
+  if (p6m  > 0) partes.push(`2.ª Prestação 10% (Jun 2027) = € ${Math.round(p6m).toLocaleString('pt-PT')}`);
+  if (p12m > 0) partes.push(`3.ª Prestação 8% (Dez 2027) = € ${Math.round(p12m).toLocaleString('pt-PT')}`);
   parcelasTexto += partes.join(' &nbsp;+&nbsp; ');
   parcelasTexto += ` &nbsp;→&nbsp; <strong style="color:var(--gold);">Total: € ${Math.round(capitalInvestido).toLocaleString('pt-PT')} (${pctInvestido}% do preço)</strong>`;
 
