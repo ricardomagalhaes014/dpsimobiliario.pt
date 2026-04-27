@@ -545,6 +545,7 @@
         <div class="table-title" style="display:flex;align-items:center;gap:16px;">
           <span>A mostrar <strong id="countLabel">0</strong> unidades</span>
           <button class="edit-mode-btn" id="bhEditBtn" onclick="toggleEditMode('bh')">✏️ Modo Edição</button>
+          <button class="edit-mode-btn" id="bhExportBtn" onclick="exportBHtoPDF()" style="border-color:rgba(197,165,90,0.4);color:var(--gold);">⬇ Exportar PDF</button>
         </div>
         <input type="text" class="search-box" placeholder="🔍 Pesquisar fracção..." id="searchBox" oninput="applyFilters()">
       </div>
@@ -1034,6 +1035,10 @@ function renderStats() {
     <div class="stat-box">
       <div class="stat-box-val">${pct}%</div>
       <div class="stat-box-label">Absorção</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-val" style="color:#f59e0b">${dps}</div>
+      <div class="stat-box-label">DPS (vendidas)</div>
     </div>
   `;
 }
@@ -2112,6 +2117,225 @@ async function gerarPropostaBh(unit, loadBtn, simData) {
   } finally {
     loadBtn.textContent = origText;
     loadBtn.disabled = false;
+  }
+}
+
+// ============================================================
+// EXPORTAR TABELA BH PARA PDF
+// ============================================================
+function exportBHtoPDF() {
+  const btn = document.getElementById('bhExportBtn');
+  const origText = btn.textContent;
+  btn.textContent = 'A gerar...';
+  btn.disabled = true;
+
+  try {
+    // Carregar jsPDF se ainda não estiver carregado
+    const doExport = () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+      const W = doc.internal.pageSize.getWidth();
+      const H = doc.internal.pageSize.getHeight();
+      const GOLD = [197, 165, 90];
+      const DARK = [13, 31, 60];
+      const WHITE = [245, 242, 237];
+      const GRAY = [138, 155, 181];
+
+      // Obter dados filtrados actuais da tabela
+      const search = document.getElementById('searchBox').value.toLowerCase().trim();
+      const piso = document.getElementById('filterPiso').value;
+      let data = BH_UNITS.filter(u => {
+        if (filters.tipo !== 'all' && u.tipologia !== filters.tipo) return false;
+        if (filters.status !== 'all' && u.status !== filters.status) return false;
+        if (filters.torre !== 'all') {
+          const f = u.fraccao.toUpperCase();
+          let bloco = 'Outro';
+          if (f.length === 1) { bloco = 'Bloco 1'; }
+          else if (f.length === 2) {
+            const l1 = f.charAt(0), l2 = f.charAt(1);
+            if (l1 === 'A') bloco = 'Bloco 1';
+            else if (l1 === 'B') bloco = 'Bloco 2';
+            else if (l1 === 'C') bloco = 'Bloco 2';
+            else if (l1 === 'D') bloco = (l2.charCodeAt(0) <= 'D'.charCodeAt(0)) ? 'Bloco 2' : 'Bloco 3';
+            else if (l1 === 'E') bloco = 'Bloco 3';
+            else if (l1 === 'F') bloco = 'Bloco 3';
+          }
+          if (bloco !== filters.torre) return false;
+        }
+        if (piso !== 'all' && u.piso !== parseInt(piso)) return false;
+        if (search && !u.fraccao.toLowerCase().startsWith(search)) return false;
+        return true;
+      });
+      data.sort((a, b) => {
+        let va = a[sortKey], vb = b[sortKey];
+        if (typeof va === 'string') va = va.toLowerCase();
+        if (typeof vb === 'string') vb = vb.toLowerCase();
+        if (va < vb) return sortAsc ? -1 : 1;
+        if (va > vb) return sortAsc ? 1 : -1;
+        return 0;
+      });
+
+      // --- CABÇALHO ---
+      doc.setFillColor(...DARK);
+      doc.rect(0, 0, W, H, 'F');
+
+      // Barra dourada topo
+      doc.setFillColor(...GOLD);
+      doc.rect(0, 0, W, 2, 'F');
+
+      // Título
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(16);
+      doc.setFont('helvetica', 'bold');
+      doc.text('BELO HORIZONTE RESIDENCES', W / 2, 14, { align: 'center' });
+
+      doc.setTextColor(...GRAY);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Setúbal, Distrito de Lisboa — DPS Imobiliário', W / 2, 20, { align: 'center' });
+
+      // Filtros activos
+      const filterDesc = [
+        filters.torre !== 'all' ? filters.torre : 'Todos os Blocos',
+        filters.tipo !== 'all' ? filters.tipo : 'Todas as Tipologias',
+        filters.status !== 'all' ? filters.status : 'Todos os Estados',
+        piso !== 'all' ? 'Piso ' + piso : 'Todos os Pisos'
+      ].join(' • ');
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(7);
+      doc.text(filterDesc, W / 2, 26, { align: 'center' });
+
+      // Data e contagem
+      const hoje = new Date().toLocaleDateString('pt-PT');
+      doc.setTextColor(...GRAY);
+      doc.setFontSize(7);
+      doc.text(`${data.length} unidade${data.length !== 1 ? 's' : ''} • Gerado em ${hoje}`, W / 2, 31, { align: 'center' });
+
+      // Linha separadora
+      doc.setDrawColor(...GOLD);
+      doc.setLineWidth(0.3);
+      doc.line(10, 34, W - 10, 34);
+
+      // --- TABELA ---
+      const cols = [
+        { header: 'FRACÇÃO', key: 'fraccao', w: 22 },
+        { header: 'PISO', key: 'piso', w: 14 },
+        { header: 'TIPOLOGIA', key: 'tipologia', w: 22 },
+        { header: 'ÁREA ABC (m²)', key: 'abc', w: 28 },
+        { header: 'VARANDA (m²)', key: 'varanda', w: 28 },
+        { header: 'TOTAL (m²)', key: 'total', w: 26 },
+        { header: 'PREÇO (€)', key: 'preco', w: 36 },
+        { header: 'ESTADO', key: 'status', w: 26 },
+        { header: 'ORIENTAÇÃO', key: 'orientacao', w: 36 }
+      ];
+
+      const tableX = 10;
+      const rowH = 7;
+      const headerH = 8;
+      let y = 38;
+
+      // Cabeçalho da tabela
+      doc.setFillColor(20, 40, 75);
+      doc.rect(tableX, y, W - 20, headerH, 'F');
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(6.5);
+      doc.setFont('helvetica', 'bold');
+      let x = tableX + 2;
+      cols.forEach(c => {
+        doc.text(c.header, x, y + 5.5);
+        x += c.w;
+      });
+      y += headerH;
+
+      // Linhas de dados
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6.5);
+      data.forEach((u, i) => {
+        // Verificar se precisa de nova página
+        if (y + rowH > H - 12) {
+          // Rodapé
+          doc.setFillColor(...GOLD);
+          doc.rect(0, H - 2, W, 2, 'F');
+          doc.addPage();
+          doc.setFillColor(...DARK);
+          doc.rect(0, 0, W, H, 'F');
+          doc.setFillColor(...GOLD);
+          doc.rect(0, 0, W, 2, 'F');
+          y = 10;
+          // Repetir cabeçalho
+          doc.setFillColor(20, 40, 75);
+          doc.rect(tableX, y, W - 20, headerH, 'F');
+          doc.setTextColor(...GOLD);
+          doc.setFontSize(6.5);
+          doc.setFont('helvetica', 'bold');
+          let hx = tableX + 2;
+          cols.forEach(c => { doc.text(c.header, hx, y + 5.5); hx += c.w; });
+          y += headerH;
+          doc.setFont('helvetica', 'normal');
+        }
+
+        // Fundo alternado
+        if (i % 2 === 0) {
+          doc.setFillColor(18, 35, 65);
+          doc.rect(tableX, y, W - 20, rowH, 'F');
+        }
+
+        // Cor do estado
+        const statusColor = u.status === 'Disponível' ? [34, 197, 94] :
+                            u.status === 'Vendido' ? [239, 68, 68] :
+                            u.status === 'DPS' ? [245, 158, 11] :
+                            [99, 102, 241]; // Reservado
+
+        doc.setTextColor(...WHITE);
+        let cx = tableX + 2;
+        cols.forEach(c => {
+          let val = u[c.key];
+          if (c.key === 'preco') val = '€ ' + Number(val).toLocaleString('pt-PT');
+          else if (c.key === 'abc' || c.key === 'varanda' || c.key === 'total') val = Number(val).toFixed(2);
+          else if (c.key === 'piso') val = val + 'º';
+          else if (c.key === 'status') { doc.setTextColor(...statusColor); }
+          else doc.setTextColor(...WHITE);
+          doc.text(String(val ?? ''), cx, y + 4.8);
+          if (c.key === 'status') doc.setTextColor(...WHITE);
+          cx += c.w;
+        });
+
+        // Linha separadora leve
+        doc.setDrawColor(30, 50, 90);
+        doc.setLineWidth(0.1);
+        doc.line(tableX, y + rowH, tableX + W - 20, y + rowH);
+        y += rowH;
+      });
+
+      // Rodapé última página
+      doc.setFillColor(...GOLD);
+      doc.rect(0, H - 2, W, 2, 'F');
+      doc.setTextColor(...GRAY);
+      doc.setFontSize(6);
+      doc.text('DPS Imobiliário — dpsimobiliario.pt', W / 2, H - 5, { align: 'center' });
+
+      // Filtros no nome do ficheiro
+      const blocoLabel = filters.torre !== 'all' ? filters.torre.replace(' ', '') : 'TodosBlocos';
+      const tipoLabel = filters.tipo !== 'all' ? filters.tipo : 'TodasTipo';
+      const statusLabel = filters.status !== 'all' ? filters.status : 'TodosEstados';
+      doc.save(`BH_Unidades_${blocoLabel}_${tipoLabel}_${statusLabel}_${hoje.replace(/\//g,'-')}.pdf`);
+
+      btn.textContent = origText;
+      btn.disabled = false;
+    };
+
+    if (!window.jspdf) {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+      s.onload = doExport;
+      document.head.appendChild(s);
+    } else {
+      doExport();
+    }
+  } catch(err) {
+    alert('Erro ao gerar PDF: ' + err.message);
+    btn.textContent = origText;
+    btn.disabled = false;
   }
 }
 
