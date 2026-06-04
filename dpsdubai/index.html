@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPS Imobiliário — Investir em Dubai</title>
+  <meta name="description" content="Descubra as melhores oportunidades de investimento imobiliário em Dubai com a DPS Imobiliário. Não vendemos apenas casas, estruturamos investimento." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dark: #9A7A30;
+      --navy: #0A0E1A;
+      --navy-mid: #111827;
+      --navy-light: #1C2537;
+      --navy-card: #161D2E;
+      --white: #F5F0E8;
+      --white-dim: rgba(245,240,232,0.7);
+      --white-faint: rgba(245,240,232,0.12);
+      --gold-line: rgba(201,168,76,0.28);
+      --font-display: 'Cormorant Garamond', serif;
+      --font-ui: 'Montserrat', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: var(--font-ui); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+    /* SPLASH */
+    #splash {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--navy);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    #splash.hide { opacity: 0; pointer-events: none; transform: scale(1.04); }
+    .splash-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/jMcpTjBoFWutQHUK.jpg');
+      background-size: cover; background-position: center;
+      filter: brightness(0.3);
+    }
+    .splash-content { position: relative; z-index: 2; text-align: center; padding: 2rem; max-width: 680px; }
+    .splash-badge {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase; padding: 0.4rem 1.2rem; margin-bottom: 1.5rem;
+    }
+    .splash-logo { width: 150px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 24px rgba(201,168,76,0.5)); }
+    .splash-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 0.4rem; }
+    .splash-title em { font-style: italic; color: var(--gold-light); }
+    .splash-subtitle { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 1.8rem; }
+    .splash-divider { width: 50px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 auto 1.5rem; }
+    .splash-week-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .splash-week-text { font-family: var(--font-display); font-size: clamp(0.95rem, 2vw, 1.2rem); font-style: italic; color: var(--white-dim); margin-bottom: 2.2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .splash-cta {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--navy); font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; padding: 1rem 2.5rem;
+      text-decoration: none; border: none; cursor: pointer;
+      animation: pulse-gold 2.2s ease-in-out infinite;
+    }
+    .splash-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+    @keyframes pulse-gold { 0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.4)} 50%{box-shadow:0 0 0 14px rgba(201,168,76,0)} }
+    .splash-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-7px)} }
+
+    /* NAVBAR */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s ease; }
+    nav.scrolled { background: rgba(10,14,26,0.96); backdrop-filter: blur(14px); border-bottom: 1px solid var(--gold-line); padding: 0.7rem 2rem; }
+    .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+    .nav-logo img { height: 42px; filter: drop-shadow(0 2px 8px rgba(201,168,76,0.3)); }
+    .nav-tagline { font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--gold); }
+    @media(max-width:900px){.nav-tagline{display:none}}
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+    .nav-links a { color: var(--white-dim); text-decoration: none; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { border: 1px solid var(--gold) !important; color: var(--gold) !important; padding: 0.45rem 1.1rem; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+    @media(max-width:768px){.nav-links{display:none}}
+
+    /* HERO */
+    .hero { min-height: 100vh; position: relative; display: flex; align-items: flex-end; padding-bottom: 7rem; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/vhozDMyOpqNNHcAl.jpg'); background-size: cover; background-position: center 30%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,26,1) 0%, rgba(10,14,26,0.55) 50%, rgba(10,14,26,0.1) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .hero-eyebrow::before { content:''; display:block; width:40px; height:1px; background:var(--gold); }
+    .hero-eyebrow span { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.8rem); font-weight: 300; line-height: 1.05; margin-bottom: 1.5rem; max-width: 680px; }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-desc { font-size: 0.95rem; color: var(--white-dim); max-width: 460px; margin-bottom: 2.5rem; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 0.6rem; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: var(--navy); font-family: var(--font-ui); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s ease; }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,168,76,0.35); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; color: var(--white); border: 1px solid rgba(245,240,232,0.35); font-family: var(--font-ui); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-stats { position: absolute; bottom: 3rem; right: 2rem; display: flex; gap: 2rem; }
+    .hero-stat { text-align: right; }
+    .hero-stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--gold-light); line-height: 1; }
+    .hero-stat-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); }
+    @media(max-width:600px){.hero-stats{display:none}}
+
+    /* SECTIONS */
+    section { padding: 5.5rem 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section-header { margin-bottom: 3.5rem; }
+    .section-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+    .section-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+    .section-eyebrow span { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; color: var(--white); }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-desc { font-size: 0.88rem; color: var(--white-dim); max-width: 540px; margin-top: 0.9rem; line-height: 1.85; }
+    .gold-divider { width: 55px; height: 1px; background: linear-gradient(to right, var(--gold), transparent); margin: 1.2rem 0; }
+
+    /* STATS BAR */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--gold-line); border: 1px solid var(--gold-line); }
+    .stat-card { background: var(--navy-card); padding: 2.5rem 2rem; text-align: center; transition: background 0.3s; }
+    .stat-card:hover { background: var(--navy-light); }
+    .stat-number { font-family: var(--font-display); font-size: 2.6rem; font-weight: 600; color: var(--gold-light); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); }
+    .stat-sub { font-size: 0.72rem; color: var(--gold); margin-top: 0.25rem; }
+
+    /* MARKET */
+    .market-section { background: var(--navy-mid); }
+    .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    @media(max-width:768px){.market-grid{grid-template-columns:1fr}}
+    .market-text p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.9; margin-bottom: 1.1rem; }
+    .market-text strong { color: var(--gold-light); font-weight: 600; }
+    .market-highlights { display: flex; flex-direction: column; gap: 0.9rem; }
+    .highlight-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.1rem; background: var(--navy-card); border-left: 2px solid var(--gold); }
+    .highlight-icon { width: 34px; height: 34px; background: rgba(201,168,76,0.08); border: 1px solid var(--gold-line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.95rem; }
+    .highlight-text h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .highlight-text p { font-size: 0.76rem; color: var(--white-dim); line-height: 1.6; }
+
+    /* SAMANA */
+    .samana-section { background: var(--navy-light); }
+    .samana-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media(max-width:768px){.samana-grid{grid-template-columns:1fr}}
+    .samana-image { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+    .samana-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .samana-image:hover img { transform: scale(1.04); }
+    .samana-image::after { content:''; position:absolute; inset:0; border:1px solid var(--gold-line); pointer-events:none; }
+    .samana-badge { position: absolute; bottom: 1.2rem; left: 1.2rem; background: rgba(10,14,26,0.9); border: 1px solid var(--gold); padding: 0.4rem 0.9rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .samana-text p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.9; margin-bottom: 1rem; }
+    .samana-text strong { color: var(--gold-light); }
+    .samana-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; margin-top: 1.8rem; }
+    .samana-metric { text-align: center; padding: 1rem; background: rgba(201,168,76,0.05); border: 1px solid var(--gold-line); }
+    .samana-metric-num { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; color: var(--gold-light); }
+    .samana-metric-label { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white-dim); }
+
+    /* PROJECTS */
+    .projects-section { background: var(--navy); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--navy-card); border: 1px solid var(--gold-line); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px var(--gold-line); }
+    .project-img { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .project-card:hover .project-img img { transform: scale(1.06); }
+    .project-tag { position: absolute; top: 1rem; left: 1rem; background: rgba(10,14,26,0.85); border: 1px solid var(--gold); padding: 0.28rem 0.75rem; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,26,0.8) 0%, transparent 60%); }
+    .project-body { padding: 1.6rem; }
+    .project-location { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .project-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--white); margin-bottom: 0.7rem; line-height: 1.2; }
+    .project-desc { font-size: 0.8rem; color: var(--white-dim); line-height: 1.7; margin-bottom: 1.3rem; }
+    .project-specs { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.3rem; padding-top: 1rem; border-top: 1px solid var(--gold-line); }
+    .project-spec-val { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--gold-light); display: block; }
+    .project-spec-key { font-size: 0.56rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white-dim); }
+    .project-actions { display: flex; gap: 0.6rem; }
+    .btn-sim { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: var(--navy); font-family: var(--font-ui); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.7rem 0.8rem; text-decoration: none; transition: all 0.3s; }
+    .btn-sim:hover { box-shadow: 0 6px 20px rgba(201,168,76,0.35); transform: translateY(-1px); }
+    .btn-info { display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: transparent; color: var(--white-dim); border: 1px solid var(--gold-line); font-family: var(--font-ui); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.7rem 0.9rem; text-decoration: none; transition: all 0.3s; cursor: pointer; }
+    .btn-info:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* SIMULATOR */
+    .simulator-section { background: var(--navy-mid); }
+    .simulator-wrapper { border: 1px solid var(--gold-line); background: var(--navy-card); overflow: hidden; }
+    .simulator-header { background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02)); border-bottom: 1px solid var(--gold-line); padding: 1.8rem 2.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .simulator-header h3 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; color: var(--white); }
+    .simulator-header p { font-size: 0.8rem; color: var(--white-dim); margin-top: 0.2rem; }
+    /* ===== SIMULADOR EMBUTIDO ===== */
+    .sim-body { padding: 2rem 2.2rem 2.5rem; }
+    .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media(max-width:900px){ .sim-grid { grid-template-columns: 1fr; } }
+    .sim-col { display: flex; flex-direction: column; gap: 1.2rem; }
+    .sim-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .sim-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+    .sim-select, .sim-input { background: var(--navy); border: 1px solid var(--gold-line); color: var(--white); font-family: var(--font-ui); font-size: 0.82rem; padding: 0.7rem 0.9rem; width: 100%; appearance: none; -webkit-appearance: none; outline: none; transition: border-color 0.2s; }
+    .sim-select:focus, .sim-input:focus { border-color: var(--gold); }
+    .sim-select option { background: #111827; color: #fff; }
+    .sim-range-wrap { display: flex; align-items: center; gap: 0.8rem; }
+    .sim-range { flex: 1; accent-color: var(--gold); }
+    .sim-range-val { min-width: 3.5rem; text-align: right; font-size: 0.82rem; color: var(--gold); font-weight: 700; }
+    .sim-unit-info { background: rgba(201,168,76,0.06); border: 1px solid var(--gold-line); padding: 1rem 1.2rem; font-size: 0.78rem; color: var(--white-dim); display: none; }
+    .sim-unit-info.visible { display: block; }
+    .sim-unit-info strong { color: var(--gold); }
+    .sim-results { margin-top: 1.5rem; background: var(--navy); border: 1px solid var(--gold-line); padding: 1.5rem 1.8rem; display: none; }
+    .sim-results.visible { display: block; }
+    .sim-results-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); margin-bottom: 1.2rem; }
+    .sim-results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media(max-width:700px){ .sim-results-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:480px){ .sim-results-grid { grid-template-columns: 1fr; } }
+    .sim-res-card { background: var(--navy-card); padding: 1rem; text-align: center; }
+    .sim-res-label { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 0.3rem; }
+    .sim-res-value { font-size: 1.15rem; font-weight: 700; color: var(--white); }
+    .sim-res-value.gold { color: var(--gold); }
+    .sim-res-value.green { color: #4ade80; }
+    .sim-plan-desc { font-size: 0.72rem; color: var(--white-dim); margin-top: 0.3rem; line-height: 1.5; }
+    .sim-btn { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: var(--navy); font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.85rem 2rem; border: none; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 0.5rem; }
+    .sim-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .sim-whatsapp { display: flex; align-items: center; justify-content: center; gap: 0.6rem; background: #25D366; color: #fff; font-family: var(--font-ui); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.85rem 2rem; border: none; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 0.8rem; text-decoration: none; }
+    .sim-whatsapp:hover { background: #1ebe5d; }
+    .sim-disclaimer { font-size: 0.62rem; color: var(--white-dim); margin-top: 1rem; opacity: 0.7; }
+
+    /* VANTAGENS */
+    .vantagens-section { background: var(--navy-light); }
+    .vantagens-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.3rem; }
+    .vantagem-card { padding: 1.8rem; background: var(--navy-card); border: 1px solid var(--gold-line); transition: border-color 0.3s, transform 0.3s; }
+    .vantagem-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .vantagem-icon { width: 44px; height: 44px; background: rgba(201,168,76,0.07); border: 1px solid var(--gold-line); display: flex; align-items: center; justify-content: center; margin-bottom: 1.1rem; font-size: 1.3rem; }
+    .vantagem-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+    .vantagem-desc { font-size: 0.8rem; color: var(--white-dim); line-height: 1.7; }
+
+    /* PROJECTIONS */
+    .projections-section { background: var(--navy); }
+    .projections-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media(max-width:768px){.projections-grid{grid-template-columns:1fr}}
+    .projection-bars { display: flex; flex-direction: column; gap: 1rem; }
+    .projection-bar-item { display: flex; flex-direction: column; gap: 0.35rem; }
+    .projection-bar-label { display: flex; justify-content: space-between; font-size: 0.73rem; color: var(--white-dim); }
+    .projection-bar-label span:last-child { color: var(--gold); font-weight: 600; }
+    .projection-bar-track { height: 3px; background: rgba(255,255,255,0.07); overflow: hidden; }
+    .projection-bar-fill { height: 100%; background: linear-gradient(to right, var(--gold-dark), var(--gold-light)); }
+    .projections-text p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.9; margin-bottom: 1rem; }
+    .projections-text strong { color: var(--gold-light); }
+
+    /* NEWS */
+    .news-section { background: var(--navy-mid); }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.3rem; }
+    .news-card { background: var(--navy-card); border: 1px solid var(--gold-line); padding: 1.6rem; transition: border-color 0.3s; }
+    .news-card:hover { border-color: var(--gold); }
+    .news-source { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.7rem; }
+    .news-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--white); line-height: 1.4; margin-bottom: 0.7rem; }
+    .news-desc { font-size: 0.78rem; color: var(--white-dim); line-height: 1.7; }
+    .news-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--gold); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; margin-top: 0.9rem; }
+    .news-link:hover { color: var(--gold-light); }
+
+    /* FOOTER */
+    footer { background: var(--navy-card); border-top: 1px solid var(--gold-line); padding: 4rem 0 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    @media(max-width:768px){.footer-grid{grid-template-columns:1fr}}
+    .footer-brand img { height: 50px; margin-bottom: 1rem; }
+    .footer-tagline { font-family: var(--font-display); font-style: italic; font-size: 0.98rem; color: var(--gold); margin-bottom: 0.9rem; }
+    .footer-brand p { font-size: 0.78rem; color: var(--white-dim); line-height: 1.7; }
+    .footer-col h4 { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; }
+    .footer-col a { display: block; font-size: 0.8rem; color: var(--white-dim); text-decoration: none; margin-bottom: 0.55rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--gold-line); padding-top: 1.8rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.7rem; color: var(--white-dim); }
+    .footer-bottom strong { color: var(--gold); }
+
+    /* FLOATING SIDEBAR */
+    .float-sidebar { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 200; display: flex; flex-direction: column; gap: 2px; }
+    .float-btn { display: flex; align-items: center; justify-content: flex-end; gap: 0.6rem; padding: 0.8rem 0.85rem; text-decoration: none; font-family: var(--font-ui); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: white; cursor: pointer; border: none; overflow: hidden; max-width: 44px; transition: max-width 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s ease; white-space: nowrap; }
+    .float-btn:hover { max-width: 180px; padding-left: 1rem; }
+    .float-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .float-btn span { opacity: 0; transition: opacity 0.2s 0.1s; }
+    .float-btn:hover span { opacity: 1; }
+    .fb-wa { background: #25D366; }
+    .fb-sim { background: linear-gradient(135deg, #9A7A30, #C9A84C); }
+    .fb-ig { background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCAF45); }
+    .fb-fb { background: #1877F2; }
+    .fb-li { background: #0A66C2; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- SPLASH SCREEN -->
+  <div id="splash" onclick="closeSplash()">
+    <div class="splash-bg"></div>
+    <div class="splash-content">
+      <div class="splash-badge">DPS Imobiliário · Dubai</div>
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/ZztjQCeqFzzLvTNl.png" alt="DPS Imobiliário" class="splash-logo" />
+      <h1 class="splash-title">Investir em <em>Dubai</em></h1>
+      <p class="splash-subtitle">Mercado Imobiliário · Samana Developers</p>
+      <div class="splash-divider"></div>
+      <p class="splash-week-label">✦ Destaque da Semana</p>
+      <p class="splash-week-text">Samana Barari Heights — Piscinas privadas, vistas panorâmicas e retorno garantido. O investimento que estrutura o seu futuro.</p>
+      <button class="splash-cta" onclick="closeSplash()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Descobrir Oportunidades
+      </button>
+    </div>
+    <div class="splash-hint">↓ Clique para entrar</div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/ZztjQCeqFzzLvTNl.png" alt="DPS Imobiliário" />
+      <span class="nav-tagline">Não vendemos apenas casas, estruturamos investimento.</span>
+    </a>
+    <div class="nav-links">
+      <a href="#mercado">Mercado</a>
+      <a href="#samana">Samana</a>
+      <a href="#empreendimentos">Empreendimentos</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#vantagens">Vantagens</a>
+      <a href="https://wa.me/351925708456" target="_blank" class="nav-cta">Contactar</a>
+      <div id="google_translate_element" style="display:inline-block; margin-left:0.8rem;"></div>
+    </div>
+  </nav>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'en,ar,zh-CN,fr,ru,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <style>
+    #google_translate_element .goog-te-gadget-simple {
+      background: transparent !important;
+      border: 1px solid rgba(201,168,76,0.5) !important;
+      border-radius: 3px !important;
+      padding: 2px 6px !important;
+      font-size: 0.65rem !important;
+    }
+    #google_translate_element .goog-te-gadget-simple span,
+    #google_translate_element .goog-te-gadget-simple a {
+      color: #C9A84C !important;
+      font-family: var(--font-ui) !important;
+      font-size: 0.65rem !important;
+      text-decoration: none !important;
+    }
+    #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span { color: #C9A84C !important; }
+    .goog-te-banner-frame { display: none !important; }
+    body { top: 0 !important; }
+  </style>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span>Dubai Real Estate Investment</span></div>
+      <h1>O Mercado que<br/><em>Nunca Para</em></h1>
+      <p class="hero-desc">Dubai transformou-se no destino de investimento imobiliário mais dinâmico do mundo. Retornos de 8–10%, zero impostos e valorização garantida.</p>
+      <div class="hero-actions">
+        <a href="#empreendimentos" class="btn-gold">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          Ver Empreendimentos
+        </a>
+        <a href="#simulador" class="btn-outline">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Simular Investimento
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">214K+</div><div class="hero-stat-label">Transações em 2025</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">8–10%</div><div class="hero-stat-label">ROI Anual</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">0%</div><div class="hero-stat-label">Imposto sobre Ganhos</div></div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div id="mercado">
+    <div class="stats-grid">
+      <div class="stat-card reveal"><div class="stat-number">AED 682B</div><div class="stat-label">Volume de Vendas 2025</div><div class="stat-sub">+18% vs 2024</div></div>
+      <div class="stat-card reveal"><div class="stat-number">214K+</div><div class="stat-label">Transações em 2025</div><div class="stat-sub">Recorde histórico</div></div>
+      <div class="stat-card reveal"><div class="stat-number">51.9%</div><div class="stat-label">Valorização 2014–2024</div><div class="stat-sub">AED 1.003 → 1.524/ft²</div></div>
+      <div class="stat-card reveal"><div class="stat-number">4M+</div><div class="stat-label">Residentes em Dubai</div><div class="stat-sub">Projeção: 5.8M até 2040</div></div>
+    </div>
+  </div>
+
+  <!-- MARKET INFO -->
+  <section class="market-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span>Visão Geral</span></div>
+        <h2 class="section-title">O Mercado que <em>Transforma Capital</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-desc">Dubai consolidou-se como um dos mercados imobiliários mais resilientes e rentáveis do mundo, com crescimento sustentado e proteção legal robusta para investidores estrangeiros.</p>
+      </div>
+      <div class="market-grid">
+        <div class="market-text reveal">
+          <p>Após uma correção entre 2015 e 2020, o mercado recuperou com vigor. O preço médio de venda por pé quadrado subiu de <strong>AED 1.003 em 2014 para AED 1.524 em 2024</strong> — uma valorização de 51,9% — e superou AED 1.850 em 2025.</p>
+          <p>O número de transações cresceu de <strong>41.715 em 2014 para mais de 132.000 em 2023</strong>. Em 2025 foram registadas mais de <strong>214.912 transações</strong> totalizando cerca de AED 682 biliões em vendas.</p>
+          <p>As contas <em>escrow</em>, exigidas por lei desde 2007, protegem investidores ao garantir que os pagamentos de imóveis na planta são libertados apenas quando marcos de construção são cumpridos — conferindo máxima segurança ao investimento.</p>
+        </div>
+        <div class="market-highlights reveal">
+          <div class="highlight-item">
+            <div class="highlight-icon">📈</div>
+            <div class="highlight-text"><h4>Valorização Consistente</h4><p>Preços residenciais subiram 80% desde 2015, com yields de arrendamento de 6–10% ao ano.</p></div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🏦</div>
+            <div class="highlight-text"><h4>Proteção Legal Escrow</h4><p>Contas escrow obrigatórias garantem que o seu dinheiro só é libertado com marcos de construção cumpridos.</p></div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🌍</div>
+            <div class="highlight-text"><h4>Zero Impostos sobre Ganhos</h4><p>Dubai não aplica imposto sobre mais-valias, rendimentos de arrendamento ou herança imobiliária.</p></div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">✈️</div>
+            <div class="highlight-text"><h4>Golden Visa Imobiliário</h4><p>Investimentos a partir de AED 2M qualificam para o Golden Visa dos Emirados Árabes Unidos.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMANA -->
+  <section class="samana-section" id="samana">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span>O Nosso Parceiro</span></div>
+        <h2 class="section-title">Samana <em>Developers</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-desc">O 5.º maior promotor off-plan de Dubai, com crescimento de 600% em vendas em 2023 e AED 7,1 biliões em 2025.</p>
+      </div>
+      <div class="samana-grid">
+        <div class="samana-image reveal">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/EaGaswICcTGaIlis.jpg" alt="Samana Developers Dubai" />
+          <div class="samana-badge">5.º Maior Promotor Off-Plan</div>
+        </div>
+        <div class="samana-text reveal">
+          <p><strong>Samana Developers</strong> é um promotor boutique fundado em 2017. A empresa ganhou notoriedade ao introduzir piscinas privadas em todas as unidades e amenities de estilo resort.</p>
+          <p>Com mais de <strong>30 projetos lançados</strong> e quatro entregues, a Samana tornou-se o quinto maior vendedor de off-plan em Dubai. Cerca de <strong>86% das vendas provêm de investidores estrangeiros</strong>.</p>
+          <p>Preços de entrada competitivos a partir de <strong>AED 599.000</strong> e planos de pagamento flexíveis com retorno garantido até 8% ampliam o acesso a compradores e investidores internacionais.</p>
+          <div class="samana-metrics">
+            <div class="samana-metric"><div class="samana-metric-num">30+</div><div class="samana-metric-label">Projetos</div></div>
+            <div class="samana-metric"><div class="samana-metric-num">8%</div><div class="samana-metric-label">ROI Garantido</div></div>
+            <div class="samana-metric"><div class="samana-metric-num">600%</div><div class="samana-metric-label">Crescimento 2023</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPREENDIMENTOS -->
+  <section class="projects-section" id="empreendimentos">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span>Portfólio Exclusivo</span></div>
+        <h2 class="section-title">Empreendimentos <em>em Destaque</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-desc">Selecione um empreendimento e simule o seu investimento diretamente abaixo, com todos os planos de pagamento e projeções de retorno.</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <div class="project-img">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/vZlFHDWJftYIhcQA.jpg" alt="Samana Barari Heights" />
+            <div class="project-overlay"></div>
+            <div class="project-tag">Disponível</div>
+          </div>
+          <div class="project-body">
+            <div class="project-location">Majan · Dubailand</div>
+            <h3 class="project-name">Samana Barari Heights</h3>
+            <p class="project-desc">Arranha-céu de 360° com piscinas privadas em cada unidade, vistas panorâmicas para Al Barari e Dubai skyline. Estúdios a Sky Villas de 4 quartos.</p>
+            <div class="project-specs">
+              <div class="project-spec"><span class="project-spec-val">AED 599K</span><span class="project-spec-key">Desde</span></div>
+              <div class="project-spec"><span class="project-spec-val">8%</span><span class="project-spec-key">ROI Garantido</span></div>
+              <div class="project-spec"><span class="project-spec-val">2027</span><span class="project-spec-key">Entrega</span></div>
+            </div>
+            <div class="project-actions">
+              <a href="#simulador" class="btn-sim" onclick="scrollToSimulator()">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Simule e Saiba Já
+              </a>
+              <a href="https://wa.me/351925708456?text=Olá!%20Tenho%20interesse%20no%20Samana%20Barari%20Heights." target="_blank" class="btn-info">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                Info
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-img">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/oGwREdeRlKYXuJfq.jpg" alt="Samana Hills South 3" />
+            <div class="project-overlay"></div>
+            <div class="project-tag">Disponível</div>
+          </div>
+          <div class="project-body">
+            <div class="project-location">Dubai South</div>
+            <h3 class="project-name">Samana Hills South 3</h3>
+            <p class="project-desc">Santuário de estilo resort com 147 unidades, 30+ amenidades e localização estratégica junto ao Aeroporto Al Maktoum. Preços desde AED 639.000.</p>
+            <div class="project-specs">
+              <div class="project-spec"><span class="project-spec-val">AED 639K</span><span class="project-spec-key">Desde</span></div>
+              <div class="project-spec"><span class="project-spec-val">8%</span><span class="project-spec-key">ROI Garantido</span></div>
+              <div class="project-spec"><span class="project-spec-val">Out 2028</span><span class="project-spec-key">Entrega</span></div>
+            </div>
+            <div class="project-actions">
+              <a href="#simulador" class="btn-sim" onclick="scrollToSimulator()">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Simule e Saiba Já
+              </a>
+              <a href="https://wa.me/351925708456?text=Olá!%20Tenho%20interesse%20no%20Samana%20Hills%20South%203." target="_blank" class="btn-info">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                Info
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-img">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/SWsOBeBJaASXajHU.jpg" alt="Samana Boulevard Heights" />
+            <div class="project-overlay"></div>
+            <div class="project-tag">Disponível</div>
+          </div>
+          <div class="project-body">
+            <div class="project-location">Dubailand</div>
+            <h3 class="project-name">Samana Boulevard Heights</h3>
+            <p class="project-desc">Elegância metropolitana e conforto de resort. Estúdios a 3 quartos com varandas espaçosas, acabamentos premium e sistemas inteligentes de domótica.</p>
+            <div class="project-specs">
+              <div class="project-spec"><span class="project-spec-val">AED 750K</span><span class="project-spec-key">Desde</span></div>
+              <div class="project-spec"><span class="project-spec-val">8%</span><span class="project-spec-key">ROI Garantido</span></div>
+              <div class="project-spec"><span class="project-spec-val">2028</span><span class="project-spec-key">Entrega</span></div>
+            </div>
+            <div class="project-actions">
+              <a href="#simulador" class="btn-sim" onclick="scrollToSimulator()">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Simule e Saiba Já
+              </a>
+              <a href="https://wa.me/351925708456?text=Olá!%20Tenho%20interesse%20no%20Samana%20Boulevard%20Heights." target="_blank" class="btn-info">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                Info
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="simulator-section" id="simulador">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span>Ferramenta Exclusiva</span></div>
+        <h2 class="section-title">Simulador de <em>Investimento</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-desc">Calcule o seu retorno real. Escolha o empreendimento, o plano de pagamento, defina a valorização anual e descubra quanto ganha ao vender.</p>
+      </div>
+      <div class="simulator-wrapper reveal">
+        <div class="simulator-header">
+          <div>
+            <h3>Simule o Seu Investimento em Dubai</h3>
+            <p>18 empreendimentos · 4 planos de pagamento · Valorização anual configurável</p>
+          </div>
+        </div>
+        <div class="sim-body">
+          <div class="sim-grid">
+            <!-- COLUNA ESQUERDA -->
+            <div class="sim-col">
+              <div class="sim-field">
+                <label class="sim-label">Empreendimento</label>
+                <select class="sim-select" id="sim-emp" onchange="simUpdateUnits()">
+                  <option value="">— Seleccione o empreendimento —</option>
+                </select>
+              </div>
+              <div class="sim-field">
+                <label class="sim-label">Unidade</label>
+                <select class="sim-select" id="sim-unit" onchange="simUpdateUnitInfo()">
+                  <option value="">— Seleccione a unidade —</option>
+                </select>
+              </div>
+              <div class="sim-unit-info" id="sim-unit-info"></div>
+              <div class="sim-field">
+                <label class="sim-label">Plano de Pagamento</label>
+                <select class="sim-select" id="sim-plan" onchange="simUpdatePlanDesc()">
+                  <option value="1pct">Plano 1%/mês — 15% entrada + 1%/mês (85 meses)</option>
+                  <option value="7030">Plano 70/30 — 70% construção + 30% entrega</option>
+                  <option value="5050">Plano 50/50 — 50% construção + 50% entrega</option>
+                  <option value="4060">Plano 40/60 — 40% entrada + 60% pós-entrega</option>
+                </select>
+                <div class="sim-plan-desc" id="sim-plan-desc">Entrada de 15% + pagamentos mensais de 1% durante 85 meses. Ideal para maximizar o efeito de alavancagem.</div>
+              </div>
+            </div>
+            <!-- COLUNA DIREITA -->
+            <div class="sim-col">
+              <div class="sim-field">
+                <label class="sim-label">Valorização Anual Esperada</label>
+                <div class="sim-range-wrap">
+                  <input type="range" class="sim-range" id="sim-valorizacao" min="3" max="15" value="7" step="0.5" oninput="document.getElementById('sim-val-display').textContent=this.value+'%'">
+                  <span class="sim-range-val" id="sim-val-display">7%</span>
+                </div>
+              </div>
+              <div class="sim-field">
+                <label class="sim-label">Período de Investimento (anos)</label>
+                <div class="sim-range-wrap">
+                  <input type="range" class="sim-range" id="sim-anos" min="1" max="10" value="3" step="1" oninput="document.getElementById('sim-anos-display').textContent=this.value+' anos'">
+                  <span class="sim-range-val" id="sim-anos-display">3 anos</span>
+                </div>
+              </div>
+              <div class="sim-field">
+                <label class="sim-label">Yield de Arrendamento Anual</label>
+                <div class="sim-range-wrap">
+                  <input type="range" class="sim-range" id="sim-yield" min="4" max="12" value="7" step="0.5" oninput="document.getElementById('sim-yield-display').textContent=this.value+'%'">
+                  <span class="sim-range-val" id="sim-yield-display">7%</span>
+                </div>
+              </div>
+              <button class="sim-btn" onclick="simCalcular()">&#9654; Calcular Retorno</button>
+            </div>
+          </div>
+          <!-- RESULTADOS -->
+          <div class="sim-results" id="sim-results">
+            <div class="sim-results-title">Projeção de Retorno</div>
+            <div class="sim-results-grid">
+              <div class="sim-res-card"><div class="sim-res-label">Preço de Compra</div><div class="sim-res-value" id="res-compra">—</div></div>
+              <div class="sim-res-card"><div class="sim-res-label">Valor Estimado na Venda</div><div class="sim-res-value gold" id="res-venda">—</div></div>
+              <div class="sim-res-card"><div class="sim-res-label">Mais-Valia</div><div class="sim-res-value green" id="res-maisvalia">—</div></div>
+              <div class="sim-res-card"><div class="sim-res-label">Rendimento Arrendamento</div><div class="sim-res-value" id="res-rend">—</div></div>
+              <div class="sim-res-card"><div class="sim-res-label">Retorno Total</div><div class="sim-res-value green" id="res-total">—</div></div>
+              <div class="sim-res-card"><div class="sim-res-label">ROI Total</div><div class="sim-res-value gold" id="res-roi">—</div></div>
+            </div>
+            <div class="sim-plan-desc" id="res-plano-detalhe" style="margin-top:1rem;"></div>
+            <a class="sim-whatsapp" id="sim-wa-btn" href="#" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Solicitar Informações via WhatsApp
+            </a>
+            <p class="sim-disclaimer">* Simulação meramente indicativa. Valores baseados em projeções históricas do mercado imobiliário de Dubai. Não constitui aconselhamento financeiro. Taxa de câmbio: 1 AED = 0,2312 EUR (fev. 2026).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VANTAGENS -->
+  <section class="vantagens-section" id="vantagens">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span>Porquê Dubai</span></div>
+        <h2 class="section-title">Vantagens de <em>Investir</em></h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="vantagens-grid">
+        <div class="vantagem-card reveal"><div class="vantagem-icon">🏛️</div><h3 class="vantagem-title">Zero Impostos</h3><p class="vantagem-desc">Sem imposto sobre mais-valias, rendimentos de arrendamento, herança ou IRS. O retorno é 100% seu.</p></div>
+        <div class="vantagem-card reveal"><div class="vantagem-icon">🔐</div><h3 class="vantagem-title">Proteção Escrow</h3><p class="vantagem-desc">Contas escrow obrigatórias por lei garantem que o seu investimento está protegido durante toda a construção.</p></div>
+        <div class="vantagem-card reveal"><div class="vantagem-icon">📊</div><h3 class="vantagem-title">Retorno de 8–10%</h3><p class="vantagem-desc">Yields de arrendamento entre 6–10% ao ano, com planos de retorno garantido de até 8% em projetos selecionados.</p></div>
+        <div class="vantagem-card reveal"><div class="vantagem-icon">🌐</div><h3 class="vantagem-title">Golden Visa</h3><p class="vantagem-desc">Investimentos acima de AED 2M qualificam para residência nos Emirados Árabes Unidos por 10 anos.</p></div>
+        <div class="vantagem-card reveal"><div class="vantagem-icon">💳</div><h3 class="vantagem-title">Planos Flexíveis</h3><p class="vantagem-desc">Entrada a partir de 15% com pagamentos mensais de 1%. Estruture o investimento ao seu ritmo financeiro.</p></div>
+        <div class="vantagem-card reveal"><div class="vantagem-icon">🏙️</div><h3 class="vantagem-title">Mercado em Crescimento</h3><p class="vantagem-desc">214.912 transações em 2025, população a crescer para 5,8M até 2040 e mega-infraestruturas em construção.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJEÇÕES -->
+  <section class="projections-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span>Perspetiva Futura</span></div>
+        <h2 class="section-title">Projeções do <em>Mercado</em></h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="projections-grid">
+        <div class="projection-bars reveal">
+          <div class="projection-bar-item"><div class="projection-bar-label"><span>Valorização de Preços 2026</span><span>+3–6%</span></div><div class="projection-bar-track"><div class="projection-bar-fill" style="width:55%"></div></div></div>
+          <div class="projection-bar-item"><div class="projection-bar-label"><span>Crescimento de Transações</span><span>+12%</span></div><div class="projection-bar-track"><div class="projection-bar-fill" style="width:72%"></div></div></div>
+          <div class="projection-bar-item"><div class="projection-bar-label"><span>Yield de Arrendamento</span><span>6–10%</span></div><div class="projection-bar-track"><div class="projection-bar-fill" style="width:80%"></div></div></div>
+          <div class="projection-bar-item"><div class="projection-bar-label"><span>Crescimento Populacional</span><span>+5% a.a.</span></div><div class="projection-bar-track"><div class="projection-bar-fill" style="width:65%"></div></div></div>
+          <div class="projection-bar-item"><div class="projection-bar-label"><span>Contribuição ao PIB de Dubai</span><span>8.2%</span></div><div class="projection-bar-track"><div class="projection-bar-fill" style="width:82%"></div></div></div>
+        </div>
+        <div class="projections-text reveal">
+          <p>Os analistas preveem que em 2026 o ritmo de crescimento se manterá entre <strong>3–6%</strong>, sustentado pela entrega de novas unidades e crescimento populacional contínuo.</p>
+          <p>Até 2030, prevê-se que a população de Dubai ultrapasse <strong>cinco milhões de habitantes</strong> e que o governo alcance a meta de <strong>AED 1 trilião em transações anuais</strong>.</p>
+          <p>As reformas de vistos, iniciativas de sustentabilidade e mega-projetos de infraestrutura como o <strong>Aeroporto Al Maktoum</strong> sustentam uma trajetória de crescimento a médio e longo prazo.</p>
+          <a href="#simulador" class="btn-gold" style="margin-top:1.5rem; display:inline-flex;">Calcular o Meu Retorno</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTÍCIAS -->
+  <section class="news-section" id="noticias">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow"><span>Atualidade</span></div>
+        <h2 class="section-title">Últimas <em>Notícias</em></h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="news-grid">
+        <div class="news-card reveal">
+          <div class="news-source">Geo TV · Jan 2026</div>
+          <h3 class="news-title">Mercado imobiliário transaciona AED 771M no primeiro dia útil de 2026</h3>
+          <p class="news-desc">Dubai arrancou 2026 com recorde de transações logo no primeiro dia útil, sinalizando continuidade do ciclo de crescimento.</p>
+          <a href="https://wa.me/351925708456?text=Olá!%20Vi%20as%20notícias%20sobre%20Dubai%20e%20gostaria%20de%20saber%20mais." target="_blank" class="news-link">Saber Mais →</a>
+        </div>
+        <div class="news-card reveal">
+          <div class="news-source">Market Pulse · 2025</div>
+          <h3 class="news-title">Tendências do mercado imobiliário de Dubai 2026 — crescimento moderado e resiliente</h3>
+          <p class="news-desc">Análise aprofundada das tendências para 2026: segmentos de luxo e localizações prime continuam resilientes apesar da entrega de novas unidades.</p>
+          <a href="https://wa.me/351925708456?text=Olá!%20Tenho%20interesse%20em%20investir%20em%20Dubai%20em%202026." target="_blank" class="news-link">Saber Mais →</a>
+        </div>
+        <div class="news-card reveal">
+          <div class="news-source">Throne Properties · 2024</div>
+          <h3 class="news-title">Mercado de terrenos de Dubai cresce 403% entre 2019 e 2024</h3>
+          <p class="news-desc">O valor das transações de terrenos disparou de AED 13,7B para AED 68,8B, refletindo confiança estrutural no mercado imobiliário de Dubai.</p>
+          <a href="https://wa.me/351925708456?text=Olá!%20Quero%20saber%20mais%20sobre%20investimento%20em%20Dubai." target="_blank" class="news-link">Saber Mais →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/ZztjQCeqFzzLvTNl.png" alt="DPS Imobiliário" />
+          <p class="footer-tagline">Não vendemos apenas casas,<br/>estruturamos investimento.</p>
+          <p>A DPS Imobiliário é especialista em investimento imobiliário em Dubai, com acesso exclusivo aos melhores projetos da Samana Developers e planos de pagamento personalizados.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <a href="#mercado">Mercado Dubai</a>
+          <a href="#samana">Samana Developers</a>
+          <a href="#empreendimentos">Empreendimentos</a>
+          <a href="#simulador">Simulador</a>
+          <a href="#vantagens">Vantagens</a>
+          <a href="#noticias">Notícias</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="https://wa.me/351925708456" target="_blank">WhatsApp: +351 925 708 456</a>
+          <a href="https://www.instagram.com/dpsimobiliario" target="_blank">Instagram</a>
+          <a href="https://www.facebook.com/dpsimobiliario" target="_blank">Facebook</a>
+          <a href="https://www.linkedin.com/company/dpsimobiliario" target="_blank">LinkedIn</a>
+          <a href="https://dpsdubai.grupo-dps.com" target="_blank">Simulador Dubai</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 <strong>DPS Imobiliário</strong> · Todos os direitos reservados · dpsdubai.grupo-dps.com</p>
+        <p style="font-size:0.62rem; color:var(--gold);">Não vendemos apenas casas, estruturamos investimento.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING SIDEBAR -->
+  <div class="float-sidebar">
+    <a href="https://wa.me/351925708456?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20investimento%20imobiliário%20em%20Dubai." target="_blank" class="float-btn fb-wa" title="WhatsApp">
+      <span>Fale Connosco</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.374l-.36-.214-3.727.977.993-3.634-.235-.374A9.818 9.818 0 1112 21.818z"/></svg>
+    </a>
+    <a href="#simulador" class="float-btn fb-sim" title="Simulador" onclick="scrollToSimulator()">
+      <span>Simular Agora</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    </a>
+    <a href="https://www.instagram.com/dpsimobiliario" target="_blank" class="float-btn fb-ig" title="Instagram">
+      <span>Instagram</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/dpsimobiliario" target="_blank" class="float-btn fb-fb" title="Facebook">
+      <span>Facebook</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/company/dpsimobiliario" target="_blank" class="float-btn fb-li" title="LinkedIn">
+      <span>LinkedIn</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+  </div>
+
+  <script>
+    function closeSplash() {
+      document.getElementById('splash').classList.add('hide');
+      setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 800);
+    }
+    setTimeout(closeSplash, 12000);
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function scrollToSimulator() {
+      setTimeout(() => { document.getElementById('simulador').scrollIntoView({ behavior: 'smooth' }); }, 100);
+    }
+  </script>
+  <script defer src="/share.js"></script>
+  <script>
+  // ===== SIMULADOR DUBAI =====
+  var SAMANA_DATA = null;
+
+  fetch('/samana_data.json')
+    .then(r => r.json())
+    .then(data => {
+      SAMANA_DATA = data;
+      var sel = document.getElementById('sim-emp');
+      data.forEach(function(emp, i) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = emp.nome + ' (' + emp.total_unidades + ' unidades)';
+        sel.appendChild(opt);
+      });
+    })
+    .catch(function(e) { console.error('Erro ao carregar dados:', e); });
+
+  function simUpdateUnits() {
+    var empIdx = document.getElementById('sim-emp').value;
+    var unitSel = document.getElementById('sim-unit');
+    unitSel.innerHTML = '<option value="">— Seleccione a unidade —</option>';
+    document.getElementById('sim-unit-info').classList.remove('visible');
+    document.getElementById('sim-results').classList.remove('visible');
+    if (!empIdx || !SAMANA_DATA) return;
+    var emp = SAMANA_DATA[parseInt(empIdx)];
+    emp.unidades.forEach(function(u, i) {
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = u.codigo + ' · ' + u.tipologia + ' · ' + u.piso + ' · ' + fmtEur(u.preco_desconto);
+      unitSel.appendChild(opt);
+    });
+  }
+
+  function simUpdateUnitInfo() {
+    var empIdx = document.getElementById('sim-emp').value;
+    var unitIdx = document.getElementById('sim-unit').value;
+    var info = document.getElementById('sim-unit-info');
+    document.getElementById('sim-results').classList.remove('visible');
+    if (!empIdx || unitIdx === '' || !SAMANA_DATA) { info.classList.remove('visible'); return; }
+    var u = SAMANA_DATA[parseInt(empIdx)].unidades[parseInt(unitIdx)];
+    info.innerHTML =
+      '<strong>' + u.tipologia + '</strong> &nbsp;|&nbsp; ' + u.piso +
+      ' &nbsp;|&nbsp; ' + u.area + ' m² &nbsp;|&nbsp; ' + u.quartos + ' quarto(s)' +
+      '<br>Vista: ' + u.vista + ' &nbsp;|&nbsp; Localização: ' + u.localizacao +
+      '<br>Preço com desconto: <strong>' + fmtEur(u.preco_desconto) + '</strong>' +
+      ' &nbsp;|&nbsp; Valor de reserva: <strong>' + fmtEur(u.reserva) + '</strong>';
+    info.classList.add('visible');
+  }
+
+  var planDescs = {
+    '1pct': 'Entrada de 15% + pagamentos mensais de 1% durante 85 meses. Ideal para maximizar o efeito de alavancagem com menor capital inicial.',
+    '7030': '70% do valor pago durante a construção (em tranches) + 30% na entrega das chaves.',
+    '5050': '50% do valor pago durante a construção + 50% na entrega. Equilíbrio entre alavancagem e exposição.',
+    '4060': '40% de entrada inicial + 60% pago após a entrega, em prestações. Menor esforço durante a construção.'
+  };
+
+  function simUpdatePlanDesc() {
+    var plan = document.getElementById('sim-plan').value;
+    document.getElementById('sim-plan-desc').textContent = planDescs[plan] || '';
+    document.getElementById('sim-results').classList.remove('visible');
+  }
+
+  function simCalcular() {
+    var empIdx = document.getElementById('sim-emp').value;
+    var unitIdx = document.getElementById('sim-unit').value;
+    if (!empIdx || unitIdx === '' || !SAMANA_DATA) {
+      alert('Por favor seleccione o empreendimento e a unidade.');
+      return;
+    }
+    var u = SAMANA_DATA[parseInt(empIdx)].unidades[parseInt(unitIdx)];
+    var empNome = SAMANA_DATA[parseInt(empIdx)].nome;
+    var preco = u.preco_desconto;
+    var plan = document.getElementById('sim-plan').value;
+    var valorizacao = parseFloat(document.getElementById('sim-valorizacao').value) / 100;
+    var anos = parseInt(document.getElementById('sim-anos').value);
+    var yieldAnual = parseFloat(document.getElementById('sim-yield').value) / 100;
+
+    // Valor na venda
+    var valorVenda = preco * Math.pow(1 + valorizacao, anos);
+    var maisValia = valorVenda - preco;
+
+    // Rendimento de arrendamento (sobre o preço de compra, pelo período)
+    var rendArrendamento = preco * yieldAnual * anos;
+
+    // Retorno total
+    var retornoTotal = maisValia + rendArrendamento;
+    var roi = (retornoTotal / preco) * 100;
+
+    // Detalhe do plano
+    var planoDetalhe = '';
+    if (plan === '1pct') {
+      var entrada = preco * 0.15;
+      var mensal = preco * 0.01;
+      planoDetalhe = 'Entrada: ' + fmtEur(entrada) + ' · Prestação mensal: ' + fmtEur(mensal) + ' · Total 85 meses: ' + fmtEur(mensal * 85);
+    } else if (plan === '7030') {
+      planoDetalhe = 'Durante construção: ' + fmtEur(preco * 0.70) + ' · Na entrega: ' + fmtEur(preco * 0.30);
+    } else if (plan === '5050') {
+      planoDetalhe = 'Durante construção: ' + fmtEur(preco * 0.50) + ' · Na entrega: ' + fmtEur(preco * 0.50);
+    } else if (plan === '4060') {
+      planoDetalhe = 'Entrada: ' + fmtEur(preco * 0.40) + ' · Pós-entrega: ' + fmtEur(preco * 0.60);
+    }
+
+    document.getElementById('res-compra').textContent = fmtEur(preco);
+    document.getElementById('res-venda').textContent = fmtEur(valorVenda);
+    document.getElementById('res-maisvalia').textContent = '+' + fmtEur(maisValia);
+    document.getElementById('res-rend').textContent = fmtEur(rendArrendamento);
+    document.getElementById('res-total').textContent = '+' + fmtEur(retornoTotal);
+    document.getElementById('res-roi').textContent = '+' + roi.toFixed(1) + '%';
+    document.getElementById('res-plano-detalhe').textContent = planoDetalhe;
+
+    // WhatsApp
+    var msg = 'Olá! Tenho interesse no empreendimento ' + empNome + ', unidade ' + u.codigo +
+      ' (' + u.tipologia + ', ' + u.piso + ', ' + fmtEur(preco) + '). ' +
+      'Plano: ' + document.getElementById('sim-plan').options[document.getElementById('sim-plan').selectedIndex].text + '. ' +
+      'Pode enviar mais informações?';
+    document.getElementById('sim-wa-btn').href = 'https://wa.me/351925708456?text=' + encodeURIComponent(msg);
+
+    document.getElementById('sim-results').classList.add('visible');
+    document.getElementById('sim-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function fmtEur(v) {
+    return new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+  }
+  </script>
+</body>
+</html>
