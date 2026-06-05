@@ -2000,20 +2000,14 @@ async function gerarPropostaBh(unit, loadBtn, simData) {
     doc.setTextColor(...GOLD);
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
-    doc.text('PRÉ-VENDA', W/2, 126, { align: 'center' });
+    doc.text('PREÇO', W/2, 126, { align: 'center' });
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
-    doc.text(`${Number(unit.pre_sale).toLocaleString('pt-PT')} €`, W/2, 134, { align: 'center' });
+    doc.text(`${Number(unit.preco).toLocaleString('pt-PT')} €`, W/2, 134, { align: 'center' });
     doc.setTextColor(...GREY);
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
-    doc.text(`PVP: ${Number(unit.preco).toLocaleString('pt-PT')} €`, W/2, 141, { align: 'center' });
-    // Linha de risco sobre o PVP
-    const pvpText = `PVP: ${Number(unit.preco).toLocaleString('pt-PT')} €`;
-    const pvpW = doc.getTextWidth(pvpText);
-    doc.setDrawColor(...GREY);
-    doc.setLineWidth(0.4);
-    doc.line(W/2 - pvpW/2, 140, W/2 + pvpW/2, 140);
+    // Sem PVP separado — BH tem apenas um preço
 
     // ---- 10 PONTOS FORTES ----
     doc.setTextColor(...GOLD);
@@ -2051,7 +2045,7 @@ async function gerarPropostaBh(unit, loadBtn, simData) {
     doc.setDrawColor(...GOLD);
     doc.line(20, 255, W-20, 255);
 
-    const preco = Number(unit.pre_sale); // Preço de pré-venda
+    const preco = Number(unit.preco); // Preço da unidade
     const pagamentos = [
       { fase: 'Reserva — Agora', pct: '2%', valor: preco * 0.02 },
       { fase: 'CPCV — Até final de 2026', pct: '10%', valor: preco * 0.10 },
@@ -2197,7 +2191,7 @@ async function gerarPropostaBh(unit, loadBtn, simData) {
       `Fracção: ${unit.fraccao}  |  Tipologia: ${unit.tipologia}  |  Piso: ${unit.piso}`,
       `Área ABC: ${unit.abc || unit.area_abc || '—'} m²  |  Varanda: ${unit.varanda || 0} m²  |  Área Total: ${unit.total || unit.total_area || '—'} m²`,
       `Orientação Solar: ${unit.orientacao || 'N/D'}  |  Estado: ${unit.status}`,
-      `Pré-Venda: ${Number(unit.pre_sale).toLocaleString('pt-PT')} €  |  PVP: ${Number(unit.preco).toLocaleString('pt-PT')} €`,
+      `Preço: ${Number(unit.preco).toLocaleString('pt-PT')} €`,
     ];
     let ydesc = yd + 18;
     descLines.forEach(l => {
