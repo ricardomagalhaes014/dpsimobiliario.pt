@@ -452,7 +452,7 @@
       50% { box-shadow: 0 4px 40px rgba(197,165,90,1); opacity: 0.85; }
     }
     .unidades-float {
-      position: fixed; bottom: 100px; right: 16px; z-index: 999;
+      position: fixed; bottom: 170px; right: 16px; z-index: 999;
       background: var(--gold); color: var(--dark);
       padding: 14px 18px; font-size: 0.72rem; font-weight: 800;
       letter-spacing: 0.08em; text-transform: uppercase;
@@ -1766,7 +1766,44 @@ function submitForm(e) {
   const tipologia = e.target.tipologia.value;
   const msg = encodeURIComponent(`Olá, sou ${nome} e tenho interesse no Belo Horizonte Residences${tipologia ? ' - Tipologia ' + tipologia : ''}. Gostaria de receber mais informações.`);
   setTimeout(() => window.open(`https://wa.me/351925708456?text=${msg}`, '_blank'), 500);
+  // Iniciar chamada Sofia automaticamente após envio do formulário
+  setTimeout(() => {
+    var w = document.getElementById('el-w');
+    if (w && w.shadowRoot) {
+      var b = w.shadowRoot.querySelector('button');
+      if (b) b.click();
+    } else {
+      var dpsbtn = document.getElementById('dps-btn');
+      if (dpsbtn) dpsbtn.click();
+    }
+  }, 1500);
 }
+</script>
+<!-- Assistente Virtual Sofia - Belo Horizonte -->
+<style>
+#dps-btn{position:fixed;bottom:100px;right:20px;z-index:2147483647;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#C5A55A,#a8893d);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(197,165,90,0.5);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s;}
+#dps-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(197,165,90,0.7);}
+#dps-btn svg{width:28px;height:28px;fill:white;}
+#dps-tip{position:fixed;bottom:165px;right:85px;z-index:2147483647;background:rgba(0,0,0,0.88);color:#C5A55A;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.5px;padding:6px 14px;border-radius:20px;border:1px solid rgba(197,165,90,0.3);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .3s;}
+#dps-btn:hover~#dps-tip{opacity:1;}
+</style>
+<button id="dps-btn" title="Falar com a Sofia">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V15h-2v1.93A8 8 0 0 1 4 9h2a6 6 0 0 0 12 0h2a8 8 0 0 1-7 6.93zM8 9a4 4 0 0 1 8 0z"/></svg>
+</button>
+<div id="dps-tip">Falar com a Sofia IA</div>
+<elevenlabs-convai agent-id="agent_1901kv0dj4m0fxnr5pxqdhqzjf26" id="el-w"></elevenlabs-convai>
+<script src="https://elevenlabs.io/convai-widget/index.js" async></script>
+<script>
+(function(){
+  var w=document.getElementById('el-w');
+  w.style.cssText='position:fixed!important;bottom:170px!important;right:20px!important;z-index:2147483646!important;display:block!important;';
+  document.getElementById('dps-btn').onclick=function(){
+    setTimeout(function(){
+      var s=w.shadowRoot;
+      if(s){var b=s.querySelector('button');if(b)b.click();}
+    },300);
+  };
+})();
 </script>
 </body>
 </html>

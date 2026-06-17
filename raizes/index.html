@@ -294,7 +294,7 @@
       50% { box-shadow: 0 4px 40px rgba(197,165,90,1); opacity: 0.85; }
     }
     .unidades-float {
-      position: fixed; bottom: 100px; right: 16px; z-index: 999;
+      position: fixed; bottom: 170px; right: 16px; z-index: 999;
       background: var(--gold); color: var(--dark);
       padding: 14px 18px; font-size: 0.72rem; font-weight: 800;
       letter-spacing: 0.08em; text-transform: uppercase;
@@ -447,9 +447,9 @@
   <style>
   elevenlabs-convai {
     position: fixed !important;
-    bottom: 32px !important;
-    right: 32px !important;
-    z-index: 99999 !important;
+    bottom: 170px !important;
+    right: 20px !important;
+    z-index: 2147483646 !important;
     display: block !important;
   }
 </style>
@@ -670,4 +670,21 @@
         <p style="font-size:0.85rem; font-weight:300; line-height:1.8; color:var(--text-light);">Segundo o DPS, cada apartamento pode beneficiar de varanda, terraço ou jardim, conforme a tipologia e configuração específica da fração.</p>
       </div></div></div></section>
 
-<section style="background:var(--dark-blue, #0a0f1e); padding:100px 0;" id="apresentacao"><div class="container"><div style="text-align:center; margin-bottom:60px;"><p class="section-label">Apresentação Oficial</p><div class="gold-line" style="margin:0 auto 24px;"></div><h2 class="section-title">Raízes <em>Fânzeres</em></h2><p class="section-text" style="margin:0 auto;">Apresentação visual baseada nas páginas úteis do DPS fornecido para o empreendimento Raízes.</p></div><div style="position:relative; max-width:900px; margin:0 auto 60px; background:#000; border-radius:8px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.5);"><div id="apres-slides" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;"><img id="apres-img" src="apresentacao/slide-01.webp" alt="Apresentação Raízes - Slide 1" style="width:100%; height:100%; object-fit:contain; display:block; background:#000;"><button onclick="apresSlide(-1)" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); border:1px solid var(--gold); color:var(--gold); width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10;" data-manus_clickable="true" data-manus_click_id="37">‹</button><button onclick="apresSlide(1)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); border:1px solid var(--gold); color:var(--gold); width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10;" data-manus_clickable="true" data-manus_click_id="38">›</button><div style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; padding:4px 14px; border-radius:20px;"><span id="apres-counter">1 / 17</span></div></div></div></div></section></body></html>
+<section style="background:var(--dark-blue, #0a0f1e); padding:100px 0;" id="apresentacao"><div class="container"><div style="text-align:center; margin-bottom:60px;"><p class="section-label">Apresentação Oficial</p><div class="gold-line" style="margin:0 auto 24px;"></div><h2 class="section-title">Raízes <em>Fânzeres</em></h2><p class="section-text" style="margin:0 auto;">Apresentação visual baseada nas páginas úteis do DPS fornecido para o empreendimento Raízes.</p></div><div style="position:relative; max-width:900px; margin:0 auto 60px; background:#000; border-radius:8px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.5);"><div id="apres-slides" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;"><img id="apres-img" src="apresentacao/slide-01.webp" alt="Apresentação Raízes - Slide 1" style="width:100%; height:100%; object-fit:contain; display:block; background:#000;"><button onclick="apresSlide(-1)" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); border:1px solid var(--gold); color:var(--gold); width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10;" data-manus_clickable="true" data-manus_click_id="37">‹</button><button onclick="apresSlide(1)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); border:1px solid var(--gold); color:var(--gold); width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10;" data-manus_clickable="true" data-manus_click_id="38">›</button><div style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; padding:4px 14px; border-radius:20px;"><span id="apres-counter">1 / 17</span></div></div></div></div></section><!-- Assistente Virtual Sofia - Raizes -->
+<style>
+#dps-btn{position:fixed;bottom:100px;right:20px;z-index:2147483647;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#C5A55A,#a8893d);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(197,165,90,0.5);display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s;}
+#dps-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(197,165,90,0.7);}
+#dps-btn svg{width:28px;height:28px;fill:white;}
+</style>
+<button id="dps-btn" title="Falar com a Sofia">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V15h-2v1.93A8 8 0 0 1 4 9h2a6 6 0 0 0 12 0h2a8 8 0 0 1-7 6.93zM8 9a4 4 0 0 1 8 0z"/></svg>
+</button>
+<script>
+document.getElementById('dps-btn').onclick=function(){
+  setTimeout(function(){
+    var w=document.querySelector('elevenlabs-convai');
+    if(w&&w.shadowRoot){var b=w.shadowRoot.querySelector('button');if(b)b.click();}
+  },300);
+};
+</script>
+</body></html>
