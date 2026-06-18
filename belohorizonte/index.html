@@ -1769,14 +1769,23 @@ function submitForm(e) {
   // Iniciar chamada Sofia automaticamente após envio do formulário
   setTimeout(() => {
     var w = document.getElementById('el-w');
-    if (w && w.shadowRoot) {
-      var b = w.shadowRoot.querySelector('button');
-      if (b) b.click();
+    if (!w) return;
+    if (typeof w.startConversation === 'function') {
+      w.startConversation();
     } else {
-      var dpsbtn = document.getElementById('dps-btn');
-      if (dpsbtn) dpsbtn.click();
+      // Aguardar o widget carregar (script async)
+      var attempts = 0;
+      var interval = setInterval(() => {
+        attempts++;
+        if (typeof w.startConversation === 'function') {
+          w.startConversation();
+          clearInterval(interval);
+        } else if (attempts > 30) {
+          clearInterval(interval);
+        }
+      }, 200);
     }
-  }, 1500);
+  }, 500);
 }
 </script>
 <!-- Assistente Virtual Sofia - Belo Horizonte -->
@@ -1798,10 +1807,20 @@ function submitForm(e) {
   var w=document.getElementById('el-w');
   w.style.cssText='position:fixed!important;bottom:170px!important;right:20px!important;z-index:2147483646!important;display:block!important;';
   document.getElementById('dps-btn').onclick=function(){
-    setTimeout(function(){
-      var s=w.shadowRoot;
-      if(s){var b=s.querySelector('button');if(b)b.click();}
-    },300);
+    if (typeof w.startConversation === 'function') {
+      w.startConversation();
+    } else {
+      var attempts = 0;
+      var interval = setInterval(function(){
+        attempts++;
+        if (typeof w.startConversation === 'function') {
+          w.startConversation();
+          clearInterval(interval);
+        } else if (attempts > 30) {
+          clearInterval(interval);
+        }
+      }, 200);
+    }
   };
 })();
 </script>
