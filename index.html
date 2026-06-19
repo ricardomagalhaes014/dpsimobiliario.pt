@@ -123,6 +123,49 @@ nav[class*="fixed"] a[class*="text-[#F5F2ED]"]:hover {
 }
 </style>
 <!-- FIM DPS FIX: Menu dourado inline -->
+<!-- DPS FIX: Remover formulario de contacto -->
+<style>
+/* Esconder o formulario de contacto */
+#contacto form { display: none !important; }
+#contacto .lg\:col-span-3 { display: none !important; }
+</style>
+<script id="dps-remove-form">
+(function() {
+  function removeContactForm() {
+    var section = document.getElementById('contacto');
+    if (!section) return;
+    // Esconder o form
+    var forms = section.querySelectorAll('form');
+    forms.forEach(function(f) { f.style.display = 'none'; f.closest('[class]') && (f.closest('[class]').style.display = 'none'); });
+    // Encontrar a coluna com o form (normalmente a primeira coluna do grid)
+    var grid = section.querySelector('.grid');
+    if (grid) {
+      var cols = grid.children;
+      if (cols.length >= 2) {
+        // Esconder a coluna do formulario (col-span-3)
+        for (var i = 0; i < cols.length; i++) {
+          if (cols[i].querySelector('form')) {
+            cols[i].style.display = 'none';
+          }
+        }
+        // Expandir a coluna de contactos diretos
+        grid.style.display = 'block';
+      }
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(removeContactForm, 400);
+    setTimeout(removeContactForm, 900);
+    setTimeout(removeContactForm, 1800);
+    setTimeout(removeContactForm, 3000);
+  });
+  var obs = new MutationObserver(function() { removeContactForm(); });
+  document.addEventListener('DOMContentLoaded', function() {
+    obs.observe(document.body, {childList: true, subtree: true});
+  });
+})();
+</script>
+<!-- FIM DPS FIX: Remover formulario de contacto -->
   </head>
   <body>
     <div id="root"></div>
