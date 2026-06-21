@@ -40,5 +40,7 @@ RewriteCond %{REQUEST_URI} !^/google
 RewriteCond %{REQUEST_URI} !^/site\.webmanifest
 RewriteRule ^([a-z0-9][a-z0-9\-]*)/?$ agente.php?slug=$1 [L,QSA]
 
+# ─── PHP scripts diretos (não redirecionar para index.html) ─────────────────────
+RewriteRule \.php$ - [L]
 # ─── Redirecionar tudo o resto para index.html (SPA routing) ──────────────────
 RewriteRule ^ index.html [L]
