@@ -1,4 +1,21 @@
 <?php
+// Endpoint de atualização forçada dos ficheiros HTML
+if (isset($_GET['update']) && $_GET['update'] === 'go2026') {
+    $repo = 'ricardomagalhaes014/dpsimobiliario.pt';
+    $files = ['index.html', 'raizes/index.html', 'belohorizonte/index.html'];
+    $r = [];
+    foreach ($files as $f) {
+        $url = "https://raw.githubusercontent.com/{$repo}/main/{$f}?t=" . time();
+        $c = @file_get_contents($url);
+        if (!$c || strlen($c) < 5000) { $r[$f] = 'FAIL:' . strlen((string)$c); continue; }
+        $dest = __DIR__ . '/' . $f;
+        @mkdir(dirname($dest), 0755, true);
+        $r[$f] = file_put_contents($dest, $c) !== false ? 'OK:' . strlen($c) : 'WRITE_FAIL';
+    }
+    header('Content-Type: application/json');
+    echo json_encode(['ok' => true, 'ts' => date('Y-m-d H:i:s'), 'r' => $r]);
+    exit;
+}
 /**
  * Landing Page Pessoal do Agente - DPS Imobiliário
  * URL: dpsimobiliario.pt/{slug}
