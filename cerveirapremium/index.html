@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cerveira Premium | Apartamentos T1, T2 e T3 em Vila Nova de Cerveira</title>
+  <meta name="description" content="Cerveira Premium — complexo habitacional de qualidade premium em Vila Nova de Cerveira, Alto Minho. Apartamentos T1, T2 e T3 com vistas sobre o Rio Minho. Arquitetura contemporânea, fachadas em pedra natural e varandas amplas.">
+  <meta name="keywords" content="Cerveira Premium, Vila Nova de Cerveira, apartamentos, T1, T2, T3, Alto Minho, Rio Minho, DPS Imobiliário, investimento, habitação">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Portuguese">
+  <link rel="canonical" href="https://dpsimobiliario.pt/cerveirapremium/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DPS Imobiliário">
+  <meta property="og:locale" content="pt_PT">
+  <meta property="og:url" content="https://dpsimobiliario.pt/cerveirapremium/">
+  <meta property="og:title" content="Cerveira Premium | Apartamentos T1, T2 e T3 em Vila Nova de Cerveira">
+  <meta property="og:description" content="Complexo habitacional premium em Vila Nova de Cerveira, com vistas sobre o Rio Minho. Apartamentos T1, T2 e T3 com arquitetura contemporânea e fachadas em pedra natural.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C5A55A;
+      --gold-light: #D7BF7A;
+      --dark: #080808;
+      --dark-2: #0F0F0F;
+      --cream: #F5F2ED;
+      --text-light: rgba(245,242,237,0.7);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--dark); color: var(--cream); font-family: 'Montserrat', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+    /* NAVBAR */
+    nav#navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav#navbar.scrolled { background: rgba(8,8,8,0.97); padding: 14px 40px; backdrop-filter: blur(10px); }
+    .nav-logo img { height: 40px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,242,237,0.7); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 24px; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); }
+    .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; }
+    .nav-mobile-btn span { display: block; width: 22px; height: 1px; background: var(--cream); margin: 5px 0; transition: all 0.3s; }
+
+    /* HERO */
+    .hero {
+      height: 100vh; position: relative; display: flex; align-items: flex-end;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.7) 70%, rgba(8,8,8,1) 100%),
+                  url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center/cover no-repeat;
+    }
+    .hero-content { padding: 0 80px 100px; max-width: 700px; }
+    .hero-breadcrumb { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero-breadcrumb a { color: rgba(245,242,237,0.5); text-decoration: none; }
+    .hero-breadcrumb a:hover { color: var(--gold); }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 24px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero p { font-size: 0.85rem; font-weight: 300; line-height: 1.9; color: var(--text-light); max-width: 480px; margin-bottom: 40px; }
+    .hero-badges { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+    .badge { border: 1px solid rgba(197,165,90,0.4); padding: 8px 18px; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+    .hero-cta { display: inline-block; background: var(--gold); color: var(--dark); padding: 16px 40px; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; font-weight: 500; }
+    .hero-cta:hover { background: var(--gold-light); }
+
+    /* SECTIONS */
+    section { padding: 100px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 24px; }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-text { font-size: 0.85rem; font-weight: 300; line-height: 1.9; color: var(--text-light); max-width: 600px; }
+
+    /* INTRO */
+    .intro { background: var(--dark-2); }
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .intro-image { position: relative; }
+    .intro-image img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+    .intro-image::before { content: ''; position: absolute; top: -20px; left: -20px; right: 20px; bottom: 20px; border: 1px solid rgba(197,165,90,0.2); z-index: -1; }
+    .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+    .stat { border-left: 2px solid var(--gold); padding-left: 16px; }
+    .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-top: 4px; }
+
+    /* TIPOLOGIAS */
+    .tipologias { background: var(--dark); }
+    .tipologias-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+    .tipo-card { background: var(--dark-2); padding: 48px 40px; position: relative; overflow: hidden; transition: transform 0.3s; }
+    .tipo-card:hover { transform: translateY(-4px); }
+    .tipo-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s; }
+    .tipo-card:hover::before { transform: scaleX(1); }
+    .tipo-tag { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .tipo-name { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; margin-bottom: 20px; }
+    .tipo-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .tipo-features li { font-size: 0.78rem; font-weight: 300; color: var(--text-light); padding-left: 16px; position: relative; }
+    .tipo-features li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+    /* LOCALIZAÇÃO */
+    .localizacao { background: var(--dark-2); }
+    .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+    .loc-points { display: flex; flex-direction: column; gap: 20px; }
+    .loc-point { display: flex; gap: 20px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .loc-icon { width: 36px; height: 36px; border: 1px solid rgba(197,165,90,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gold); font-size: 0.9rem; }
+    .loc-point-title { font-size: 0.78rem; font-weight: 500; margin-bottom: 4px; }
+    .loc-point-desc { font-size: 0.72rem; font-weight: 300; color: var(--text-light); line-height: 1.6; }
+    .loc-map { background: rgba(197,165,90,0.05); border: 1px solid rgba(197,165,90,0.15); height: 400px; display: flex; align-items: center; justify-content: center; }
+    .loc-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(80%) invert(10%); }
+
+    /* PAGAMENTO */
+    .pagamento { background: var(--dark); }
+    .payment-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-top: 60px; }
+    .payment-step { background: var(--dark-2); padding: 36px 28px; text-align: center; position: relative; }
+    .payment-step::after { content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 1rem; z-index: 1; }
+    .payment-step:last-child::after { display: none; }
+    .payment-pct { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 12px; }
+    .payment-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); line-height: 1.5; }
+
+    /* CONTACTO */
+    .contacto { background: var(--dark-2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form input, .contact-form select, .contact-form textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--cream); padding: 14px 18px; font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem; font-weight: 300; outline: none; transition: border-color 0.3s; width: 100%;
+    }
+    .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form select option { background: var(--dark); }
+    .contact-form textarea { resize: vertical; min-height: 100px; }
+    .contact-form button { background: var(--gold); color: var(--dark); border: none; padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; font-weight: 500; align-self: flex-start; }
+    .contact-form button:hover { background: var(--gold-light); }
+    .contact-info { display: flex; flex-direction: column; gap: 32px; }
+    .contact-item { display: flex; gap: 20px; align-items: flex-start; }
+    .contact-item-icon { width: 44px; height: 44px; border: 1px solid rgba(197,165,90,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gold); }
+    .contact-item-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .contact-item-value { font-size: 0.85rem; font-weight: 300; }
+    .contact-item-value a { color: var(--cream); text-decoration: none; }
+    .contact-item-value a:hover { color: var(--gold); }
+
+    /* FOOTER */
+    footer { background: #050505; padding: 60px 0 30px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+    .footer-brand img { height: 50px; margin-bottom: 20px; }
+    .footer-brand p { font-size: 0.78rem; font-weight: 300; color: rgba(245,242,237,0.5); line-height: 1.8; max-width: 280px; }
+    .footer-col h5 { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.78rem; font-weight: 300; color: rgba(245,242,237,0.5); text-decoration: none; transition: color 0.3s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 0.7rem; color: rgba(245,242,237,0.3); }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .intro-grid, .loc-grid, .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+      .tipologias-grid { grid-template-columns: 1fr 1fr; }
+      .payment-steps { grid-template-columns: 1fr 1fr; }
+      .payment-step::after { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav#navbar { padding: 16px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-mobile-btn { display: block; }
+      .hero-content { padding: 0 24px 80px; }
+      .container { padding: 0 24px; }
+      section { padding: 70px 0; }
+      .tipologias-grid { grid-template-columns: 1fr; }
+      .payment-steps { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+      .intro-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <a href="https://dpsimobiliario.pt" target="_blank">
+        <img src="https://dpsimobiliario.pt/images/logo-dps-white.webp" alt="DPS Imobiliário" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <span style="display:none; font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--cream); letter-spacing:0.1em;">dps</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#intro">O Empreendimento</a></li>
+      <li><a href="#tipologias">Tipologias</a></li>
+      <li><a href="#localizacao">Localização</a></li>
+      <li><a href="#pagamento">Condições</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="https://wa.me/351925610864?text=Olá,%20tenho%20interesse%20no%20Cerveira%20Premium" target="_blank" class="nav-cta">Saber Mais</a>
+    <button class="nav-mobile-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <nav aria-label="Breadcrumb" class="hero-breadcrumb">
+        <a href="https://dpsimobiliario.pt">DPS Imobiliário</a> / <a href="https://dpsimobiliario.pt/imoveis">Imóveis</a> / Cerveira Premium
+      </nav>
+      <h1>Cerveira<br><em>Premium</em></h1>
+      <p>Complexo habitacional de qualidade premium em Vila Nova de Cerveira, debruçado sobre o Rio Minho. Arquitetura contemporânea, fachadas em pedra natural e vistas fenomenais sobre a natureza.</p>
+      <div class="hero-badges">
+        <span class="badge">T1 · T2 · T3</span>
+        <span class="badge">Alto Minho</span>
+        <span class="badge">Em Planta</span>
+        <span class="badge">Obra: Ago 2026</span>
+      </div>
+      <a href="#contacto" class="hero-cta">Solicitar Informação</a>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <div class="container">
+      <div class="intro-grid">
+        <div>
+          <p class="section-label">O Empreendimento</p>
+          <h2 class="section-title">Viver com vista<br>para o <em>Rio Minho</em></h2>
+          <p class="section-text">O Cerveira Premium (lote 4) situa-se em Vila Nova de Cerveira, no Alto Minho, numa zona consolidada em frente ao Continente e próxima de todos os serviços. Um projeto de arquitetura orgânica e contemporânea, com fachadas em pedra natural, varandas amplas com vegetação e vistas privilegiadas sobre a natureza e o Rio Minho.</p>
+          <div class="intro-stats">
+            <div class="stat">
+              <div class="stat-number">T1–T3</div>
+              <div class="stat-label">Tipologias disponíveis</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">Ago 26</div>
+              <div class="stat-label">Início previsto de obra</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">2 Anos</div>
+              <div class="stat-label">Prazo estimado de conclusão</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">15%</div>
+              <div class="stat-label">Entrada no CPCV</div>
+            </div>
+          </div>
+        </div>
+        <div class="intro-image">
+          <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80" alt="Cerveira Premium — Vista exterior">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPOLOGIAS -->
+  <section class="tipologias" id="tipologias">
+    <div class="container">
+      <p class="section-label">Tipologias</p>
+      <h2 class="section-title">Apartamentos para<br><em>cada estilo de vida</em></h2>
+      <div class="tipologias-grid">
+        <div class="tipo-card">
+          <div class="tipo-tag">Tipologia</div>
+          <div class="tipo-name">T1</div>
+          <ul class="tipo-features">
+            <li>Varanda com vistas</li>
+            <li>Luz natural abundante</li>
+            <li>Ideal para investimento</li>
+            <li>Pagamento faseado em planta</li>
+          </ul>
+        </div>
+        <div class="tipo-card">
+          <div class="tipo-tag">Tipologia</div>
+          <div class="tipo-name">T2</div>
+          <ul class="tipo-features">
+            <li>Varanda ampla</li>
+            <li>Arquitetura contemporânea</li>
+            <li>Habitação própria ou investimento</li>
+            <li>Pagamento faseado em planta</li>
+          </ul>
+        </div>
+        <div class="tipo-card">
+          <div class="tipo-tag">Tipologia</div>
+          <div class="tipo-name">T3</div>
+          <ul class="tipo-features">
+            <li>Espaço familiar generoso</li>
+            <li>Varandas com vegetação</li>
+            <li>Fachadas em pedra natural</li>
+            <li>Pagamento faseado em planta</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:32px; font-size:0.72rem; color:rgba(245,242,237,0.4); font-style:italic;">* Áreas, orientações e disponibilidades confirmadas na visita ou por WhatsApp.</p>
+    </div>
+  </section>
+
+  <!-- LOCALIZAÇÃO -->
+  <section class="localizacao" id="localizacao">
+    <div class="container">
+      <p class="section-label">Localização</p>
+      <h2 class="section-title">Vila Nova de Cerveira,<br><em>Alto Minho</em></h2>
+      <div class="loc-grid">
+        <div class="loc-points">
+          <div class="loc-point">
+            <div class="loc-icon">⛩</div>
+            <div>
+              <div class="loc-point-title">Castelo de Vila Nova de Cerveira</div>
+              <div class="loc-point-desc">Património histórico e cultural no coração da cidade, a poucos minutos do empreendimento.</div>
+            </div>
+          </div>
+          <div class="loc-point">
+            <div class="loc-icon">🏝</div>
+            <div>
+              <div class="loc-point-title">Ilha da Boega & Rio Minho</div>
+              <div class="loc-point-desc">Natureza exuberante e vistas deslumbrantes sobre o Rio Minho e a fronteira com a Galiza.</div>
+            </div>
+          </div>
+          <div class="loc-point">
+            <div class="loc-icon">🎨</div>
+            <div>
+              <div class="loc-point-title">Fundação Bienal de Arte</div>
+              <div class="loc-point-desc">Cerveira é reconhecida internacionalmente pelo seu festival de arte bienal, conferindo prestígio cultural à região.</div>
+            </div>
+          </div>
+          <div class="loc-point">
+            <div class="loc-icon">🛒</div>
+            <div>
+              <div class="loc-point-title">Zona Consolidada de Serviços</div>
+              <div class="loc-point-desc">Em frente ao Continente, com fácil acesso a comércio, serviços e transportes. Ligação rápida a Viana do Castelo, Porto e à Galiza.</div>
+            </div>
+          </div>
+        </div>
+        <div class="loc-map">
+          <iframe
+            src="https://maps.google.com/maps?q=Vila+Nova+de+Cerveira,+Portugal&z=13&output=embed"
+            title="Localização Cerveira Premium"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONDIÇÕES DE PAGAMENTO -->
+  <section class="pagamento" id="pagamento">
+    <div class="container">
+      <p class="section-label">Condições de Pagamento</p>
+      <h2 class="section-title">Pagamento faseado<br><em>em planta</em></h2>
+      <p class="section-text" style="margin-bottom:0;">Invista com tranquilidade. O pagamento faseado permite distribuir o esforço financeiro ao longo da construção, com apenas 15% de entrada.</p>
+      <div class="payment-steps">
+        <div class="payment-step">
+          <div class="payment-pct">15%</div>
+          <div class="payment-label">Celebração do CPCV</div>
+        </div>
+        <div class="payment-step">
+          <div class="payment-pct">15%</div>
+          <div class="payment-label">Início da Obra</div>
+        </div>
+        <div class="payment-step">
+          <div class="payment-pct">15%</div>
+          <div class="payment-label">Fim da Estrutura</div>
+        </div>
+        <div class="payment-step">
+          <div class="payment-pct">15%</div>
+          <div class="payment-label">Fim das Especialidades</div>
+        </div>
+        <div class="payment-step">
+          <div class="payment-pct">40%</div>
+          <div class="payment-label">Escritura Final</div>
+        </div>
+      </div>
+      <p style="margin-top:24px; font-size:0.72rem; color:rgba(245,242,237,0.4); font-style:italic;">* Prazos sujeitos ao arranque oficial da obra, previsto para agosto de 2026.</p>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="section-label">Fale Connosco</p>
+          <h2 class="section-title">Receba a brochura<br><em>e os valores</em></h2>
+          <p class="section-text" style="margin-bottom:40px;">Deixe os seus dados e a nossa equipa entra em contacto para lhe enviar toda a informação sobre o Cerveira Premium — plantas, valores e disponibilidades.</p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-item-icon">📱</div>
+              <div>
+                <div class="contact-item-label">WhatsApp / Telefone</div>
+                <div class="contact-item-value"><a href="https://wa.me/351925610864" target="_blank">925 610 864</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">🌐</div>
+              <div>
+                <div class="contact-item-label">Website</div>
+                <div class="contact-item-value"><a href="https://dpsimobiliario.pt" target="_blank">dpsimobiliario.pt</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <form class="contact-form" onsubmit="handleSubmit(event)">
+            <input type="text" name="nome" placeholder="Nome completo" required>
+            <input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required>
+            <input type="email" name="email" placeholder="E-mail">
+            <select name="tipologia">
+              <option value="" disabled selected>Tipologia de interesse</option>
+              <option value="T1">T1</option>
+              <option value="T2">T2</option>
+              <option value="T3">T3</option>
+              <option value="Indiferente">Indiferente</option>
+            </select>
+            <select name="finalidade">
+              <option value="" disabled selected>Finalidade</option>
+              <option value="Habitação própria">Habitação própria</option>
+              <option value="Investimento">Investimento</option>
+            </select>
+            <textarea name="mensagem" placeholder="Mensagem (opcional)"></textarea>
+            <button type="submit">Enviar Pedido</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://dpsimobiliario.pt/images/logo-dps-white.webp" alt="DPS Imobiliário" onerror="this.style.display='none'">
+          <p>dps Imobiliário — especialistas em projetos em planta. Comercialização exclusiva do Cerveira Premium em Vila Nova de Cerveira.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Empreendimento</h5>
+          <ul>
+            <li><a href="#intro">O Projeto</a></li>
+            <li><a href="#tipologias">Tipologias</a></li>
+            <li><a href="#localizacao">Localização</a></li>
+            <li><a href="#pagamento">Condições</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="https://wa.me/351925610864" target="_blank">WhatsApp: 925 610 864</a></li>
+            <li><a href="https://dpsimobiliario.pt" target="_blank">dpsimobiliario.pt</a></li>
+            <li><a href="https://dpsimobiliario.pt/imoveis" target="_blank">Outros Imóveis</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 dps Imobiliário. Todos os direitos reservados.</p>
+        <p>Comercialização exclusiva — <a href="https://dpsimobiliario.pt" target="_blank">dpsimobiliario.pt</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const nome = form.nome.value;
+      const tel = form.telefone.value;
+      const tipo = form.tipologia.value || 'Não especificada';
+      const fin = form.finalidade.value || 'Não especificada';
+      const msg = form.mensagem.value;
+      const text = `Olá! Tenho interesse no Cerveira Premium.\n\nNome: ${nome}\nTelefone: ${tel}\nTipologia: ${tipo}\nFinalidade: ${fin}${msg ? '\nMensagem: ' + msg : ''}`;
+      window.open('https://wa.me/351925610864?text=' + encodeURIComponent(text), '_blank');
+    }
+  </script>
+
+<elevenlabs-convai agent-id="agent_6601kvrmzqcse48scrpx0a603b3v"></elevenlabs-convai>
+<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+</body>
+</html>
