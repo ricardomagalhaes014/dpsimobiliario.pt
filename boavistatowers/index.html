@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boavista Towers — Porto | DPS Imobiliário</title>
+  <meta name="description" content="Boavista Towers — 21 pisos de residências premium na Avenida da Boavista, Porto. T1 Smart, T2 Smart e T2 com garagem. Preço desde 262.900€. Desconto até 30%." />
+  <meta property="og:title" content="Boavista Towers — Where the city meets the sky" />
+  <meta property="og:description" content="249 unidades premium na Avenida da Boavista, Porto. Rooftop, Ginásio, Coworking. Preço desde 262.900€." />
+  <meta property="og:image" content="https://dpsimobiliario.pt/boavistatowers/sofia_boavista.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dark: #9A7A30;
+      --navy: #0A0E1A;
+      --navy-mid: #111827;
+      --navy-light: #1C2537;
+      --navy-card: #161D2E;
+      --white: #F5F0E8;
+      --white-dim: rgba(245,240,232,0.7);
+      --white-faint: rgba(245,240,232,0.12);
+      --gold-line: rgba(201,168,76,0.28);
+      --font-display: 'Cormorant Garamond', serif;
+      --font-ui: 'Montserrat', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: var(--font-ui); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+    /* SPLASH */
+    #splash {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--navy);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    #splash.hide { opacity: 0; pointer-events: none; transform: scale(1.04); }
+    .splash-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0A0E1A 0%, #1a1a2e 40%, #0d1117 100%);
+    }
+    .splash-particles { position: absolute; inset: 0; overflow: hidden; }
+    .splash-particles::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.15) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: particleFloat 20s linear infinite;
+    }
+    @keyframes particleFloat { 0%{transform:translateY(0)} 100%{transform:translateY(-60px)} }
+    .splash-skyline {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(to top, rgba(201,168,76,0.05) 0%, transparent 100%);
+      clip-path: polygon(0 100%, 5% 60%, 10% 65%, 15% 40%, 20% 45%, 25% 20%, 30% 25%, 35% 10%, 38% 15%, 42% 5%, 45% 10%, 48% 0%, 52% 5%, 55% 15%, 58% 10%, 62% 25%, 65% 20%, 70% 40%, 75% 35%, 80% 55%, 85% 50%, 90% 65%, 95% 60%, 100% 70%, 100% 100%);
+    }
+    .splash-content { position: relative; z-index: 2; text-align: center; padding: 2rem; max-width: 700px; }
+    .splash-badge {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.4em; text-transform: uppercase; padding: 0.4rem 1.4rem; margin-bottom: 1.8rem;
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+    @keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.3)} 50%{box-shadow:0 0 20px 4px rgba(201,168,76,0.15)} }
+    .splash-logo { width: 130px; margin-bottom: 1.8rem; filter: drop-shadow(0 0 30px rgba(201,168,76,0.6)); }
+    .splash-title { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 0.5rem; }
+    .splash-title em { font-style: italic; color: var(--gold-light); }
+    .splash-tagline { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 0.8rem; }
+    .splash-claim { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.4rem); font-style: italic; color: var(--gold); margin-bottom: 2.5rem; }
+    .splash-divider { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 auto 2rem; }
+    .splash-stats { display: flex; gap: 2.5rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .splash-stat { text-align: center; }
+    .splash-stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--gold); line-height: 1; }
+    .splash-stat-label { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); margin-top: 0.3rem; }
+    .splash-cta {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--navy); font-family: var(--font-ui); font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.25em; text-transform: uppercase; padding: 1.1rem 2.8rem;
+      border: none; cursor: pointer;
+      animation: pulse-gold 2.5s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    .splash-cta:hover { transform: translateY(-3px); }
+    @keyframes pulse-gold { 0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.5)} 50%{box-shadow:0 0 0 18px rgba(201,168,76,0)} }
+    .splash-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--white-dim); animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
+
+    /* NAVBAR */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s ease; }
+    nav.scrolled { background: rgba(10,14,26,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid var(--gold-line); padding: 0.7rem 2rem; }
+    .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+    .nav-logo img { height: 38px; filter: drop-shadow(0 2px 8px rgba(201,168,76,0.3)); }
+    .nav-tagline { font-family: var(--font-display); font-style: italic; font-size: 0.8rem; color: var(--gold); }
+    @media(max-width:900px){.nav-tagline{display:none}}
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+    .nav-links a { color: var(--white-dim); text-decoration: none; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { border: 1px solid var(--gold) !important; color: var(--gold) !important; padding: 0.45rem 1.1rem; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+    @media(max-width:768px){.nav-links{display:none}}
+
+    /* HERO */
+    .hero { min-height: 100vh; position: relative; display: flex; align-items: flex-end; padding-bottom: 6rem; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d1117 0%, #1a1a2e 50%, #0A0E1A 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: gridPan 30s linear infinite;
+    }
+    @keyframes gridPan { 0%{transform:translate(0,0)} 100%{transform:translate(80px,80px)} }
+    .hero-glow {
+      position: absolute; top: 20%; right: 10%; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+    @keyframes glowPulse { 0%,100%{opacity:0.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.1)} }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,26,1) 0%, rgba(10,14,26,0.4) 60%, rgba(10,14,26,0.1) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 1300px; margin: 0 auto; padding: 0 2rem; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: flex-end; }
+    @media(max-width:900px){ .hero-content { grid-template-columns: 1fr; } .hero-right { display: none; } }
+    .hero-left {}
+    .hero-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .hero-eyebrow::before { content:''; display:block; width:40px; height:1px; background:var(--gold); }
+    .hero-eyebrow span { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1.2rem; }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-location { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.5rem; }
+    .hero-location svg { color: var(--gold); flex-shrink: 0; }
+    .hero-location span { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; color: var(--white-dim); }
+    .hero-desc { font-size: 0.9rem; color: var(--white-dim); max-width: 460px; margin-bottom: 2.5rem; line-height: 1.9; }
+    .hero-price-badge {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: rgba(201,168,76,0.1); border: 1px solid var(--gold-line);
+      padding: 0.8rem 1.5rem; margin-bottom: 2rem;
+    }
+    .hero-price-from { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .hero-price-value { font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; color: var(--white); }
+    .hero-price-discount { font-size: 0.65rem; font-weight: 700; color: var(--gold); background: rgba(201,168,76,0.15); padding: 0.2rem 0.6rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 0.6rem; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: var(--navy); font-family: var(--font-ui); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s ease; }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,168,76,0.4); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; color: var(--white); border: 1px solid rgba(245,240,232,0.3); font-family: var(--font-ui); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-right { position: relative; display: flex; align-items: flex-end; justify-content: center; }
+    .hero-sofia-wrap {
+      position: relative;
+      width: 380px;
+    }
+    .hero-sofia-wrap::before {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(201,168,76,0.2) 0%, transparent 70%);
+    }
+    .hero-sofia-img {
+      width: 100%; max-height: 580px; object-fit: cover; object-position: top;
+      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.8));
+      position: relative; z-index: 2;
+    }
+    .sofia-badge {
+      position: absolute; bottom: 2rem; left: -1rem; z-index: 3;
+      background: rgba(10,14,26,0.95); border: 1px solid var(--gold-line);
+      backdrop-filter: blur(10px); padding: 0.8rem 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .sofia-badge-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: dotPulse 2s ease-in-out infinite; }
+    @keyframes dotPulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.4)} 50%{box-shadow:0 0 0 6px rgba(34,197,94,0)} }
+    .sofia-badge-text { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.08em; }
+    .sofia-badge-text strong { display: block; color: var(--white); font-weight: 700; }
+    .sofia-badge-text span { color: var(--white-dim); }
+
+    /* STATS BAR */
+    .stats-bar { background: var(--navy-card); border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); padding: 2rem 0; }
+    .stats-bar-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem; }
+    @media(max-width:900px){ .stats-bar-inner { grid-template-columns: repeat(3, 1fr); } }
+    @media(max-width:600px){ .stats-bar-inner { grid-template-columns: repeat(2, 1fr); } }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 600; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); margin-top: 0.4rem; }
+
+    /* SECTION COMMON */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .section-eyebrow::before { content:''; display:block; width:30px; height:1px; background:var(--gold); }
+    .section-eyebrow span { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+    .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 1rem; }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-desc { font-size: 0.9rem; color: var(--white-dim); max-width: 580px; line-height: 1.9; margin-bottom: 3rem; }
+
+    /* CLAIM SECTION */
+    .claim-section { background: var(--navy-mid); text-align: center; padding: 5rem 2rem; }
+    .claim-inner { max-width: 900px; margin: 0 auto; }
+    .claim-quote { font-family: var(--font-display); font-size: clamp(1.4rem, 3.5vw, 2.4rem); font-weight: 300; font-style: italic; color: var(--white); line-height: 1.5; margin-bottom: 1.5rem; }
+    .claim-quote em { color: var(--gold-light); }
+    .claim-source { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+
+    /* TIPOLOGIAS */
+    .tipologias-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media(max-width:900px){ .tipologias-grid { grid-template-columns: 1fr; } }
+    .tipo-card {
+      background: var(--navy-card); border: 1px solid var(--gold-line);
+      padding: 2.5rem 2rem; position: relative; overflow: hidden;
+      transition: all 0.4s ease; cursor: pointer;
+    }
+    .tipo-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .tipo-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .tipo-card:hover::before { opacity: 1; }
+    .tipo-card.active { border-color: var(--gold); }
+    .tipo-card.active::before { opacity: 1; }
+    .tipo-badge { display: inline-block; background: rgba(201,168,76,0.12); border: 1px solid var(--gold-line); color: var(--gold); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; padding: 0.3rem 0.8rem; margin-bottom: 1.2rem; }
+    .tipo-name { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+    .tipo-area { font-size: 0.8rem; color: var(--gold); font-weight: 500; margin-bottom: 1.5rem; }
+    .tipo-features { list-style: none; margin-bottom: 2rem; }
+    .tipo-features li { font-size: 0.78rem; color: var(--white-dim); padding: 0.4rem 0; border-bottom: 1px solid var(--white-faint); display: flex; align-items: center; gap: 0.6rem; }
+    .tipo-features li::before { content: '—'; color: var(--gold); font-size: 0.7rem; }
+    .tipo-price { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--white); }
+    .tipo-price-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white-dim); }
+    .tipo-desc { font-size: 0.75rem; color: var(--white-dim); line-height: 1.7; margin-top: 1rem; }
+
+    /* ORIENTAÇÕES */
+    .orientacoes-section { background: var(--navy-mid); }
+    .compass-container { position: relative; max-width: 500px; margin: 0 auto 3rem; }
+    .compass-svg { width: 100%; }
+    .compass-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+    .orientacoes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    @media(max-width:600px){ .orientacoes-grid { grid-template-columns: 1fr; } }
+    .orient-card { background: var(--navy-card); border: 1px solid var(--gold-line); padding: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .orient-icon { width: 40px; height: 40px; background: rgba(201,168,76,0.1); border: 1px solid var(--gold-line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.2rem; }
+    .orient-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .orient-desc { font-size: 0.78rem; color: var(--white-dim); line-height: 1.6; }
+
+    /* COMODIDADES */
+    .amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    @media(max-width:900px){ .amenities-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width:500px){ .amenities-grid { grid-template-columns: 1fr; } }
+    .amenity-card {
+      background: var(--navy-card); border: 1px solid var(--gold-line);
+      padding: 2rem 1.5rem; text-align: center;
+      transition: all 0.3s ease;
+    }
+    .amenity-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .amenity-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .amenity-name { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); margin-bottom: 0.4rem; }
+    .amenity-desc { font-size: 0.7rem; color: var(--white-dim); line-height: 1.6; }
+
+    /* LOCALIZAÇÃO */
+    .localizacao-section { background: var(--navy-mid); }
+    .localizacao-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    @media(max-width:900px){ .localizacao-grid { grid-template-columns: 1fr; } }
+    .poi-list { list-style: none; }
+    .poi-item { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; border-bottom: 1px solid var(--white-faint); }
+    .poi-name { font-size: 0.78rem; color: var(--white); display: flex; align-items: center; gap: 0.6rem; }
+    .poi-name::before { content: '📍'; font-size: 0.7rem; }
+    .poi-time { font-size: 0.7rem; color: var(--gold); font-weight: 500; }
+    .map-placeholder {
+      background: var(--navy-card); border: 1px solid var(--gold-line);
+      height: 350px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .map-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .map-center { position: relative; z-index: 2; text-align: center; }
+    .map-pin { font-size: 3rem; animation: pinBounce 2s ease-in-out infinite; }
+    @keyframes pinBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .map-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-top: 0.5rem; }
+    .map-sublabel { font-size: 0.65rem; color: var(--white-dim); margin-top: 0.3rem; }
+
+    /* PAGAMENTO */
+    .pagamento-section { background: var(--navy); }
+    .pagamento-timeline { position: relative; padding-left: 2rem; }
+    .pagamento-timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.2)); }
+    .pagamento-step { position: relative; padding: 0 0 2.5rem 2.5rem; }
+    .pagamento-step::before { content:''; position:absolute; left:-0.45rem; top:0.3rem; width:12px; height:12px; background:var(--gold); border-radius:50%; box-shadow:0 0 12px rgba(201,168,76,0.5); }
+    .pagamento-step-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .pagamento-step-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+    .pagamento-step-desc { font-size: 0.78rem; color: var(--white-dim); }
+    .pagamento-pct { font-family: var(--font-display); font-size: 2.5rem; font-weight: 600; color: var(--gold); float: right; line-height: 1; }
+    .pagamento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    @media(max-width:900px){ .pagamento-grid { grid-template-columns: 1fr; } }
+    .simulador-card {
+      background: var(--navy-card); border: 1px solid var(--gold-line); padding: 2.5rem;
+    }
+    .simulador-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 1.5rem; }
+    .simulador-input-group { margin-bottom: 1.5rem; }
+    .simulador-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; display: block; }
+    .simulador-input {
+      width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--gold-line);
+      color: var(--white); font-family: var(--font-ui); font-size: 0.9rem; padding: 0.8rem 1rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .simulador-input:focus { border-color: var(--gold); }
+    .simulador-select { appearance: none; cursor: pointer; }
+    .simulador-result { background: rgba(201,168,76,0.08); border: 1px solid var(--gold-line); padding: 1.5rem; margin-top: 1.5rem; }
+    .simulador-result-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--white-faint); font-size: 0.78rem; }
+    .simulador-result-row:last-child { border-bottom: none; }
+    .simulador-result-label { color: var(--white-dim); }
+    .simulador-result-value { color: var(--gold); font-weight: 600; font-family: var(--font-display); font-size: 1rem; }
+    .simulador-total { background: rgba(201,168,76,0.15); padding: 1rem; margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .simulador-total-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .simulador-total-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--white); }
+
+    /* DESCONTO */
+    .desconto-section { background: var(--navy-mid); }
+    .desconto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    @media(max-width:900px){ .desconto-grid { grid-template-columns: 1fr; } }
+    .desconto-card { background: var(--navy-card); border: 1px solid var(--gold-line); padding: 2.5rem 2rem; text-align: center; }
+    .desconto-pct { font-family: var(--font-display); font-size: 3.5rem; font-weight: 600; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
+    .desconto-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; }
+    .desconto-desc { font-size: 0.78rem; color: var(--white-dim); line-height: 1.7; }
+
+    /* SOFIA SECTION */
+    .sofia-section { background: var(--navy); overflow: hidden; }
+    .sofia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media(max-width:900px){ .sofia-grid { grid-template-columns: 1fr; } .sofia-img-wrap { display: none; } }
+    .sofia-img-wrap { position: relative; }
+    .sofia-img-wrap::before {
+      content: '';
+      position: absolute; inset: -20px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.1) 0%, transparent 60%);
+      border: 1px solid var(--gold-line);
+    }
+    .sofia-img { width: 100%; max-height: 600px; object-fit: cover; object-position: top; position: relative; z-index: 2; }
+    .sofia-text {}
+    .sofia-quote { font-family: var(--font-display); font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-style: italic; color: var(--white-dim); line-height: 1.6; margin-bottom: 2rem; border-left: 2px solid var(--gold); padding-left: 1.5rem; }
+    .sofia-features { list-style: none; margin-bottom: 2.5rem; }
+    .sofia-features li { font-size: 0.8rem; color: var(--white-dim); padding: 0.5rem 0; border-bottom: 1px solid var(--white-faint); display: flex; align-items: center; gap: 0.8rem; }
+    .sofia-features li::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
+    .sofia-cta-text { font-size: 0.78rem; color: var(--white-dim); margin-bottom: 1.5rem; line-height: 1.7; }
+
+    /* FAQ */
+    .faq-section { background: var(--navy-mid); }
+    .faq-list { max-width: 800px; }
+    .faq-item { border-bottom: 1px solid var(--gold-line); }
+    .faq-question {
+      width: 100%; background: none; border: none; text-align: left;
+      padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; color: var(--white); font-family: var(--font-ui); font-size: 0.85rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-question.open { color: var(--gold); }
+    .faq-icon { color: var(--gold); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
+    .faq-question.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .faq-answer.open { max-height: 500px; padding-bottom: 1.5rem; }
+    .faq-answer p { font-size: 0.82rem; color: var(--white-dim); line-height: 1.8; }
+
+    /* CTA FINAL */
+    .cta-final { background: var(--navy); text-align: center; padding: 8rem 2rem; position: relative; overflow: hidden; }
+    .cta-final::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+    .cta-final-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+    .cta-final-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; margin-bottom: 1rem; }
+    .cta-final-title em { font-style: italic; color: var(--gold-light); }
+    .cta-final-desc { font-size: 0.9rem; color: var(--white-dim); margin-bottom: 3rem; line-height: 1.9; }
+    .cta-final-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { background: var(--navy-card); border-top: 1px solid var(--gold-line); padding: 3rem 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+    .footer-logo img { height: 36px; filter: drop-shadow(0 2px 8px rgba(201,168,76,0.3)); }
+    .footer-text { font-size: 0.68rem; color: var(--white-dim); text-align: center; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.65rem; color: var(--white-dim); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* GOOGLE TRANSLATE */
+    #google_translate_element { position: fixed; bottom: 5rem; left: 1rem; z-index: 1000; }
+    .goog-te-gadget-simple { background: rgba(10,14,26,0.95) !important; border: 1px solid var(--gold-line) !important; border-radius: 0 !important; }
+    .goog-te-gadget-simple .goog-te-menu-value span { color: var(--gold) !important; font-size: 0.65rem !important; }
+    .goog-te-gadget-simple img { display: none !important; }
+
+    /* SCROLL INDICATOR */
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(to right, var(--gold-dark), var(--gold)); z-index: 9998; transition: width 0.1s; }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* COUNTER */
+    .counter { display: inline-block; }
+
+    /* WHATSAPP FLOAT */
+    .whatsapp-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 500;
+      width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none; transition: transform 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ELEVENLABS WIDGET OVERRIDE */
+    elevenlabs-convai { --el-color-primary: #C9A84C; }
+  </style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-bg"></div>
+  <div class="splash-particles"></div>
+  <div class="splash-skyline"></div>
+  <div class="splash-content">
+    <div class="splash-badge">Porto · Avenida da Boavista · Pré-Lançamento</div>
+    <img src="logo.png" alt="DPS Imobiliário" class="splash-logo" />
+    <h1 class="splash-title">Boavista <em>Towers</em></h1>
+    <p class="splash-tagline">Porto · 21 Pisos · 249 Unidades</p>
+    <p class="splash-claim">"Where the city meets the sky"</p>
+    <div class="splash-divider"></div>
+    <div class="splash-stats">
+      <div class="splash-stat">
+        <div class="splash-stat-num">21</div>
+        <div class="splash-stat-label">Pisos</div>
+      </div>
+      <div class="splash-stat">
+        <div class="splash-stat-num">249</div>
+        <div class="splash-stat-label">Unidades</div>
+      </div>
+      <div class="splash-stat">
+        <div class="splash-stat-num">~30%</div>
+        <div class="splash-stat-label">Desconto</div>
+      </div>
+      <div class="splash-stat">
+        <div class="splash-stat-num">262.9k€</div>
+        <div class="splash-stat-label">Desde</div>
+      </div>
+    </div>
+    <button class="splash-cta" onclick="closeSplash()">
+      <span>Descobrir o Empreendimento</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="splash-hint">↓ Clique para entrar</div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="/" class="nav-logo">
+    <img src="logo.png" alt="DPS Imobiliário" />
+    <span class="nav-tagline">Boavista Towers</span>
+  </a>
+  <div class="nav-links">
+    <a href="#tipologias">Tipologias</a>
+    <a href="#localizacao">Localização</a>
+    <a href="#pagamento">Pagamento</a>
+    <a href="#comodidades">Comodidades</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://wa.me/351910000000?text=Olá!%20Tenho%20interesse%20no%20Boavista%20Towers." target="_blank" class="nav-cta">Contactar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span>Pré-Lançamento · Porto</span>
+      </div>
+      <h1>Boavista<br/><em>Towers</em></h1>
+      <div class="hero-location">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Avenida da Boavista, Porto · 21 Pisos · 249 Unidades</span>
+      </div>
+      <p class="hero-desc">Uma das oportunidades residenciais mais diferenciadoras da Avenida da Boavista. Arquitetura contemporânea, comodidades premium e condições de pré-lançamento únicas.</p>
+      <div class="hero-price-badge">
+        <span class="hero-price-from">Desde</span>
+        <span class="hero-price-value">262.900€</span>
+        <span class="hero-price-discount">-30%</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#tipologias" class="btn-gold">
+          Ver Tipologias
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/351910000000?text=Olá!%20Tenho%20interesse%20no%20Boavista%20Towers." target="_blank" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-sofia-wrap">
+        <img src="sofia_boavista.png" alt="Sofia — Assistente Virtual DPS" class="hero-sofia-img" />
+        <div class="sofia-badge">
+          <div class="sofia-badge-dot"></div>
+          <div class="sofia-badge-text">
+            <strong>Sofia</strong>
+            <span>Assistente Virtual · Online</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span class="counter" data-target="21">0</span></div>
+      <div class="stat-label">Pisos</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span class="counter" data-target="249">0</span></div>
+      <div class="stat-label">Unidades</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">~30%</div>
+      <div class="stat-label">Desconto Total</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">262.9k€</div>
+      <div class="stat-label">Preço Desde</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">6%</div>
+      <div class="stat-label">IVA Reduzido HPP</div>
+    </div>
+  </div>
+</div>
+
+<!-- CLAIM -->
+<div class="claim-section">
+  <div class="claim-inner fade-up">
+    <p class="claim-quote">"Não é apenas a compra de um apartamento. É a entrada antecipada numa posição imobiliária <em>numa das avenidas mais fortes do Porto</em>."</p>
+    <div class="claim-source">DPS Imobiliário · Boavista Towers</div>
+  </div>
+</div>
+
+<!-- TIPOLOGIAS -->
+<section id="tipologias">
+  <div class="section-inner">
+    <div class="section-eyebrow fade-up"><span>Tipologias</span></div>
+    <h2 class="section-title fade-up">Escolha a sua <em>residência</em></h2>
+    <p class="section-desc fade-up">Três tipologias pensadas para diferentes perfis — do investidor ao residente premium. Todas com garagem incluída.</p>
+    <div class="tipologias-grid">
+      <div class="tipo-card fade-up" onclick="selectTipo(this, 262900)">
+        <div class="tipo-badge">Mais Procurado</div>
+        <div class="tipo-name">T1 Smart</div>
+        <div class="tipo-area">≈ 40 m² + Varanda ≈ 3,5 m²</div>
+        <ul class="tipo-features">
+          <li>1 lugar de garagem incluído</li>
+          <li>Varanda privativa</li>
+          <li>Ideal para investimento</li>
+          <li>Excelente rentabilidade</li>
+          <li>Unidade eficiente e compacta</li>
+        </ul>
+        <div class="tipo-price-label">Preço desde</div>
+        <div class="tipo-price">≈ 262.900€</div>
+        <p class="tipo-desc">Unidade compacta, eficiente e muito procurada para investimento ou primeira habitação. Excelente relação área/preço na Avenida da Boavista.</p>
+      </div>
+      <div class="tipo-card fade-up" onclick="selectTipo(this, 340000)">
+        <div class="tipo-badge">Equilíbrio Perfeito</div>
+        <div class="tipo-name">T2 Smart</div>
+        <div class="tipo-area">≈ 55,5 m² a 61 m² + Varanda ≈ 4,5–5,5 m²</div>
+        <ul class="tipo-features">
+          <li>1 lugar de garagem incluído</li>
+          <li>2 quartos otimizados</li>
+          <li>Varanda ampla</li>
+          <li>Ideal para casal ou família</li>
+          <li>Área bruta total ≈ 61 m²</li>
+        </ul>
+        <div class="tipo-price-label">Preço indicativo</div>
+        <div class="tipo-price">Consultar</div>
+        <p class="tipo-desc">Tipologia eficiente para quem quer 2 quartos com área otimizada. Perfeita para arrendamento premium ou habitação própria.</p>
+      </div>
+      <div class="tipo-card fade-up" onclick="selectTipo(this, 420000)">
+        <div class="tipo-badge">Máximo Conforto</div>
+        <div class="tipo-name">T2</div>
+        <div class="tipo-area">≈ 71,5 m² int. / ≈ 79,5 m² total + Varanda ≈ 8 m²</div>
+        <ul class="tipo-features">
+          <li>1 lugar de garagem incluído</li>
+          <li>2 quartos amplos</li>
+          <li>Varanda de 8 m²</li>
+          <li>Ideal para família ou arrendamento premium</li>
+          <li>Área bruta total ≈ 79,5 m²</li>
+        </ul>
+        <div class="tipo-price-label">Preço indicativo</div>
+        <div class="tipo-price">Consultar</div>
+        <p class="tipo-desc">Tipologia mais ampla, com maior conforto e potencial para família ou arrendamento premium. Varandas generosas com vistas privilegiadas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIENTAÇÕES -->
+<section class="orientacoes-section" id="orientacoes">
+  <div class="section-inner">
+    <div class="section-eyebrow fade-up"><span>Orientações</span></div>
+    <h2 class="section-title fade-up">Vistas <em>privilegiadas</em></h2>
+    <p class="section-desc fade-up">Cada orientação oferece uma perspetiva única sobre Porto. Escolha a vista que mais lhe agrada.</p>
+    <div class="orientacoes-grid">
+      <div class="orient-card fade-up">
+        <div class="orient-icon">⬆️</div>
+        <div>
+          <div class="orient-title">Norte — Avenida da Boavista</div>
+          <div class="orient-desc">Vista direta para a icónica Avenida da Boavista, um dos eixos urbanos mais prestigiados do Porto. Ideal para quem aprecia a vida urbana e o movimento da cidade.</div>
+        </div>
+      </div>
+      <div class="orient-card fade-up">
+        <div class="orient-icon">⬇️</div>
+        <div>
+          <div class="orient-title">Sul — VCI</div>
+          <div class="orient-desc">Vista para a Via de Cintura Interna, com fácil acesso a toda a cidade. Orientação com boa luminosidade e vistas abertas sobre o Porto.</div>
+        </div>
+      </div>
+      <div class="orient-card fade-up">
+        <div class="orient-icon">⬅️</div>
+        <div>
+          <div class="orient-title">Poente — Vista Mar (a partir do 7.º piso)</div>
+          <div class="orient-desc">A partir do 7.º piso, vistas para o Oceano Atlântico. Uma das orientações mais valorizadas do empreendimento, com pôr do sol sobre o mar.</div>
+        </div>
+      </div>
+      <div class="orient-card fade-up">
+        <div class="orient-icon">➡️</div>
+        <div>
+          <div class="orient-title">Nascente — Rio Douro</div>
+          <div class="orient-desc">Vista para o Rio Douro e as suas margens. Uma perspetiva única sobre o coração histórico do Porto, com o rio como pano de fundo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMODIDADES -->
+<section id="comodidades">
+  <div class="section-inner">
+    <div class="section-eyebrow fade-up"><span>Comodidades</span></div>
+    <h2 class="section-title fade-up">Viver com <em>distinção</em></h2>
+    <p class="section-desc fade-up">O Boavista Towers oferece um conjunto de comodidades premium que transformam a experiência de habitar.</p>
+    <div class="amenities-grid">
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">🏙️</span>
+        <div class="amenity-name">Rooftop</div>
+        <div class="amenity-desc">Terraço panorâmico no topo do edifício com vistas 360° sobre o Porto e o Atlântico.</div>
+      </div>
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">💪</span>
+        <div class="amenity-name">Ginásio</div>
+        <div class="amenity-desc">Espaço de fitness equipado para os residentes, sem necessidade de deslocação.</div>
+      </div>
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">💼</span>
+        <div class="amenity-name">Coworking</div>
+        <div class="amenity-desc">Espaço de trabalho partilhado com infraestrutura profissional para residentes.</div>
+      </div>
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">🎙️</span>
+        <div class="amenity-name">Sala de Podcast</div>
+        <div class="amenity-desc">Estúdio profissional para criadores de conteúdo e profissionais de comunicação.</div>
+      </div>
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">🌿</span>
+        <div class="amenity-name">Jardim</div>
+        <div class="amenity-desc">Espaço verde privativo para relaxamento e convívio dos residentes.</div>
+      </div>
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">🚗</span>
+        <div class="amenity-name">Estacionamento</div>
+        <div class="amenity-desc">1 lugar de garagem incluído em todas as tipologias. Segurança e comodidade garantidas.</div>
+      </div>
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">⚡</span>
+        <div class="amenity-name">Carregamento Elétrico</div>
+        <div class="amenity-desc">Infraestrutura de carregamento para veículos elétricos no estacionamento privativo.</div>
+      </div>
+      <div class="amenity-card fade-up">
+        <span class="amenity-icon">🚲</span>
+        <div class="amenity-name">Bicicletário</div>
+        <div class="amenity-desc">Espaço seguro para armazenamento de bicicletas, promovendo mobilidade sustentável.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section class="localizacao-section" id="localizacao">
+  <div class="section-inner">
+    <div class="section-eyebrow fade-up"><span>Localização</span></div>
+    <h2 class="section-title fade-up">Avenida da <em>Boavista</em></h2>
+    <p class="section-desc fade-up">Uma morada que dispensa apresentações. Um dos eixos mais nobres do Porto, com procura constante e oferta nova limitada.</p>
+    <div class="localizacao-grid">
+      <div class="fade-up">
+        <ul class="poi-list">
+          <li class="poi-item">
+            <span class="poi-name">MetroBus Bessa</span>
+            <span class="poi-time">≈ 1 min a pé</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">Estádio do Bessa</span>
+            <span class="poi-time">Envolvente próxima</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">Casa da Música</span>
+            <span class="poi-time">≈ 5 min de carro</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">Fundação de Serralves</span>
+            <span class="poi-time">≈ 2 min de carro</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">Parque da Cidade</span>
+            <span class="poi-time">≈ 5 min de carro</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">Praias / Foz do Douro</span>
+            <span class="poi-time">≈ 7 min de carro</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">VCI (acesso rápido)</span>
+            <span class="poi-time">Envolvente imediata</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">Aeroporto Francisco Sá Carneiro</span>
+            <span class="poi-time">≈ 15 min de carro</span>
+          </li>
+          <li class="poi-item">
+            <span class="poi-name">Restaurantes e serviços</span>
+            <span class="poi-time">Envolvente imediata</span>
+          </li>
+        </ul>
+      </div>
+      <div class="fade-up">
+        <div class="map-placeholder">
+          <div class="map-center">
+            <div class="map-pin">📍</div>
+            <div class="map-label">Boavista Towers</div>
+            <div class="map-sublabel">Avenida da Boavista, Porto</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;text-align:center;">
+          <a href="https://maps.google.com/?q=Avenida+da+Boavista+Porto" target="_blank" class="btn-outline" style="font-size:0.65rem;padding:0.7rem 1.5rem;">
+            Ver no Google Maps
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCONTO -->
+<section class="desconto-section" id="desconto">
+  <div class="section-inner">
+    <div class="section-eyebrow fade-up"><span>Proposta de Valor</span></div>
+    <h2 class="section-title fade-up">Desconto de <em>~30%</em></h2>
+    <p class="section-desc fade-up">O valor competitivo resulta da combinação de dois fatores distintos que se somam nesta fase de pré-lançamento.</p>
+    <div class="desconto-grid">
+      <div class="desconto-card fade-up">
+        <div class="desconto-pct">~20%</div>
+        <div class="desconto-title">Desconto Pré-Lançamento</div>
+        <div class="desconto-desc">Condição especial para os primeiros compradores. O preço de entrada em fase de pré-lançamento é significativamente inferior ao valor de mercado esperado na conclusão da obra.</div>
+      </div>
+      <div class="desconto-card fade-up">
+        <div class="desconto-pct">~10%</div>
+        <div class="desconto-title">Benefício Fiscal HPP</div>
+        <div class="desconto-desc">IVA a 6% para Habitação Própria Permanente (HPP), em vez dos 23% habituais. Este benefício fiscal representa uma poupança significativa no valor final.</div>
+      </div>
+      <div class="desconto-card fade-up" style="border-color: var(--gold);">
+        <div class="desconto-pct">~30%</div>
+        <div class="desconto-title">Desconto Total Combinado</div>
+        <div class="desconto-desc">A soma dos dois benefícios resulta num desconto total de aproximadamente 30% face ao valor de mercado esperado. Uma oportunidade única na Avenida da Boavista.</div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;padding:1.5rem;background:rgba(201,168,76,0.08);border:1px solid var(--gold-line);" class="fade-up">
+      <p style="font-size:0.78rem;color:var(--white-dim);line-height:1.8;"><strong style="color:var(--gold);">⚠️ Nota importante:</strong> Se o comprador final não adquirir para Habitação Própria Permanente, na escritura terá de suportar a diferença fiscal, indicada como cerca de 10% face ao valor inicial. A cedência de posição é possível, mas condicionada. Consulte sempre um advogado ou consultor fiscal para validar o seu caso específico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGAMENTO -->
+<section class="pagamento-section" id="pagamento">
+  <div class="section-inner">
+    <div class="section-eyebrow fade-up"><span>Condições de Pagamento</span></div>
+    <h2 class="section-title fade-up">Plano de <em>pagamento faseado</em></h2>
+    <p class="section-desc fade-up">Pagamento estruturado ao longo da construção, alinhado com as fases de obra.</p>
+    <div class="pagamento-grid">
+      <div class="fade-up">
+        <div class="pagamento-timeline">
+          <div class="pagamento-step">
+            <span class="pagamento-pct">15%</span>
+            <div class="pagamento-step-label">Fase 1</div>
+            <div class="pagamento-step-title">CPCV</div>
+            <div class="pagamento-step-desc">Contrato Promessa de Compra e Venda. Sinal inicial para reserva da fração.</div>
+          </div>
+          <div class="pagamento-step">
+            <span class="pagamento-pct">15%</span>
+            <div class="pagamento-step-label">Fase 2 · Até 15/10/2026</div>
+            <div class="pagamento-step-title">Reforço</div>
+            <div class="pagamento-step-desc">Reforço do sinal até 15 de outubro de 2026.</div>
+          </div>
+          <div class="pagamento-step">
+            <span class="pagamento-pct">10%</span>
+            <div class="pagamento-step-label">Fase 3</div>
+            <div class="pagamento-step-title">10.ª Lage do Bloco 1</div>
+            <div class="pagamento-step-desc">Pagamento na conclusão da 10.ª lage do Bloco 1.</div>
+          </div>
+          <div class="pagamento-step">
+            <span class="pagamento-pct">10%</span>
+            <div class="pagamento-step-label">Fase 4</div>
+            <div class="pagamento-step-title">Conclusão do Betão</div>
+            <div class="pagamento-step-desc">Pagamento na conclusão da estrutura de betão do edifício.</div>
+          </div>
+          <div class="pagamento-step" style="padding-bottom:0;">
+            <span class="pagamento-pct">50%</span>
+            <div class="pagamento-step-label">Fase Final</div>
+            <div class="pagamento-step-title">Escritura</div>
+            <div class="pagamento-step-desc">Pagamento do remanescente na escritura pública de compra e venda.</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="simulador-card">
+          <div class="simulador-title">Simulador de Pagamento</div>
+          <div class="simulador-input-group">
+            <label class="simulador-label">Valor do Imóvel (€)</label>
+            <input type="number" class="simulador-input" id="simValor" value="262900" oninput="calcSimulador()" placeholder="Ex: 262900" />
+          </div>
+          <div class="simulador-result" id="simResult">
+            <div class="simulador-result-row">
+              <span class="simulador-result-label">CPCV (15%)</span>
+              <span class="simulador-result-value" id="simCPCV">39.435€</span>
+            </div>
+            <div class="simulador-result-row">
+              <span class="simulador-result-label">Reforço até 15/10/2026 (15%)</span>
+              <span class="simulador-result-value" id="simReforco">39.435€</span>
+            </div>
+            <div class="simulador-result-row">
+              <span class="simulador-result-label">10.ª Lage Bloco 1 (10%)</span>
+              <span class="simulador-result-value" id="simLage">26.290€</span>
+            </div>
+            <div class="simulador-result-row">
+              <span class="simulador-result-label">Conclusão Betão (10%)</span>
+              <span class="simulador-result-value" id="simBetao">26.290€</span>
+            </div>
+            <div class="simulador-result-row">
+              <span class="simulador-result-label">Escritura (50%)</span>
+              <span class="simulador-result-value" id="simEscritura">131.450€</span>
+            </div>
+          </div>
+          <div class="simulador-total">
+            <span class="simulador-total-label">Total</span>
+            <span class="simulador-total-value" id="simTotal">262.900€</span>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <a href="https://wa.me/351910000000?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Boavista%20Towers." target="_blank" class="btn-gold" style="width:100%;justify-content:center;">
+              Falar com Consultor
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOFIA SECTION -->
+<section class="sofia-section" id="sofia">
+  <div class="section-inner">
+    <div class="sofia-grid">
+      <div class="sofia-img-wrap fade-up">
+        <img src="sofia_boavista.png" alt="Sofia — Assistente Virtual DPS" class="sofia-img" />
+      </div>
+      <div class="sofia-text fade-up">
+        <div class="section-eyebrow"><span>Assistente Virtual</span></div>
+        <h2 class="section-title">Conheça a <em>Sofia</em></h2>
+        <p class="sofia-quote">"Estou aqui para responder a todas as suas questões sobre o Boavista Towers — disponível 24 horas por dia, 7 dias por semana."</p>
+        <ul class="sofia-features">
+          <li>Informação completa sobre tipologias e preços</li>
+          <li>Esclarecimento sobre condições de pagamento</li>
+          <li>Explicação do benefício fiscal HPP</li>
+          <li>Orientação sobre o processo de reserva</li>
+          <li>Qualificação do perfil do comprador</li>
+          <li>Encaminhamento para consultor humano</li>
+        </ul>
+        <p class="sofia-cta-text">Clique no botão de voz no canto inferior direito para falar com a Sofia. Ela está pronta para o ajudar a encontrar a unidade ideal no Boavista Towers.</p>
+        <a href="https://wa.me/351910000000?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20Boavista%20Towers." target="_blank" class="btn-gold">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Falar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-eyebrow fade-up"><span>Perguntas Frequentes</span></div>
+    <h2 class="section-title fade-up">Tudo o que precisa de <em>saber</em></h2>
+    <div class="faq-list fade-up">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Qual é o preço de entrada no Boavista Towers?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>O preço de entrada começa em aproximadamente 262.900€ para um T1 Smart (≈ 40 m²). Os valores das restantes tipologias devem ser confirmados na tabela de vendas atualizada. Todos os preços incluem 1 lugar de garagem.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Como funciona o desconto de ~30%?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>O desconto resulta de dois fatores: cerca de 20% por ser pré-lançamento (preço de entrada inferior ao valor de mercado esperado na conclusão) e cerca de 10% pelo enquadramento fiscal de Habitação Própria Permanente (IVA a 6% em vez de 23%). Caso o comprador final não adquira para HPP, na escritura terá de suportar a diferença fiscal de cerca de 10%.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Quais são as condições de pagamento?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>O pagamento é faseado: CPCV 15%, Reforço até 15/10/2026 15%, Conclusão da 10.ª Lage do Bloco 1 10%, Conclusão do Betão 10%, e Escritura 50%. Este plano permite distribuir o investimento ao longo da construção.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          É possível ceder a posição (revender antes da escritura)?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>A cedência de posição é possível, mas condicionada. É necessário validar as condições específicas com o promotor e com um advogado. Se o comprador final não adquirir para Habitação Própria Permanente, poderá ter de suportar na escritura uma diferença fiscal de cerca de 10% do valor inicial.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          A partir de que piso se vê o mar?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>As unidades com orientação Poente têm vista para o Oceano Atlântico a partir de aproximadamente o 7.º piso. Para confirmar a vista específica de cada fração, consulte a planta e a localização exata da unidade pretendida.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Todas as unidades têm garagem?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Sim. Todas as tipologias (T1 Smart, T2 Smart e T2) incluem 1 lugar de garagem privativo. O empreendimento também dispõe de infraestrutura de carregamento para veículos elétricos e bicicletário.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Quem é o promotor do Boavista Towers?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>O promotor é a Boavista Tower S.A. / Grupo MESMOVALOR. A mediação é feita exclusivamente pela DPS Imobiliário.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Como posso reservar uma fração?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Para reservar, entre em contacto com um consultor DPS Imobiliário via WhatsApp ou através da Sofia (assistente virtual). O consultor irá apresentar as opções disponíveis, confirmar a disponibilidade da fração pretendida e orientar sobre o processo de reserva e CPCV.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-final-inner">
+    <div class="section-eyebrow fade-up" style="justify-content:center;"><span>Próximo Passo</span></div>
+    <h2 class="cta-final-title fade-up">Garanta a sua <em>posição</em></h2>
+    <p class="cta-final-desc fade-up">As melhores unidades são escolhidas primeiro. Fale hoje com um consultor DPS Imobiliário e receba 3 opções personalizadas ao seu perfil.</p>
+    <div class="cta-final-actions fade-up">
+      <a href="https://wa.me/351910000000?text=Olá!%20Tenho%20interesse%20no%20Boavista%20Towers.%20Podem%20enviar-me%20informação?" target="_blank" class="btn-gold">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar por WhatsApp
+      </a>
+      <a href="tel:+351910000000" class="btn-outline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
+        Ligar Agora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="logo.png" alt="DPS Imobiliário" />
+    </div>
+    <div class="footer-text">
+      <p>© 2025 DPS Imobiliário · Boavista Towers · Porto</p>
+      <p style="margin-top:0.3rem;font-size:0.62rem;">Mediação: DPS Imobiliário · Promotor: Boavista Tower S.A. / Grupo MESMOVALOR</p>
+      <p style="margin-top:0.3rem;font-size:0.6rem;color:rgba(245,240,232,0.4);">Valores e áreas indicativos. Confirmar na tabela de vendas. Sujeito a alterações.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://dpsimobiliario.pt" target="_blank">Site DPS</a>
+      <a href="https://dpsimobiliario.pt/imoveis" target="_blank">Todos os Imóveis</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/351910000000?text=Olá!%20Tenho%20interesse%20no%20Boavista%20Towers." target="_blank" class="whatsapp-float" title="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ELEVENLABS WIDGET -->
+<elevenlabs-convai agent-id="agent_0401kw45t4wkfdqrnwxt81pm7m6w"></elevenlabs-convai>
+<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+<!-- GOOGLE TRANSLATE -->
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'pt', includedLanguages: 'en,fr,de,es,it,zh-CN,ar,ru', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+// SPLASH
+function closeSplash() {
+  document.getElementById('splash').classList.add('hide');
+  setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 900);
+}
+document.getElementById('splash').addEventListener('click', closeSplash);
+
+// NAVBAR SCROLL
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+
+  // Scroll progress
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('scrollProgress').style.width = scrolled + '%';
+});
+
+// FADE UP OBSERVER
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Counter animation
+      const counter = e.target.querySelector('.counter');
+      if (counter && !counter.dataset.animated) {
+        counter.dataset.animated = '1';
+        animateCounter(counter, parseInt(counter.dataset.target));
+      }
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// COUNTER ANIMATION
+function animateCounter(el, target) {
+  let current = 0;
+  const step = target / 60;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current);
+  }, 25);
+}
+
+// FAQ TOGGLE
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-answer.open').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-question.open').forEach(b => b.classList.remove('open'));
+  // Open clicked if was closed
+  if (!isOpen) {
+    answer.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+
+// SIMULADOR
+function calcSimulador() {
+  const valor = parseFloat(document.getElementById('simValor').value) || 0;
+  const fmt = v => v.toLocaleString('pt-PT', {minimumFractionDigits: 0, maximumFractionDigits: 0}) + '€';
+  document.getElementById('simCPCV').textContent = fmt(valor * 0.15);
+  document.getElementById('simReforco').textContent = fmt(valor * 0.15);
+  document.getElementById('simLage').textContent = fmt(valor * 0.10);
+  document.getElementById('simBetao').textContent = fmt(valor * 0.10);
+  document.getElementById('simEscritura').textContent = fmt(valor * 0.50);
+  document.getElementById('simTotal').textContent = fmt(valor);
+}
+
+// TIPO CARD SELECT
+function selectTipo(card, preco) {
+  document.querySelectorAll('.tipo-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  if (preco) {
+    document.getElementById('simValor').value = preco;
+    calcSimulador();
+  }
+}
+
+// Init simulador
+calcSimulador();
+</script>
+</body>
+</html>
