@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofia — Assistente Virtual DPS Imobiliário</title>
+  <meta name="description" content="Fale com a Sofia, a assistente virtual de inteligência artificial da DPS Imobiliário. Disponível 24/7 para responder a todas as suas questões sobre imóveis." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ElevenLabs Widget -->
+  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dark: #9a7a2e;
+      --dark: #050810;
+      --dark-2: #0a0f1e;
+      --dark-3: #0f1628;
+      --blue-glow: #1a3a6e;
+      --cyan: #00d4ff;
+      --cyan-dim: rgba(0, 212, 255, 0.15);
+      --white: #ffffff;
+      --white-dim: rgba(255,255,255,0.7);
+      --white-faint: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─── CANVAS BACKGROUND ─── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ─── GRID OVERLAY ─── */
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ─── MAIN WRAPPER ─── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      backdrop-filter: blur(20px);
+      background: rgba(5,8,16,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-wrap img {
+      height: 40px;
+      filter: brightness(1.1);
+    }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: #00ff88;
+      border-radius: 50%;
+      animation: pulse-green 1.5s ease-in-out infinite;
+      box-shadow: 0 0 8px #00ff88;
+    }
+
+    @keyframes pulse-green {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ─── HERO SECTION ─── */
+    .hero {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 0;
+      min-height: calc(100vh - 90px);
+      padding: 0;
+    }
+
+    /* ─── LEFT: AVATAR ─── */
+    .avatar-side {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      min-height: calc(100vh - 90px);
+      overflow: hidden;
+    }
+
+    /* Glow behind Sofia */
+    .avatar-glow {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse at center bottom, rgba(201,168,76,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .avatar-glow-blue {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(0,212,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .sofia-img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 520px;
+      height: calc(100vh - 90px);
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    }
+
+    /* Scanning line animation */
+    .scan-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.6), transparent);
+      animation: scan 4s linear infinite;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes scan {
+      0% { top: 0%; opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    /* HUD elements */
+    .hud-element {
+      position: absolute;
+      z-index: 4;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 10px;
+      color: rgba(0,212,255,0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .hud-tl {
+      top: 40px;
+      left: 30px;
+      border-left: 1px solid rgba(0,212,255,0.4);
+      border-top: 1px solid rgba(0,212,255,0.4);
+      padding: 8px 12px;
+    }
+
+    .hud-br {
+      bottom: 120px;
+      right: 30px;
+      border-right: 1px solid rgba(201,168,76,0.4);
+      border-bottom: 1px solid rgba(201,168,76,0.4);
+      padding: 8px 12px;
+      color: rgba(201,168,76,0.7);
+    }
+
+    .hud-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hud-stat span:first-child {
+      font-size: 9px;
+      opacity: 0.6;
+    }
+
+    .hud-stat span:last-child {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cyan);
+    }
+
+    /* ─── RIGHT: CONTENT ─── */
+    .content-side {
+      padding: 60px 64px 60px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title .name {
+      display: block;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title .sub {
+      display: block;
+      color: var(--white);
+      font-weight: 300;
+      font-size: 0.65em;
+      margin-top: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--white-dim);
+      max-width: 480px;
+    }
+
+    /* ─── CAPABILITIES ─── */
+    .capabilities {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .cap-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white-faint);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--white-dim);
+      transition: all 0.3s ease;
+    }
+
+    .cap-item:hover {
+      background: rgba(201,168,76,0.08);
+      border-color: rgba(201,168,76,0.25);
+      color: var(--white);
+    }
+
+    .cap-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ─── CTA BUTTON ─── */
+    .cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(201,168,76,0.45);
+    }
+
+    .btn-primary svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white-dim);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 16px 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: var(--white);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--white-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ─── WAVE ANIMATION (speaking indicator) ─── */
+    .wave-container {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 24px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      border-radius: 2px;
+      background: var(--gold);
+      animation: wave-anim 1.2s ease-in-out infinite;
+    }
+
+    .wave-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+    .wave-bar:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+    .wave-bar:nth-child(3) { height: 24px; animation-delay: 0.2s; }
+    .wave-bar:nth-child(4) { height: 16px; animation-delay: 0.3s; }
+    .wave-bar:nth-child(5) { height: 8px; animation-delay: 0.4s; }
+
+    @keyframes wave-anim {
+      0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* ─── FLOATING CARDS ─── */
+    .float-card {
+      position: absolute;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 16px;
+      padding: 14px 18px;
+      z-index: 5;
+      pointer-events: none;
+      animation: float-y 4s ease-in-out infinite;
+    }
+
+    .float-card-1 {
+      top: 80px;
+      right: 20px;
+      animation-delay: 0s;
+    }
+
+    .float-card-2 {
+      bottom: 160px;
+      left: 20px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float-y {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .float-card-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .float-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .float-card-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .float-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .float-card-sub {
+      font-size: 10px;
+      color: var(--white-dim);
+    }
+
+    /* ─── ELEVENLABS WIDGET OVERRIDE ─── */
+    elevenlabs-convai {
+      position: fixed !important;
+      bottom: 32px !important;
+      right: 32px !important;
+      z-index: 9999 !important;
+    }
+
+    /* ─── SECTION: COMO FUNCIONA ─── */
+    .section-how {
+      padding: 80px 48px;
+      background: linear-gradient(180deg, var(--dark) 0%, var(--dark-2) 100%);
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      margin-bottom: 56px;
+      color: var(--white);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .step-card {
+      background: var(--white-faint);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .step-card:hover::before { opacity: 1; }
+
+    .step-card:hover {
+      background: rgba(201,168,76,0.06);
+      border-color: rgba(201,168,76,0.2);
+      transform: translateY(-4px);
+    }
+
+    .step-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(201,168,76,0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .step-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .step-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .step-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--white-dim);
+    }
+
+    /* ─── SECTION: EMPREENDIMENTOS ─── */
+    .section-projects {
+      padding: 80px 48px;
+      background: var(--dark-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: var(--white-faint);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-card:hover {
+      background: rgba(201,168,76,0.07);
+      border-color: rgba(201,168,76,0.25);
+      transform: translateY(-3px);
+    }
+
+    .project-flag {
+      font-size: 24px;
+    }
+
+    .project-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .project-location {
+      font-size: 12px;
+      color: var(--white-dim);
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: rgba(201,168,76,0.1);
+      color: var(--gold-light);
+      border: 1px solid rgba(201,168,76,0.2);
+      width: fit-content;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-left img {
+      height: 28px;
+      opacity: 0.7;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    /* ─── GOOGLE TRANSLATE ─── */
+    #google_translate_element {
+      position: fixed;
+      bottom: 100px;
+      right: 32px;
+      z-index: 9998;
+    }
+
+    #google_translate_element .goog-te-gadget-simple {
+      background: rgba(10,15,30,0.9) !important;
+      border: 1px solid rgba(201,168,76,0.3) !important;
+      border-radius: 8px !important;
+      padding: 4px 10px !important;
+      font-size: 12px !important;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      header { padding: 16px 24px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .avatar-side {
+        min-height: 50vh;
+        height: 50vh;
+      }
+
+      .sofia-img {
+        height: 50vh;
+        max-width: 100%;
+      }
+
+      .content-side {
+        padding: 40px 24px;
+      }
+
+      .capabilities {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-how, .section-projects {
+        padding: 60px 24px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        padding: 24px;
+      }
+
+      .float-card { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated background canvas -->
+<canvas id="bg-canvas"></canvas>
+<div class="grid-overlay"></div>
+
+<div class="wrapper">
+
+  <!-- ─── HEADER ─── -->
+  <header>
+    <div class="logo-wrap">
+      <img src="logo.png" alt="DPS Imobiliário" />
+    </div>
+    <div class="header-badge">
+      <span class="pulse-dot"></span>
+      Sofia AI · Online 24/7
+    </div>
+  </header>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+
+    <!-- Avatar Left -->
+    <div class="avatar-side">
+      <div class="avatar-glow"></div>
+      <div class="avatar-glow-blue"></div>
+      <div class="scan-line"></div>
+
+      <img src="sofia.png" alt="Sofia — Assistente Virtual DPS" class="sofia-img" />
+
+      <!-- HUD Top Left -->
+      <div class="hud-element hud-tl">
+        <div class="hud-stat">
+          <span>Status</span>
+          <span style="color:#00ff88">● Activa</span>
+        </div>
+      </div>
+
+
+
+      <!-- Floating Card 1 -->
+      <div class="float-card float-card-1">
+        <div class="float-card-inner">
+          <div class="float-card-icon">🏠</div>
+          <div class="float-card-text">
+            <span class="float-card-title">+500 Imóveis</span>
+            <span class="float-card-sub">Portfólio activo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Card 2 -->
+      <div class="float-card float-card-2">
+        <div class="float-card-inner">
+          <div class="float-card-icon">⚡</div>
+          <div class="float-card-text">
+            <span class="float-card-title">Resposta Imediata</span>
+            <span class="float-card-sub">Disponível agora</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Right -->
+    <div class="content-side">
+      <div class="eyebrow">DPS Imobiliário · Assistente Virtual</div>
+
+      <h1 class="hero-title">
+        <span class="name">Sofia</span>
+        <span class="sub">A sua consultora imobiliária<br>com inteligência artificial</span>
+      </h1>
+
+      <p class="hero-desc">
+        Fale com a Sofia em tempo real. Ela conhece todos os nossos empreendimentos, responde às suas dúvidas, apresenta opções de financiamento e agenda visitas — tudo por voz, 24 horas por dia.
+      </p>
+
+      <!-- Capabilities -->
+      <div class="capabilities">
+        <div class="cap-item">
+          <div class="cap-icon">🏢</div>
+          Empreendimentos em Portugal
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">🌍</div>
+          Imóveis no Brasil e Dubai
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">💰</div>
+          Simulação de financiamento
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">📅</div>
+          Agendamento de visitas
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">📋</div>
+          Processos e documentação
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">🔔</div>
+          Alertas de novos imóveis
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-group">
+        <button class="btn-primary" onclick="document.querySelector('elevenlabs-convai').shadowRoot?.querySelector('button')?.click() || document.querySelector('elevenlabs-convai')?.click()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+          Falar com a Sofia
+        </button>
+        <a href="https://dpsimobiliario.pt" target="_blank" class="btn-secondary">
+          Ver Imóveis →
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <span class="stat-value">24/7</span>
+          <span class="stat-label">Disponibilidade</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">+3</span>
+          <span class="stat-label">Países</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">
+            <span class="wave-container">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+            </span>
+          </span>
+          <span class="stat-label">Voz em tempo real</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOW IT WORKS ─── -->
+  <section class="section-how">
+    <p class="section-label">Como funciona</p>
+    <h2 class="section-title">Simples como uma conversa</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-icon">🎙️</div>
+        <h3 class="step-title">Clique e fale</h3>
+        <p class="step-desc">Prima o botão de microfone e fale naturalmente. A Sofia compreende português europeu e brasileiro.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-icon">🧠</div>
+        <h3 class="step-title">IA processa</h3>
+        <p class="step-desc">A inteligência artificial analisa a sua questão e consulta a base de dados completa de imóveis DPS.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-icon">✅</div>
+        <h3 class="step-title">Resposta imediata</h3>
+        <p class="step-desc">Recebe uma resposta personalizada por voz em segundos. Pode continuar a conversa naturalmente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EMPREENDIMENTOS ─── -->
+  <section class="section-projects">
+    <p class="section-label">Portfólio</p>
+    <h2 class="section-title">Pergunte sobre qualquer empreendimento</h2>
+    <div class="projects-grid">
+      <a href="https://wa.me/925610864" target="_blank" class="project-card">
+        <span class="project-flag">🇵🇹</span>
+        <div class="project-name">Novo Empreendimento</div>
+        <div class="project-location">Porto, Portugal</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+      <a href="https://www.dpsimobiliario.pt/raizes" target="_blank" class="project-card">
+        <span class="project-flag">🇵🇹</span>
+        <div class="project-name">Raízes</div>
+        <div class="project-location">Porto, Portugal</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+      <a href="https://dpsimobiliario.pt/belohorizonte" target="_blank" class="project-card">
+        <span class="project-flag">🇵🇹</span>
+        <div class="project-name">Belo Horizonte</div>
+        <div class="project-location">Porto, Portugal</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+      <a href="https://dpsimobiliario.pt/cerveirapremium" target="_blank" class="project-card">
+        <span class="project-flag">🇵🇹</span>
+        <div class="project-name">Cerveira Premium</div>
+        <div class="project-location">Cerveira, Portugal</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+      <a href="https://laketowers.grupo-dps.com" target="_blank" class="project-card">
+        <span class="project-flag">🇵🇹</span>
+        <div class="project-name">Lake Towers</div>
+        <div class="project-location">Portugal</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+      <a href="https://dpsimobiliario.pt/saojoaopremium/" target="_blank" class="project-card">
+        <span class="project-flag">🇵🇹</span>
+        <div class="project-name">São João Premium</div>
+        <div class="project-location">Portugal</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+      <a href="https://brasil.grupo-dps.com" target="_blank" class="project-card">
+        <span class="project-flag">🇧🇷</span>
+        <div class="project-name">Brasil</div>
+        <div class="project-location">Brasil</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+      <a href="https://dpsdubai.grupo-dps.com" target="_blank" class="project-card">
+        <span class="project-flag">🇦🇪</span>
+        <div class="project-name">Dubai</div>
+        <div class="project-location">Dubai, UAE</div>
+        <span class="project-tag">Clique e Conheça</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-left">
+      <img src="logo.png" alt="DPS Imobiliário" />
+      <span class="footer-copy">© 2026 DPS Imobiliário. Todos os direitos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://dpsimobiliario.pt" target="_blank">Website</a>
+      <a href="https://dpsimobiliario.pt/imoveis" target="_blank">Imóveis</a>
+      <a href="https://dpsimobiliario.pt/contacto" target="_blank">Contacto</a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ─── ELEVENLABS WIDGET ─── -->
+<elevenlabs-convai agent-id="agent_0901kv03vzc4eqnvzt5758mms6t8"></elevenlabs-convai>
+
+<!-- ─── GOOGLE TRANSLATE ─── -->
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'pt',
+      includedLanguages: 'en,fr,de,es,zh-CN,ar,ru',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- ─── ANIMATED BACKGROUND ─── -->
+<script>
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function Particle() {
+    this.reset();
+  }
+
+  Particle.prototype.reset = function() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.r = Math.random() * 1.5 + 0.5;
+    this.alpha = Math.random() * 0.5 + 0.1;
+    this.color = Math.random() > 0.7 ? '#c9a84c' : '#00d4ff';
+  };
+
+  Particle.prototype.update = function() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  };
+
+  function init() {
+    resize();
+    particles = Array.from({length: 120}, () => new Particle());
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0,212,255,${0.04 * (1 - dist/120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw particles
+    particles.forEach(p => {
+      p.update();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  init();
+  draw();
+})();
+</script>
+
+</body>
+</html>
