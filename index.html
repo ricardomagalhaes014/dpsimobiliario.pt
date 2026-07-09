@@ -68,8 +68,24 @@
 <script id="dps-bh-inject">
 (function() {
   function injectBH() {
-    // 1. Adicionar card Belo Horizonte ao lado do Lake Towers
     var allLinks = Array.from(document.querySelectorAll('a'));
+
+    // 0. Adicionar card Boavista Towers ANTES de todos os outros cards Portugal
+    var lakeLink2 = allLinks.find(function(a) { return a.textContent.includes('Lake Towers'); });
+    if (lakeLink2 && !document.getElementById('boavista-towers-card-injected')) {
+      var container2 = lakeLink2.parentElement;
+      var boavistaCard = document.createElement('a');
+      boavistaCard.id = 'boavista-towers-card-injected';
+      boavistaCard.href = 'http://dpsimobiliario.pt/boavistatowers';
+      boavistaCard.target = '_blank';
+      boavistaCard.rel = 'noopener noreferrer';
+      boavistaCard.className = lakeLink2.className;
+      boavistaCard.style.textDecoration = 'none';
+      boavistaCard.innerHTML = '<div class="border border-[#C5A55A]/20 overflow-hidden hover:border-[#C5A55A]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#C5A55A]/10"><div class="relative h-48 overflow-hidden"><img alt="Boavista Towers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663171422751/SXGHXbdncSTkMAwr.png" style="object-position:center"></div><div class="p-4 bg-white"><h4 class="font-bold text-[#1a1a1a] text-base mb-1" style="font-family: var(--font-display);">Boavista Towers</h4><p class="text-[#666] text-xs mb-2">Avenida da Boavista, Porto · Portugal</p><p class="text-[#C5A55A] font-semibold text-sm">Desde 263.900 €</p></div></div>';
+      container2.insertBefore(boavistaCard, container2.firstChild);
+    }
+
+    // 1. Adicionar card Belo Horizonte ao lado do Lake Towers
     var lakeLink = allLinks.find(function(a) { return a.textContent.includes('Lake Towers'); });
     if (lakeLink && !document.getElementById('bh-card-injected')) {
       var container = lakeLink.parentElement;
