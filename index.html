@@ -100,6 +100,21 @@
       container.appendChild(bhCard);
     }
 
+    // 1b. Adicionar card Aura Residence ao lado do Lake Towers
+    var lakeLink3 = allLinks.find(function(a) { return a.textContent.includes('Lake Towers'); });
+    if (lakeLink3 && !document.getElementById('aura-card-injected')) {
+      var container3 = lakeLink3.parentElement;
+      var auraCard = document.createElement('a');
+      auraCard.id = 'aura-card-injected';
+      auraCard.href = 'https://dpsimobiliario.pt/auraresidence';
+      auraCard.target = '_blank';
+      auraCard.rel = 'noopener noreferrer';
+      auraCard.className = lakeLink3.className;
+      auraCard.style.textDecoration = 'none';
+      auraCard.innerHTML = '<div class="border border-[#C5A55A]/20 overflow-hidden hover:border-[#C5A55A]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#C5A55A]/10"><div class="relative h-48 overflow-hidden"><img alt="Aura Residence" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" src="https://dpsimobiliario.pt/auraresidence/assets/render7.jpg" style="object-position:center"></div><div class="p-4 bg-white"><h4 class="font-bold text-[#1a1a1a] text-base mb-1" style="font-family: var(--font-display);">Aura Residence</h4><p class="text-[#666] text-xs mb-2">Meixomil, Paços de Ferreira · Portugal</p><p class="text-[#C5A55A] font-semibold text-sm">Novo - T0 a T3 com varandas</p></div></div>';
+      container3.appendChild(auraCard);
+    }
+
     // 2. Tornar o banner Portugal clicável para portugal.php
     var ptHeadings = Array.from(document.querySelectorAll('h2, h3, h4'));
     var ptH = ptHeadings.find(function(h) { return h.textContent.includes('\uD83C\uDDF5\uD83C\uDDF9'); });
