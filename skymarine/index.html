@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sky Marine Towers · Porto Belo · Sem juros na planta | DPS Imobiliário</title>
+<meta name="description" content="Sky Marine Towers em Porto Belo (SC): studios e apartamentos de 2 suítes na planta, sem juros e cerca de 30% abaixo do preço médio de mercado. Praia artificial, marina e piscina passarela. Peça a tabela.">
+<meta property="og:title" content="Sky Marine Towers · Sem juros na planta, 30% abaixo do mercado">
+<meta property="og:description" content="Resort residencial em Porto Belo, SC. 2 torres, 31 pisos, 6.000 m² de lazer. Peça a tabela de preços.">
+<meta property="og:image" content="https://dpsimobiliario.pt/skymarine/img/og.jpg">
+<meta property="og:url" content="https://dpsimobiliario.pt/skymarine/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#06111f">
+<link rel="canonical" href="https://dpsimobiliario.pt/skymarine/">
+<link rel="icon" href="img/favicon.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Manrope:wght@400;500;600;700&family=Michroma&display=swap">
+<style>
+/* Layout: noite em Porto Belo — fundo azul-noite, linhas LED brancas como as da fachada, bronze da película de vidro como único acento. Secções a toda a largura, conteúdo num contentor de 1180px. */
+:root{
+  --night:#06111f;
+  --deep:#0b1a2e;
+  --panel:#10233b;
+  --ink:#e8eef6;
+  --mist:#9dafc5;
+  --hair:rgba(206,224,246,.16);
+  --led:#f2f7ff;
+  --bronze:#c9a46c;
+  --bronze-hi:#e6c992;
+  --pool:#63d4e4;
+  --on-bronze:#1a1206;
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-tech:"Michroma","Eurostile","Arial Narrow",sans-serif;
+  --wrap:1180px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--night);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--night)}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--bronze-hi);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(2rem,4.4vw,3.4rem)}
+h2 em,h1 em{font-style:italic;color:var(--bronze-hi)}
+p{margin:0}
+.eyebrow{font-family:var(--f-tech);font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--bronze)}
+.lead{color:var(--mist);font-size:1.08rem;max-width:60ch}
+.led{height:1px;background:var(--led);box-shadow:0 0 6px rgba(225,238,255,.9),0 0 22px rgba(140,190,255,.45);border:0;margin:0}
+section{position:relative}
+.sec{padding-block:clamp(72px,10vw,128px)}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(36px,5vw,60px);max-width:760px}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 26px;border-radius:2px;font-weight:600;font-size:.95rem;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:background .2s,color .2s,border-color .2s,transform .2s;font-family:var(--f-body)}
+.btn-primary{background:var(--bronze);color:var(--on-bronze)}
+.btn-primary:hover{background:var(--bronze-hi)}
+.btn-ghost{border-color:rgba(242,247,255,.45);color:var(--led);background:rgba(6,17,31,.35)}
+.btn-ghost:hover{border-color:var(--led);background:rgba(242,247,255,.08)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(6,17,31,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.brand img{height:40px;width:auto}
+.brand span{font-family:var(--f-tech);font-size:.62rem;letter-spacing:.28em;color:var(--mist);border-left:1px solid var(--hair);padding-left:12px;line-height:1.5}
+.nav{display:flex;gap:26px;margin-left:auto;font-size:.88rem;color:var(--mist)}
+.nav a{text-decoration:none;transition:color .2s}
+.nav a:hover{color:var(--led)}
+.top .btn{min-height:42px;padding:0 18px;font-size:.85rem}
+@media (max-width:980px){.nav{display:none}.top .btn{margin-left:auto}}
+@media (max-width:460px){.brand span{display:none}.top .btn{padding:0 14px}}
+
+/* hero */
+.hero{overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(6,17,31,.94) 0%,rgba(6,17,31,.78) 42%,rgba(6,17,31,.25) 100%),linear-gradient(0deg,var(--night) 0%,rgba(6,17,31,0) 30%)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:end;padding-block:clamp(56px,8vw,104px) 40px}
+.hero-copy{display:grid;gap:26px;min-width:0}
+.hero-logo{width:min(200px,44vw)}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.6rem)}
+.hero .lead{color:#c4d1e1}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.offer{background:rgba(9,22,40,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--hair);padding:28px 28px 24px;display:grid;gap:20px;min-width:0}
+.offer-item{display:grid;gap:4px}
+.offer-big{font-family:var(--f-display);font-size:clamp(2.6rem,5vw,3.8rem);line-height:1;color:var(--bronze-hi)}
+.offer-big small{font-size:.42em;font-family:var(--f-body);font-weight:600;color:var(--led);letter-spacing:0;margin-left:6px}
+.offer-item p{color:#c4d1e1;font-size:.95rem}
+.offer-note{font-size:.72rem;color:var(--mist)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--hair);margin-top:8px}
+.fact{padding:22px 0 26px;display:grid;gap:6px;border-right:1px solid var(--hair);padding-left:22px}
+.fact:first-child{padding-left:0}
+.fact:last-child{border-right:0}
+.fact b{font-family:var(--f-tech);font-weight:400;font-size:clamp(1.15rem,2.2vw,1.6rem);color:var(--led);font-variant-numeric:tabular-nums}
+.fact span{font-size:.8rem;color:var(--mist);text-transform:uppercase;letter-spacing:.12em}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;align-items:start}.hero::after{background:linear-gradient(180deg,rgba(6,17,31,.6) 0%,rgba(6,17,31,.9) 55%,var(--night) 100%)}}
+@media (max-width:640px){.facts{grid-template-columns:repeat(2,1fr)}.fact{padding-left:0;border-right:0;border-bottom:1px solid var(--hair)}.fact:nth-child(odd){border-right:1px solid var(--hair);padding-right:12px}.fact:nth-child(even){padding-left:18px}.fact:nth-last-child(-n+2){border-bottom:0}}
+
+/* condições */
+.terms{background:var(--deep);overflow:hidden}
+.lattice{position:absolute;right:max(0px,calc((100% - 1180px)/2));top:clamp(48px,6vw,96px);height:clamp(260px,36vw,440px);width:min(30%,340px);opacity:.45;pointer-events:none}
+.lattice line{stroke:var(--led);stroke-width:1.2;filter:drop-shadow(0 0 3px rgba(200,225,255,.9))}
+.terms-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start;position:relative}
+.pillars{display:grid;gap:0;border-top:1px solid var(--hair)}
+.pillar{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:22px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--hair)}
+.pillar .num{font-family:var(--f-display);font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;color:var(--bronze-hi);min-width:3.2ch}
+.pillar h3{font-size:1.45rem;margin-bottom:6px}
+.pillar p{color:var(--mist);font-size:.96rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px dashed var(--hair)}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--f-tech);font-size:.72rem;color:var(--bronze);padding-top:5px;letter-spacing:.1em}
+.steps b{display:block;font-weight:600;color:var(--led)}
+.steps span{color:var(--mist);font-size:.93rem}
+.steps-title{font-family:var(--f-tech);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);margin-bottom:6px}
+@media (max-width:860px){.terms-grid{grid-template-columns:1fr}.lattice{display:none}}
+
+/* empreendimento */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,6vw,80px);align-items:center}
+.prose{display:grid;gap:18px;color:#c4d1e1}
+.prose p{max-width:58ch}
+.stack{position:relative;border:1px solid var(--hair);background:var(--deep)}
+.stack img{width:100%;aspect-ratio:1525/907;object-fit:cover}
+.floors{list-style:none;margin:0;padding:0;display:grid;font-size:.86rem}
+.floors li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;padding:11px 18px;border-top:1px solid var(--hair)}
+.floors li span:first-child{font-family:var(--f-tech);font-size:.66rem;letter-spacing:.12em;color:var(--bronze);padding-top:3px;font-variant-numeric:tabular-nums}
+.floors li.hl span:last-child{color:var(--led);font-weight:600}
+.spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--hair);margin-top:8px}
+.spec div{padding:14px 0;border-bottom:1px solid var(--hair);font-size:.92rem;color:var(--mist)}
+.spec div:nth-child(odd){padding-right:14px}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
+
+/* lazer */
+.leisure{background:var(--deep)}
+.mosaic{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(150px,18vw,230px);gap:10px}
+.mosaic figure{margin:0;position:relative;overflow:hidden;background:var(--panel)}
+.mosaic figure img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.mosaic figure:hover img{transform:scale(1.04)}
+.mosaic figcaption{position:absolute;left:0;bottom:0;padding:14px 16px;font-family:var(--f-tech);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--led);background:linear-gradient(0deg,rgba(6,17,31,.85),rgba(6,17,31,0));width:100%}
+.m1{grid-column:span 4;grid-row:span 2}.m2{grid-column:span 2}.m3{grid-column:span 2}.m4{grid-column:span 3}.m5{grid-column:span 3}
+@media (max-width:700px){.mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.m1{grid-column:span 2;grid-row:span 2}.m2,.m3{grid-column:span 1}.m4,.m5{grid-column:span 2}}
+.amen{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px;list-style:none;padding:0}
+.amen li{border:1px solid var(--hair);padding:8px 14px;font-size:.86rem;color:#c4d1e1;border-radius:999px}
+.amen li.star{border-color:var(--bronze);color:var(--bronze-hi)}
+
+/* plantas */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--hair);margin-bottom:28px;overflow-x:auto}
+.tab{background:none;border:0;color:var(--mist);font-family:var(--f-body);font-size:1rem;font-weight:600;padding:14px 22px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--led);border-bottom-color:var(--bronze)}
+.plan-panel{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:start}
+.plan-panel>div{min-width:0}
+.plan-scroll{overflow-x:auto;background:#eef1f5;border:1px solid var(--hair);padding:12px;-webkit-overflow-scrolling:touch}
+.plan-scroll img{min-width:760px;width:100%}
+.orient{display:flex;justify-content:space-between;font-family:var(--f-tech);font-size:.62rem;letter-spacing:.24em;color:var(--mist);margin-top:10px}
+.plan-card{border:1px solid var(--hair);background:var(--deep);padding:24px;display:grid;gap:16px}
+.plan-card .area{font-family:var(--f-display);font-size:2.6rem;line-height:1;color:var(--bronze-hi);font-variant-numeric:tabular-nums}
+.plan-card .area small{font-size:.45em;color:var(--mist);font-family:var(--f-body)}
+.plan-card ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.plan-card li{padding:10px 0;border-top:1px solid var(--hair);font-size:.92rem;display:flex;justify-content:space-between;gap:12px}
+.plan-card li span:first-child{color:var(--mist)}
+.plan-card li span:last-child{text-align:right}
+@media (max-width:900px){.plan-panel{grid-template-columns:1fr}}
+.interiors{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px}
+.interiors button{padding:0;border:0;background:var(--panel);cursor:zoom-in;aspect-ratio:16/10;overflow:hidden}
+.interiors img{width:100%;height:100%;object-fit:cover}
+@media (max-width:700px){.interiors{grid-template-columns:1fr 1fr}}
+
+/* localização */
+.loc{background:var(--deep)}
+.map{position:relative;border:1px solid var(--hair);overflow:hidden}
+.map img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.loc-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,4vw,48px);margin-top:40px}
+.dist{width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+.dist th{text-align:left;font-family:var(--f-tech);font-weight:400;font-size:.62rem;letter-spacing:.22em;color:var(--bronze);padding:18px 0 8px;text-transform:uppercase}
+.dist td{padding:9px 0;border-bottom:1px solid var(--hair)}
+.dist td:last-child{text-align:right;color:var(--led)}
+.market{display:grid;gap:0;border-top:1px solid var(--hair)}
+.market div{padding:20px 0;border-bottom:1px solid var(--hair);display:grid;gap:4px}
+.market b{font-family:var(--f-display);font-weight:400;font-size:2.2rem;line-height:1.05;color:var(--bronze-hi)}
+.market span{color:var(--mist);font-size:.92rem}
+.src{font-size:.75rem;color:var(--mist);margin-top:14px}
+.perq{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
+.perq figure{margin:0;position:relative}
+.perq img{width:100%;aspect-ratio:825/284;object-fit:cover}
+.perq figcaption{font-family:var(--f-tech);font-size:.6rem;letter-spacing:.22em;color:var(--mist);padding-top:10px;text-transform:uppercase}
+@media (max-width:860px){.loc-grid{grid-template-columns:1fr}.perq{grid-template-columns:1fr}}
+
+/* construtora */
+.builder .split{align-items:start}
+.badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.badges div{padding:24px 16px 24px 0;display:grid;gap:4px}
+.badges div+div{border-left:1px solid var(--hair);padding-left:18px}
+.badges b{font-family:var(--f-display);font-weight:400;font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--bronze-hi);font-variant-numeric:tabular-nums}
+.badges span{font-size:.82rem;color:var(--mist)}
+.builder-img{border:1px solid var(--hair)}
+.builder-img img{width:100%;aspect-ratio:16/10;object-fit:cover}
+
+/* galeria */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gallery button{padding:0;border:0;background:var(--panel);cursor:zoom-in;aspect-ratio:16/10;overflow:hidden}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.gallery button:hover img{transform:scale(1.04)}
+@media (max-width:700px){.gallery{grid-template-columns:1fr 1fr}}
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1400px,94vw);max-height:92vh;color:var(--ink)}
+dialog.lb::backdrop{background:rgba(3,9,18,.92)}
+dialog.lb img{max-height:84vh;width:auto;margin:0 auto}
+dialog.lb p{text-align:center;font-size:.85rem;color:var(--mist);padding-top:10px}
+.lb-close{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--hair);background:var(--deep);color:var(--led);font-size:1.4rem;cursor:pointer}
+
+/* contacto */
+.contact{background:linear-gradient(180deg,var(--night),var(--deep))}
+.contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,80px);align-items:start}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--panel);border:1px solid var(--hair);padding:clamp(22px,3vw,34px)}
+.field{display:grid;gap:7px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mist)}
+input,select,textarea{width:100%;background:var(--night);border:1px solid rgba(206,224,246,.24);color:var(--ink);font:inherit;font-size:1rem;padding:13px 14px;border-radius:2px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--bronze)}
+textarea{min-height:96px;resize:vertical}
+.chk{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--mist);text-transform:none;letter-spacing:0;font-weight:400}
+.chk input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--bronze)}
+form .btn{grid-column:1/-1;width:100%}
+.err{grid-column:1/-1;color:#ffb4a8;font-size:.88rem}
+.ok{background:var(--panel);border:1px solid var(--bronze);padding:clamp(24px,3vw,36px);display:grid;gap:16px}
+.ok h3{font-size:1.8rem}
+.ok p{color:#c4d1e1}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:520px){form{grid-template-columns:1fr}}
+.direct{display:grid;gap:0;margin-top:30px;border-top:1px solid var(--hair)}
+.direct div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--hair);font-size:.95rem;flex-wrap:wrap}
+.direct div span:first-child{color:var(--mist)}
+.direct a{text-decoration:none;color:var(--led)}
+.direct a:hover{color:var(--bronze-hi)}
+
+footer{border-top:1px solid var(--hair);padding-block:40px calc(40px + env(safe-area-inset-bottom,0px));font-size:.8rem;color:var(--mist)}
+footer .wrap{display:grid;gap:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+.wa-float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:56px;height:56px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:transform .2s}
+.wa-float:hover{transform:scale(1.06)}
+.wa-float svg{width:30px;height:30px}
+
+/* animação de entrada do hero: as linhas LED acendem */
+@keyframes ledOn{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+.lattice line{stroke-dasharray:var(--len);animation:ledOn 2.4s cubic-bezier(.6,.1,.2,1) both}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Sky Marine Towers, início">
+      <img src="img/logo-sky-marine.png" alt="Sky Marine Towers" width="700" height="534">
+      <span>PORTO BELO<br>SANTA CATARINA</span>
+    </a>
+    <nav class="nav" aria-label="Secções">
+      <a href="#condicoes">Condições</a>
+      <a href="#empreendimento">Empreendimento</a>
+      <a href="#lazer">Lazer</a>
+      <a href="#plantas">Plantas</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#construtora">Construtora</a>
+    </nav>
+    <a class="btn btn-primary js-wa" href="https://wa.me/351925708456" target="_blank" rel="noopener" data-cta="header">Contacte já</a>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero" aria-labelledby="h-hero">
+  <div class="hero-bg"><img src="img/hero-noite.webp" alt="Sky Marine Towers à noite, vista em contrapicado das duas torres com a passarela iluminada" fetchpriority="high"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <img class="hero-logo" src="img/logo-sky-marine.png" alt="" width="700" height="534">
+      <p class="eyebrow">Resort residencial · Porto Belo, divisa com Itapema</p>
+      <h1 id="h-hero">Compre na planta <em>sem juros</em>, abaixo do preço de mercado.</h1>
+      <p class="lead">Duas torres de 31 pisos com praia artificial, marina e piscina de vidro suspensa entre as torres. Studios e apartamentos de 2 suítes no litoral de Santa Catarina.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#contacto" data-cta="hero">Receber tabela de preços</a>
+        <a class="btn btn-ghost js-wa" href="https://wa.me/351925708456" target="_blank" rel="noopener" data-cta="hero-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+    <aside class="offer" aria-label="Condições de lançamento">
+      <div class="offer-item">
+        <p class="eyebrow">Na planta</p>
+        <div class="offer-big">0%<small>de juros</small></div>
+        <p>Prestações mensais sem juros durante toda a obra, direto com a construtora.</p>
+      </div>
+      <hr class="led">
+      <div class="offer-item">
+        <p class="eyebrow">Preço</p>
+        <div class="offer-big">−30%<small>vs. mercado*</small></div>
+        <p>Unidades cerca de 30% abaixo do preço médio de mercado na região.</p>
+      </div>
+      <p class="offer-note">*Condições de lançamento, sujeitas a disponibilidade de unidades.</p>
+    </aside>
+  </div>
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><b>2</b><span>Torres</span></div>
+      <div class="fact"><b>31</b><span>Pisos</span></div>
+      <div class="fact"><b>524</b><span>Unidades</span></div>
+      <div class="fact"><b>6.000 m²</b><span>De lazer</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="terms sec" id="condicoes" aria-labelledby="h-terms">
+  <svg class="lattice" viewBox="0 0 400 600" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="80" y1="0" x2="320" y2="600" style="--len:650"/>
+    <line x1="320" y1="0" x2="80" y2="600" style="--len:650;animation-delay:.15s"/>
+    <line x1="80" y1="60" x2="320" y2="420" style="--len:440;animation-delay:.3s"/>
+    <line x1="320" y1="60" x2="80" y2="420" style="--len:440;animation-delay:.45s"/>
+    <line x1="80" y1="200" x2="320" y2="560" style="--len:440;animation-delay:.6s"/>
+    <line x1="320" y1="200" x2="80" y2="560" style="--len:440;animation-delay:.75s"/>
+    <line x1="80" y1="0" x2="80" y2="600" style="--len:600"/>
+    <line x1="320" y1="0" x2="320" y2="600" style="--len:600"/>
+  </svg>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Condições de lançamento</p>
+      <h2 id="h-terms">Entrar cedo é <em>pagar menos</em>, e sem juros.</h2>
+      <p class="lead">Na fase de planta, o preço por metro quadrado é o mais baixo que o Sky Marine vai ter. Paga em prestações ao longo da obra, sem financiamento bancário e sem juros.</p>
+    </div>
+    <div class="terms-grid">
+      <div class="pillars">
+        <div class="pillar">
+          <div class="num">0%</div>
+          <div><h3>Sem juros na planta</h3><p>As prestações durante a construção são pagas diretamente à construtora, sem juros e sem aprovação bancária.</p></div>
+        </div>
+        <div class="pillar">
+          <div class="num">30%</div>
+          <div><h3>Abaixo do preço médio</h3><p>Preço de lançamento cerca de 30% abaixo do preço médio de mercado na região de Porto Belo e Itapema.</p></div>
+        </div>
+        <div class="pillar">
+          <div class="num">20%</div>
+          <div><h3>Valorização anual na região</h3><p>O Balneário Perequê regista uma valorização média de 20% a 25% ao ano.</p></div>
+        </div>
+      </div>
+      <div>
+        <p class="steps-title">Como se paga</p>
+        <ol class="steps">
+          <li><div><b>Entrada</b><span>Valor inicial na assinatura, para garantir a unidade e o preço de lançamento.</span></div></li>
+          <li><div><b>Prestações mensais sem juros</b><span>Distribuídas pelo período de obra, com valores fixos.</span></div></li>
+          <li><div><b>Reforços</b><span>Pagamentos intercalares periódicos, ajustados ao seu plano.</span></div></li>
+          <li><div><b>Chaves</b><span>Saldo final na entrega, com possibilidade de financiamento.</span></div></li>
+        </ol>
+        <div class="ctas" style="margin-top:28px">
+          <a class="btn btn-primary" href="#contacto" data-cta="condicoes">Simular o meu plano</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="empreendimento" aria-labelledby="h-emp">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">O empreendimento</p>
+      <h2 id="h-emp">Um resort residencial com <em>31 pisos</em> de vista.</h2>
+      <p>O Sky Marine Towers foi pensado para redefinir a ideia de casa no litoral catarinense. Duas torres revestidas a película de vidro bronze, numa rua lateral ao píer, com vista panorâmica sobre Porto Belo e Itapema.</p>
+      <p>A área de lazer ocupa 6.000 m² em 7 pisos e inclui praia artificial, marina e uma piscina de vidro na passarela que liga as torres ao nível do rooftop.</p>
+      <div class="spec">
+        <div>14 studios por piso</div>
+        <div>7 apartamentos de 2 suítes por piso</div>
+        <div>3 elevadores por torre</div>
+        <div>Acessos por reconhecimento facial</div>
+        <div>1 lugar de garagem por unidade</div>
+        <div>6 pisos de garagem</div>
+        <div>Hall mobilado e decorado</div>
+        <div>Salas comerciais no rés-do-chão</div>
+      </div>
+    </div>
+    <figure class="stack" style="margin:0">
+      <img src="img/corte.webp" alt="Vista frontal noturna das duas torres com a estrutura de cabos iluminada entre elas" loading="lazy">
+      <ul class="floors" aria-label="Distribuição por pisos">
+        <li class="hl"><span>31º</span><span>Rooftop completo e piscina passarela</span></li>
+        <li><span>27º – 30º</span><span>Studios</span></li>
+        <li class="hl"><span>26º</span><span>Área de lazer</span></li>
+        <li><span>14º – 25º</span><span>Studios</span></li>
+        <li class="hl"><span>13º</span><span>Área de lazer</span></li>
+        <li><span>8º – 12º</span><span>Apartamentos de 2 suítes</span></li>
+        <li class="hl"><span>7º</span><span>Praia artificial</span></li>
+        <li><span>Base</span><span>Garagens, marina e salas comerciais</span></li>
+      </ul>
+    </figure>
+  </div>
+</section>
+
+<section class="leisure sec" id="lazer" aria-labelledby="h-lazer">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Mais de 6.000 m² de lazer em 7 pisos</p>
+      <h2 id="h-lazer">Férias todos os dias, <em>sem sair de casa</em>.</h2>
+    </div>
+    <div class="mosaic">
+      <figure class="m1"><img src="img/piscina-passarela.webp" alt="Vista aérea da piscina de vidro suspensa entre as duas torres" loading="lazy"><figcaption>Piscina passarela</figcaption></figure>
+      <figure class="m2"><img src="img/praia-1.webp" alt="Praia artificial com palmeiras junto à torre" loading="lazy"><figcaption>Praia artificial</figcaption></figure>
+      <figure class="m3"><img src="img/beach-tennis.webp" alt="Campo de beach tennis no topo do embasamento" loading="lazy"><figcaption>Beach tennis</figcaption></figure>
+      <figure class="m4"><img src="img/praia-2.webp" alt="Esplanada com guarda-sóis na praia artificial" loading="lazy"><figcaption>Esplanada da praia</figcaption></figure>
+      <figure class="m5"><img src="img/rio-por-do-sol.webp" alt="Torres ao pôr do sol junto ao rio, com lancha em primeiro plano" loading="lazy"><figcaption>Marina</figcaption></figure>
+    </div>
+    <ul class="amen" aria-label="Equipamentos de lazer">
+      <li class="star">Piscina de vidro na passarela</li><li class="star">Praia artificial</li><li class="star">Marina</li><li class="star">Rooftop completo</li>
+      <li>Quadra de beach tennis</li><li>Piscina bar</li><li>Sala de cinema</li><li>Salão gourmet</li><li>Espaço pet</li><li>Playground</li><li>Pub desportivo</li><li>Bowling</li><li>SPA, massagem e salão de beleza</li><li>Pizzaria</li><li>Lavandaria</li><li>Garrafeira climatizada e charutaria</li><li>Mercado</li><li>Sauna</li><li>Ginásio</li><li>Miradouros</li><li>Coworking e café</li><li>Praça de fogo</li><li>Ofurô</li><li>Sala de póquer</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="plantas" aria-labelledby="h-plantas">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Plantas</p>
+      <h2 id="h-plantas">Studios para rentabilizar, <em>suítes</em> para viver.</h2>
+      <p class="lead">Todas as unidades têm living integrado, janelas de vidro do chão ao teto e lugar de garagem. As torres estão orientadas entre o rio e o mar.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Tipologias">
+      <button class="tab" role="tab" id="tab-studio" aria-controls="pan-studio" aria-selected="true">Studios · 34 m²</button>
+      <button class="tab" role="tab" id="tab-suites" aria-controls="pan-suites" aria-selected="false" tabindex="-1">2 Suítes · 73 m²</button>
+    </div>
+    <div class="plan-panel" role="tabpanel" id="pan-studio" aria-labelledby="tab-studio">
+      <div>
+        <div class="plan-scroll"><img src="img/planta-studios.webp" alt="Planta do piso tipo de studios, 14 unidades por piso" loading="lazy"></div>
+        <div class="orient"><span>← RIO</span><span>MAR →</span></div>
+      </div>
+      <div class="plan-card">
+        <p class="eyebrow">Studio</p>
+        <div class="area">34,66<small> m² privativos</small></div>
+        <ul>
+          <li><span>Quartos</span><span>1</span></li>
+          <li><span>Garagem</span><span>1 lugar</span></li>
+          <li><span>Pisos</span><span>14º–25º e 27º–30º</span></li>
+          <li><span>Por piso</span><span>14 unidades</span></li>
+          <li><span>Áreas</span><span>34,56 a 34,66 m²</span></li>
+        </ul>
+        <a class="btn btn-primary" href="#contacto" data-cta="planta-studio" data-interest="Studio">Pedir preço do studio</a>
+      </div>
+    </div>
+    <div class="plan-panel" role="tabpanel" id="pan-suites" aria-labelledby="tab-suites" hidden>
+      <div>
+        <div class="plan-scroll"><img src="img/planta-2suites.webp" alt="Planta do piso tipo de apartamentos de 2 suítes, 7 unidades por piso" loading="lazy"></div>
+        <div class="orient"><span>← RIO</span><span>MAR →</span></div>
+      </div>
+      <div class="plan-card">
+        <p class="eyebrow">Apartamento 2 suítes</p>
+        <div class="area">73,45<small> m² privativos</small></div>
+        <ul>
+          <li><span>Suítes</span><span>2</span></li>
+          <li><span>Garagem</span><span>1 lugar</span></li>
+          <li><span>Pisos</span><span>8º ao 12º</span></li>
+          <li><span>Por piso</span><span>7 unidades</span></li>
+          <li><span>Living</span><span>Integrado</span></li>
+        </ul>
+        <a class="btn btn-primary" href="#contacto" data-cta="planta-2suites" data-interest="Apartamento 2 suítes">Pedir preço das 2 suítes</a>
+      </div>
+    </div>
+    <div class="interiors" aria-label="Interiores decorados">
+      <button type="button" data-lb="img/studio-1.webp" data-cap="Studio decorado"><img src="img/studio-1.webp" alt="Sala de studio decorado com vista panorâmica" loading="lazy"></button>
+      <button type="button" data-lb="img/studio-2.webp" data-cap="Studio decorado"><img src="img/studio-2.webp" alt="Living com cozinha escura e vista para a cidade" loading="lazy"></button>
+      <button type="button" data-lb="img/studio-3.webp" data-cap="Studio decorado"><img src="img/studio-3.webp" alt="Cozinha e mesa de jantar com vista para a serra" loading="lazy"></button>
+      <button type="button" data-lb="img/studio-4.webp" data-cap="Studio decorado"><img src="img/studio-4.webp" alt="Living de esquina com janelas do chão ao teto" loading="lazy"></button>
+    </div>
+  </div>
+</section>
+
+<section class="loc sec" id="localizacao" aria-labelledby="h-loc">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Porto Belo · Santa Catarina · Brasil</p>
+      <h2 id="h-loc">No Balneário Perequê, <em>entre o píer e a praia</em>.</h2>
+      <p class="lead">Na divisa entre Porto Belo e Itapema, a 25 km de Balneário Camboriú. Perto do Píer de Itapema, da Marina Perequê e da nova extensão da faixa de areia.</p>
+    </div>
+    <figure class="map" style="margin:0"><img src="img/mapa.webp" alt="Mapa aéreo com a localização do Sky Marine Towers, Píer Itapema, Marina Perequê e extensão de praia" loading="lazy"></figure>
+    <div class="loc-grid">
+      <div style="overflow-x:auto">
+        <table class="dist">
+          <thead><tr><th colspan="2">Litoral</th></tr></thead>
+          <tbody>
+            <tr><td>Porto Belo Centro</td><td>1,1 km</td></tr>
+            <tr><td>Bombinhas</td><td>9,2 km</td></tr>
+            <tr><td>Balneário Camboriú</td><td>25 km</td></tr>
+            <tr><td>Itajaí</td><td>41 km</td></tr>
+            <tr><td>Navegantes</td><td>57 km</td></tr>
+          </tbody>
+          <thead><tr><th colspan="2">Cidades e aeroportos</th></tr></thead>
+          <tbody>
+            <tr><td>Aeroporto de Navegantes</td><td>57 km</td></tr>
+            <tr><td>Florianópolis</td><td>70 km</td></tr>
+            <tr><td>Aeroporto de Florianópolis</td><td>78 km</td></tr>
+            <tr><td>Blumenau</td><td>98 km</td></tr>
+            <tr><td>Joinville</td><td>123 km</td></tr>
+            <tr><td>Curitiba</td><td>247 km</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="market">
+          <div><b>+61,9%</b><span>Aumento do valor médio dos imóveis entre 2022 e 2023</span></div>
+          <div><b>2.ª</b><span>Cidade de Santa Catarina que mais vendeu imóveis em 2023: 1.919 unidades, R$ 3,3 mil milhões</span></div>
+          <div><b>Top 10</b><span>Entre os destinos mais escolhidos para alojamento no Airbnb</span></div>
+        </div>
+        <p class="src">Dados do Balneário Perequê, segundo a apresentação do promotor.</p>
+      </div>
+    </div>
+    <div class="perq">
+      <figure><img src="img/pier.webp" alt="Projeto do Píer Rio Perequê" loading="lazy"><figcaption>Píer Rio Perequê</figcaption></figure>
+      <figure><img src="img/molhes.webp" alt="Projeto dos molhes do Perequê" loading="lazy"><figcaption>Molhes Perequê</figcaption></figure>
+      <figure><img src="img/faixa-areia.webp" alt="Alargamento da faixa de areia" loading="lazy"><figcaption>Alargamento da faixa de areia</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="builder sec" id="construtora" aria-labelledby="h-build">
+  <div class="wrap split">
+    <div class="prose">
+      <p class="eyebrow">Construtora</p>
+      <h2 id="h-build">Tonolher Empreendimentos, <em>45 anos</em> a construir.</h2>
+      <p>Fundada em 1979 em Cachoeirinha, na região metropolitana de Porto Alegre, a Tonolher construiu edifícios residenciais, pavilhões industriais e lojas para marcas como Burger King, Panvel, Simmons e MadeiraMadeira.</p>
+      <p>Hoje, sob a liderança do arquiteto Calu Tonolher, concentra a operação no litoral de Santa Catarina, com sede em Balneário Camboriú, escritório em Itapema e fábrica própria de pré-moldados.</p>
+      <div class="badges">
+        <div><b>45</b><span>anos de história</span></div>
+        <div><b>+1.000</b><span>obras registadas no CREA</span></div>
+        <div><b>~50</b><span>colaboradores na sede</span></div>
+      </div>
+    </div>
+    <figure class="builder-img" style="margin:0"><img src="img/skyline.webp" alt="Torre Tonolher em vidro dourado com Itapema e o mar ao fundo" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0" aria-label="Galeria">
+  <div class="wrap">
+    <div class="gallery">
+      <button type="button" data-lb="img/fachada-dia.webp" data-cap="Fachada principal"><img src="img/fachada-dia.webp" alt="Fachada das duas torres em dia de céu azul" loading="lazy"></button>
+      <button type="button" data-lb="img/aereo-noite.webp" data-cap="Vista aérea noturna"><img src="img/aereo-noite.webp" alt="Vista aérea noturna das torres e do rooftop" loading="lazy"></button>
+      <button type="button" data-lb="img/fachada-rua.webp" data-cap="Entrada e salas comerciais"><img src="img/fachada-rua.webp" alt="Entrada com palmeiras e logotipo Sky Marine na fachada" loading="lazy"></button>
+      <button type="button" data-lb="img/torres-noite.webp" data-cap="As torres à noite"><img src="img/torres-noite.webp" alt="Torres iluminadas à noite vistas do jardim" loading="lazy"></button>
+      <button type="button" data-lb="img/torre-dourada.webp" data-cap="Vista para a serra e o rio"><img src="img/torre-dourada.webp" alt="Torre de vidro dourado com a serra ao fundo ao nascer do sol" loading="lazy"></button>
+      <button type="button" data-lb="img/torres-ceu.webp" data-cap="Fachada em vidro"><img src="img/torres-ceu.webp" alt="Torres de vidro espelhado com estrutura de cabos" loading="lazy"></button>
+    </div>
+  </div>
+</section>
+
+<section class="contact sec" id="contacto" aria-labelledby="h-contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">Tabela de preços e plano de pagamento</p>
+      <h2 id="h-contact" style="margin-top:18px">Receba a tabela e a <em>simulação sem juros</em>.</h2>
+      <a class="btn btn-primary js-wa" href="https://wa.me/351925708456" target="_blank" rel="noopener" data-cta="contacto-wa" style="margin-top:24px">Contacte já pelo WhatsApp</a>
+      <p class="lead" style="margin-top:18px">Ou deixe os seus dados: um consultor da DPS Imobiliário envia-lhe a disponibilidade atual, os preços de lançamento e o plano de pagamento ajustado ao seu orçamento.</p>
+      <div class="direct">
+        <div><span>WhatsApp</span><a class="js-wa" href="https://wa.me/351925708456" target="_blank" rel="noopener">+351 925 708 456</a></div>
+        <div><span>Site</span><a href="https://dpsimobiliario.pt" target="_blank" rel="noopener">dpsimobiliario.pt</a></div>
+      </div>
+    </div>
+    <div>
+      <form id="lead" novalidate>
+        <div class="field full"><label for="f-nome">Nome</label><input id="f-nome" name="nome" autocomplete="name" required></div>
+        <div class="field"><label for="f-tel">Telemóvel / WhatsApp</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" placeholder="+351 …" required></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-int">Interesse</label>
+          <select id="f-int" name="interesse">
+            <option>Studio</option>
+            <option>Apartamento 2 suítes</option>
+            <option>Investimento (várias unidades)</option>
+            <option>Ainda não sei</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-orc">Orçamento de entrada</label>
+          <select id="f-orc" name="orcamento">
+            <option>Até R$ 50.000</option>
+            <option>R$ 50.000 – 150.000</option>
+            <option>Mais de R$ 150.000</option>
+            <option>Prefiro falar com um consultor</option>
+          </select>
+        </div>
+        <div class="field full"><label for="f-msg">Mensagem (opcional)</label><textarea id="f-msg" name="mensagem" placeholder="Ex.: quero receber a tabela dos studios virados a mar"></textarea></div>
+        <label class="chk" for="f-rgpd"><input id="f-rgpd" name="consentimento" type="checkbox" required> Aceito ser contactado pela DPS Imobiliário sobre o Sky Marine Towers. Os dados são tratados de acordo com o RGPD.</label>
+        <p class="err" id="f-err" hidden></p>
+        <button class="btn btn-primary" type="submit">Enviar pelo WhatsApp</button>
+      </form>
+      <div class="ok" id="lead-ok" hidden>
+        <p class="eyebrow">Pedido recebido</p>
+        <h3>Obrigado. Falta só enviar a mensagem.</h3>
+        <p>Abrimos o WhatsApp com o seu pedido já escrito. Se não abriu, toque no botão abaixo.</p>
+        <a class="btn btn-primary" id="ok-wa" href="https://wa.me/351925708456" target="_blank" rel="noopener">Abrir o WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <span>Sky Marine Towers · Porto Belo, SC, Brasil · Construção Tonolher Empreendimentos</span>
+      <span>Comercialização: DPS Imobiliário · Dynamic Pro Smart, Lda. · AMI 26301</span>
+    </div>
+    <p>Imagens e ilustrações de caráter promocional (Lei 4.591/64). Móveis e alguns acabamentos representados não fazem parte do contrato; o imóvel é entregue conforme o memorial descritivo, podendo haver alterações em função do projeto estrutural. Preços, condições de pagamento e disponibilidade sujeitos a confirmação no momento da reserva.</p>
+  </div>
+</footer>
+
+<a class="wa-float js-wa" href="https://wa.me/351925708456" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+
+<dialog class="lb" id="lb" aria-label="Imagem ampliada">
+  <button class="lb-close" type="button" aria-label="Fechar">×</button>
+  <img src="" alt="">
+  <p></p>
+</dialog>
+
+<script>
+/* ===== Configuração =====
+   leadEndpoint: URL que recebe o lead em JSON (ex.: endpoint PHP do CRM ou webhook do Make). Vazio = só WhatsApp.
+   metaPixelId: ID do Pixel Meta para disparar o evento Lead (opcional). */
+var CONFIG = {
+  whatsapp: "351925708456",
+  leadEndpoint: "",
+  empreendimento: "Sky Marine Towers",
+  fonte: "Site dpsimobiliario.pt/skymarine",
+  metaPixelId: ""
+};
+
+(function(){
+  var waBase = "https://wa.me/" + CONFIG.whatsapp + "?text=";
+  var waMsg = "Olá! Tenho interesse no Sky Marine Towers (Porto Belo). Gostava de receber a tabela de preços e o plano sem juros.";
+  document.querySelectorAll(".js-wa").forEach(function(a){ a.href = waBase + encodeURIComponent(waMsg); });
+
+  // Meta Pixel (opcional)
+  if (CONFIG.metaPixelId) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init", CONFIG.metaPixelId); fbq("track", "PageView");
+  }
+
+  // UTMs e fbclid para atribuição
+  var qs = new URLSearchParams(location.search), track = {};
+  ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid","gclid"].forEach(function(k){ if(qs.get(k)) track[k] = qs.get(k); });
+
+  // Botões de planta preenchem o interesse
+  document.querySelectorAll("[data-interest]").forEach(function(b){
+    b.addEventListener("click", function(){ var s = document.getElementById("f-int"); s.value = b.dataset.interest; });
+  });
+
+  // Tabs das plantas
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  function selectTab(t){
+    tabs.forEach(function(x){
+      var on = x === t;
+      x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener("click", function(){ selectTab(t); });
+    t.addEventListener("keydown", function(e){
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        var n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+        selectTab(n); n.focus();
+      }
+    });
+  });
+
+  // Lightbox
+  var lb = document.getElementById("lb"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector("p");
+  document.querySelectorAll("[data-lb]").forEach(function(b){
+    b.addEventListener("click", function(){
+      lbImg.src = b.dataset.lb; lbImg.alt = b.querySelector("img").alt; lbCap.textContent = b.dataset.cap || "";
+      if (lb.showModal) lb.showModal(); else lb.setAttribute("open","");
+    });
+  });
+  lb.querySelector(".lb-close").addEventListener("click", function(){ lb.close(); });
+  lb.addEventListener("click", function(e){ if (e.target === lb) lb.close(); });
+
+  // Formulário
+  var form = document.getElementById("lead"), err = document.getElementById("f-err");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var d = Object.fromEntries(new FormData(form).entries());
+    var problems = [];
+    if (!d.nome || d.nome.trim().length < 2) problems.push("o nome");
+    if (!d.telefone || d.telefone.replace(/\D/g,"").length < 9) problems.push("um telemóvel válido");
+    if (!d.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) problems.push("um email válido");
+    if (!form.querySelector("#f-rgpd").checked) problems.push("a autorização de contacto");
+    if (problems.length) { err.textContent = "Falta preencher " + problems.join(", ") + "."; err.hidden = false; return; }
+    err.hidden = true;
+
+    var payload = Object.assign({ empreendimento: CONFIG.empreendimento, fonte: CONFIG.fonte, pagina: location.href, data: new Date().toISOString() }, d, track);
+    var text = "Olá! Pedido de tabela do Sky Marine Towers.\nNome: " + d.nome + "\nTelefone: " + d.telefone + "\nEmail: " + d.email + "\nInteresse: " + d.interesse + "\nEntrada: " + d.orcamento + (d.mensagem ? "\nMensagem: " + d.mensagem : "");
+    document.getElementById("ok-wa").href = waBase + encodeURIComponent(text);
+
+    function done(){
+      if (window.fbq) fbq("track", "Lead", { content_name: CONFIG.empreendimento });
+      form.hidden = true; document.getElementById("lead-ok").hidden = false;
+      try { window.open(document.getElementById("ok-wa").href, "_blank", "noopener"); } catch (x) {}
+    }
+    if (CONFIG.leadEndpoint) {
+      var btn = form.querySelector("button[type=submit]"); btn.disabled = true; btn.textContent = "A enviar…";
+      fetch(CONFIG.leadEndpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+        .then(function(r){ if (!r.ok) throw new Error(r.status); done(); })
+        .catch(function(){ btn.disabled = false; btn.textContent = "Enviar pelo WhatsApp"; err.textContent = "Não foi possível enviar o pedido. Tente novamente ou fale connosco no WhatsApp."; err.hidden = false; });
+    } else { done(); }
+  });
+})();
+</script>
+
+</body>
+</html>
