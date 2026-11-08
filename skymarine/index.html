@@ -216,9 +216,10 @@ dialog.lb p{text-align:center;font-size:.85rem;color:var(--mist);padding-top:10p
 .lb-close{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--hair);background:var(--deep);color:var(--led);font-size:1.4rem;cursor:pointer}
 
 /* contacto */
-.contact{background:linear-gradient(180deg,var(--night),var(--deep))}
+.contact{background:linear-gradient(180deg,rgba(6,17,31,.94) 0%,rgba(6,17,31,.72) 45%,rgba(6,17,31,.86) 100%),url(img/praia-sc-h.webp) center 60%/cover no-repeat,var(--deep)}
+@media (max-width:860px){.contact{background:linear-gradient(180deg,rgba(6,17,31,.94) 0%,rgba(6,17,31,.7) 40%,rgba(6,17,31,.88) 100%),url(img/praia-sc-v.webp) center/cover no-repeat,var(--deep)}}
 .contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,80px);align-items:start}
-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--panel);border:1px solid var(--hair);padding:clamp(22px,3vw,34px)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:rgba(16,35,59,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--hair);padding:clamp(22px,3vw,34px)}
 .field{display:grid;gap:7px;min-width:0}
 .field.full{grid-column:1/-1}
 label{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mist)}
